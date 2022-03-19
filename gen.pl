@@ -4,12 +4,11 @@ use warnings;
 use FindBin;
 use lib $FindBin::Bin;
 
-use ThroneGen qw/@power_generators/;
+use ThroneGen::Throne;
 
-say "Some sample powers:";
-
-for my $pg ( @power_generators ) {
-	for my $pts ( 1..3 ) {
-		say $pg->generate->($pts)->title;
-	}
+for my $i ( 1..5 ) {
+	my $throne = ThroneGen::Throne->new( pts => 3);
+	say "Throne #$i";
+	say "  " . $_->title for ( @{$throne->powers} );
+	say "";
 }

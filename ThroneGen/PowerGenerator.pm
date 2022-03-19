@@ -27,6 +27,12 @@ has 'generate' => (
 	# return: a ThroneGen::Power
 );
 
+sub can_generate {
+	# checks if the generator can generate a power for the supplied number of points
+	my ( $self, $pts ) = @_;
+	return ( $pts >= $self->pts_min && $pts <= $self->pts_max );
+}
+
 
 __PACKAGE__->meta->make_immutable;
 
