@@ -38,10 +38,12 @@ has 'generators' => (
 		ThroneGen::PowerGenerator->new(
 			generate => sub {
 				my $pts = shift;
-				my $gem = (qw/F W A E S D N/)[int rand 7];
+				my $gem_id = int rand 7;
+				my $gem_str = (qw/F A W E S D N/)[$gem_id];
 				return ThroneGen::Power->new(
 					pts => $pts,
-					title => sprintf( '+%d %s gem%s per month', $pts, $gem, ($pts==1?'':'s') ),
+					title => sprintf( '+%d %s gem%s per month', $pts, $gem_str, ($pts==1?'':'s') ),
+					dm_claimed => "#gems $gem_id $pts",
 				);
 			}
 		),
@@ -54,6 +56,7 @@ has 'generators' => (
 				return ThroneGen::Power->new(
 					pts => $pts,
 					title => "+$slaves slaves per month",
+					dm_claimed => "#gems 7 $slaves",
 				);
 			}
 		),
@@ -66,6 +69,7 @@ has 'generators' => (
 				return ThroneGen::Power->new(
 					pts => $pts,
 					title => "+$gold gold per month",
+					dm_claimed => "#gold $gold",
 				);
 			}
 		),

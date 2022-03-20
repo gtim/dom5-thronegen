@@ -40,6 +40,9 @@ sub write_to_dm {
 	print  $fh "#rarity 11 -- lvl1 throne\n";
 	print  $fh "#claim\n";
 	print  $fh "#dominion 2\n";
+	for my $power ( @{ $self->powers } ) {
+		print $fh $power->dm_claimed."\n" if $power->has_dm_claimed;
+	}
 	print  $fh "#end\n";
 	print  $fh "\n";
 }
