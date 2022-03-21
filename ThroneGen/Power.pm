@@ -14,7 +14,14 @@ has 'pts' => (
 	isa       => 'Int',
 	required  => 1,
 );
+has 'type' => (
+	# one throne can't have multiple powers of the same type
+	is        => 'ro',
+	isa       => 'Str',
+	required  => 1,
+);
 has 'title' => (
+	# human-readable title of throne power
 	is        => 'ro',
 	isa       => 'Str',
 	required  => 1,

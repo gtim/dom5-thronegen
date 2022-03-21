@@ -4,6 +4,7 @@ use Moose;
 use namespace::autoclean;
 use Carp;
 use POSIX qw/ceil/;
+use List::Util qw/uniq/;
 
 use ThroneGen::PowerGeneratorList;
 
@@ -33,8 +34,15 @@ has 'powers' => (
 		}
 		# generate powers
 		local $_;
-		my @powers = map { ThroneGen::PowerGeneratorList->instance->random_power($_) } @pts;
-		return \@powers;
+		my @powers;
+		for my $num_tries ( 1..100 ) {
+			@powers = map { ThroneGen::PowerGeneratorList->instance->random_power($_) } @pts;
+			if ( scalar( uniq map { $_->type } @powers ) == scalar @powers ) {
+				# all powers have unique types
+				return \@powers;
+			}
+		}
+		croak "no unique power types found for point distribution [@pts] after many tries";
 	}
 );
 
