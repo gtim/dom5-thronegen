@@ -3,6 +3,7 @@ package ThroneGen::Throne;
 use Moose;
 use namespace::autoclean;
 use Carp;
+use POSIX qw/ceil/;
 
 use ThroneGen::PowerGeneratorList;
 
@@ -23,10 +24,24 @@ has 'powers' => (
 	lazy => 1,
 	default => sub {
 		my $self = shift;
-		my $power = ThroneGen::PowerGeneratorList->instance->random_power($self->pts);
-		return [ $power ];
+		my @pts;
+		# First power: spend at least half points
+		push @pts, _rand_int_between_inclusive( ceil( $self->pts/2 ), $self->pts );
+		# Second power: spend remaining points
+		if ( $self->pts - $pts[0] > 0 ) {
+			push @pts, $self->pts - $pts[0];
+		}
+		# generate powers
+		local $_;
+		my @powers = map { ThroneGen::PowerGeneratorList->instance->random_power($_) } @pts;
+		return \@powers;
 	}
 );
+
+sub _rand_int_between_inclusive {
+	my ( $min, $max ) = @_;
+	return $min + int( rand( $max - $min + 1 ) );
+}
 
 sub write_to_dm {
 	my ( $self, $fh ) = @_;

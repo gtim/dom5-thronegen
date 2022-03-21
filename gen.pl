@@ -7,11 +7,12 @@ use lib $FindBin::Bin;
 use ThroneGen::Throne;
 use ThroneGen::DM;
 
-# generate thrones
-my @thrones;
-push @thrones, ThroneGen::Throne->new( pts => 3) for ( 1..5 );
+# generate five 5pt thrones
+
+my @thrones = map { ThroneGen::Throne->new( pts => 5 ) } ( 1..5 );
 
 # print thrones
+
 for my $throne ( @thrones ) {
 	say "Throne";
 	say "  " . $_->title for ( @{$throne->powers} );
@@ -19,6 +20,7 @@ for my $throne ( @thrones ) {
 }
 
 # write .dm
+
 open( my $fh, '>', '../tg.dm' ) or die $!;
 my $dm = ThroneGen::DM->new(
 	thrones => \@thrones,
