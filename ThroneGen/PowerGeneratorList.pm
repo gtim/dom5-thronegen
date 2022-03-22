@@ -115,6 +115,44 @@ has 'generators' => (
 				);
 			}
 		),
+
+		# recruitable mage
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2,3,4],
+			generate => sub {
+				my $pts = shift;
+				# mages and associated point costs
+				# based on this list: https://github.com/Logg-y/magicgen/tree/master/data/spells/summons/commanders
+				# so far, A is covered
+				# TODO: these should be put in a csv file
+				my @mages = (
+					# X1
+					{ pts => 1, name => 'Azure Initiate',             id => 96 }, # W1, water-breathing
+					# X2
+					#{pts => 2, name => 'Adventurer (N2)',            id => 2327 }, -- skipped, #autohealer probably too strong
+					{ pts => 2, name => 'Adventurer (F2)',            id => 2328 },
+					{ pts => 2, name => 'Adventurer (D2)',            id => 2329 },
+					{ pts => 2, name => 'Animist',                    id => 552 }, # N2, stealthy
+					{ pts => 2, name => 'Azure Mage',                 id => 97 }, # W2, water-breathing
+					# X1Y1Z1
+					{ pts => 2, name => 'Alchemist',                  id => 551 }, # F1E1S1
+					# X3
+					{ pts => 3, name => 'Adept of the Pyriphlegeton', id => 99 }, # F3, slow-rec
+					# X2Y2R1
+					{ pts => 4, name => 'Adept of the Golden Order',  id => 101 }, # F2S2R1, slow-rec
+					{ pts => 4, name => 'Adept of the Iron Order',    id => 477 }, # E2S2R1, slow-rec
+					{ pts => 4, name => 'Adept of the Silver Order',  id => 477 }, # A2S2R1, slow-rec
+				);
+				my @applicable_mages = grep { $_->{pts} == $pts } @mages;
+				my %mage = %{ $applicable_mages[ int rand @applicable_mages ] };
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "recruitable mage",
+					title => "recruitable $mage{name}",
+					dm_claimed => "#com $mage{id} -- recruitable $mage{name}"
+				);
+			}
+		),
 	] },
 );
 
