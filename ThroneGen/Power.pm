@@ -26,10 +26,17 @@ has 'title' => (
 	isa       => 'Str',
 	required  => 1,
 );
+
+# dm_* attributes have direct effect on the generated .dm
+
 has 'dm_claimed'  => (
 	is        => 'ro',
 	isa       => 'Str',
 	predicate => 'has_dm_claimed',
+);
+has 'dm_increased_domspread'  => (
+	is        => 'ro',
+	isa       => 'Int',
 );
 
 

@@ -76,6 +76,21 @@ has 'generators' => (
 				);
 			}
 		),
+
+		# dom spread
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2,4,6,8,10,12,14,16,18,20],
+			generate => sub {
+				my $pts = shift;
+				my $candles = $pts/2;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "extra temple checks per month",
+					title => "$candles additional temple checks per month",
+					dm_increased_domspread => $candles,
+				);
+			}
+		),
 	] },
 );
 

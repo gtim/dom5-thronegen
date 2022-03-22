@@ -8,6 +8,8 @@ use List::Util qw/uniq/;
 
 use ThroneGen::PowerGeneratorList;
 
+my $Default_Domspread = 2;
+
 has 'pts' => (
 	is       => 'ro',
 	isa      => 'Int',
@@ -62,12 +64,23 @@ sub write_to_dm {
 	print  $fh "#loc 213999 -- unique, allowed everywhere\n";
 	print  $fh "#rarity 11 -- lvl1 throne\n";
 	print  $fh "#claim\n";
-	print  $fh "#dominion 2\n";
+	printf $fh "#dominion %d\n", $self->_domspread();
 	for my $power ( @{ $self->powers } ) {
 		print $fh $power->dm_claimed."\n" if $power->has_dm_claimed;
 	}
 	print  $fh "#end\n";
 	print  $fh "\n";
+}
+
+sub _domspread {
+	my $self = shift;
+	my $domspread = $Default_Domspread;
+	for my $power ( @{ $self->powers } ) {
+		if ( $power->dm_increased_domspread ) {
+			$domspread += $power->dm_increased_domspread;
+		}
+	}
+	return $domspread;
 }
 
 
