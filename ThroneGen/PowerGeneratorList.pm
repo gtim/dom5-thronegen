@@ -91,6 +91,30 @@ has 'generators' => (
 				);
 			}
 		),
+
+		# improve nation scales: order/prod/growth/luck/magic
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2,4,6],
+			generate => sub {
+				my $pts = shift;
+				my $scale_points = $pts/2;
+				my @scales = (
+					{ name => 'order',      cmd => 'goddomchaos',      inverted => 1 },
+					{ name => 'production', cmd => 'goddomlazy',       inverted => 1 },
+					{ name => 'growth',     cmd => 'goddomdeath',      inverted => 1 },
+					{ name => 'luck',       cmd => 'goddommisfortune', inverted => 1 },
+					{ name => 'magic',      cmd => 'goddomdrain',      inverted => 1 },
+				);
+				my %scale = %{ $scales[ int rand @scales ] };
+				my $dm_cmd = sprintf '#%s %d', $scale{cmd}, $scale_points * ($scale{inverted}?-1:1);
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "increase $scale{name} in nation",
+					title => "+$scale_points $scale{name} scale in nation",
+					dm_claimed => $dm_cmd,
+				);
+			}
+		),
 	] },
 );
 
