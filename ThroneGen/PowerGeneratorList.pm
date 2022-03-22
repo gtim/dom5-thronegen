@@ -124,24 +124,43 @@ has 'generators' => (
 				# mages and associated point costs
 				# based on this list: https://github.com/Logg-y/magicgen/tree/master/data/spells/summons/commanders
 				# so far, A is covered
-				# TODO: these should be put in a csv file
+				# TODO: these should probably be put in a separate csv file
+				# TODO: a simple linter comparing these IDs+names with inspector data files, also checking uniqueness of IDs/names
 				my @mages = (
 					# X1
-					{ pts => 1, name => 'Azure Initiate',             id => 96 }, # W1, water-breathing
+					{ pts => 1, name => 'Azure Initiate',             id => 96   }, # W1, water-breathing
+					{ pts => 1, name => 'Cloud Mage',                 id => 92   }, # A1
+
+					# X1Y1
+					{ pts => 2, name => 'Conjurer',                   id => 94   }, # D1B1
 					# X2
-					#{pts => 2, name => 'Adventurer (N2)',            id => 2327 }, -- skipped, #autohealer probably too strong
 					{ pts => 2, name => 'Adventurer (F2)',            id => 2328 },
 					{ pts => 2, name => 'Adventurer (D2)',            id => 2329 },
-					{ pts => 2, name => 'Animist',                    id => 552 }, # N2, stealthy
-					{ pts => 2, name => 'Azure Mage',                 id => 97 }, # W2, water-breathing
+					{ pts => 2, name => 'Animist',                    id => 552  }, # N2, stealthy
+					{ pts => 2, name => 'Azure Mage',                 id => 97   }, # W2, water-breathing
 					# X1Y1Z1
-					{ pts => 2, name => 'Alchemist',                  id => 551 }, # F1E1S1
+					{ pts => 2, name => 'Alchemist',                  id => 551  }, # F1E1S1
+					{ pts => 2, name => 'Black Witch',                id => 2361 }, # D1N1R1
+					
+					# X2 with neat feature
+					{ pts => 3, name => 'Damned Boatswain',           id => 3350 }, # A/W/D 2, undead, fear
 					# X3
-					{ pts => 3, name => 'Adept of the Pyriphlegeton', id => 99 }, # F3, slow-rec
-					# X2Y2R1
-					{ pts => 4, name => 'Adept of the Golden Order',  id => 101 }, # F2S2R1, slow-rec
-					{ pts => 4, name => 'Adept of the Iron Order',    id => 477 }, # E2S2R1, slow-rec
-					{ pts => 4, name => 'Adept of the Silver Order',  id => 477 }, # A2S2R1, slow-rec
+					{ pts => 3, name => 'Adept of the Pyriphlegeton', id => 99   }, # F3, slow-rec
+					# X2Y1
+					{ pts => 3, name => 'Bloodhenge Druid',           id => 122  }, # N1B2
+
+					# X2Y2 / X2Y2R1 / X2Y1Z1R1
+					{ pts => 4, name => 'Adept of the Golden Order',  id => 101  }, # F2S2R1, slow-rec
+					{ pts => 4, name => 'Adept of the Iron Order',    id => 477  }, # E2S2R1, slow-rec
+					{ pts => 4, name => 'Adept of the Silver Order',  id => 100  }, # A2S2R1, slow-rec
+					{ pts => 4, name => 'Blackrose Sorceress',        id => 2362 }, # D1N2B1R1, slow-rec
+					{ pts => 4, name => 'Circle Master',              id => 95   }, # D2B2
+					{ pts => 4, name => 'Crystal Mage',               id => 340  }, # E2S2, slow-rec
+
+					# not included
+					#{pts => 2, name => 'Adventurer (N2)',            id => 2327 }, # #autohealer too strong
+					#{pts => 4, name => 'Cyclops',                    id => 156  }, # E3, chassis too strong 
+					#{pts => 4, name => 'Dust Priest',                id => 1978 }, # too many paths
 				);
 				my @applicable_mages = grep { $_->{pts} == $pts } @mages;
 				my %mage = %{ $applicable_mages[ int rand @applicable_mages ] };
