@@ -132,6 +132,23 @@ has 'generators' => (
 			}
 		),
 
+		# ritual discounts
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2,5,8],
+			generate => sub {
+				my $pts = shift;
+				my %discount = ( 2 => 10, 5 => 20, 8 => 30 );
+				my $discount = $discount{$pts} || croak "unspecified ritual discount for $pts pts";
+				my $school = (qw/conj alt evo const ench thau blood/)[ int rand 7 ];
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "ritual discount",
+					title => ucfirst($school) . " ritual discount $discount%",
+					dm_claimed => sprintf( '#%scost %d%%', $school, $discount ),
+				);
+			}
+		),
+
 
 		# recruitable mage
 		ThroneGen::PowerGenerator->new(
