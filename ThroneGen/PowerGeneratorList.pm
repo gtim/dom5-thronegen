@@ -116,6 +116,23 @@ has 'generators' => (
 			}
 		),
 
+		# scrying
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2,3],
+			generate => sub {
+				my $pts = shift;
+				my $scry_range = ( $pts == 1 ? 6 : 10 );
+				my $scry_duration = ( $pts <= 2 ?  1 : 3 );
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "enter to scry",
+					title => "priest can enter to scry, range $scry_range for $scry_duration turn".($scry_duration>1?'s':''),
+					dm_claimed => "#scry $scry_duration\n#scryrange $scry_range",
+				);
+			}
+		),
+
+
 		# recruitable mage
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3,4],
