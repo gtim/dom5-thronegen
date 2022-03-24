@@ -28,5 +28,6 @@
     * Maybe automate tagging based on what kind of words are used for sites/units/spells associated with these tags in vanilla/DE
   * Something more exotic like finding/making a word association corpus from vast quantities of text, and seeing if it can produce something sensible...?
 
-### bugs
+### bugs / stuff to fix
 * underwater thrones can have recruitable non-aquatic mages
+* all high-value mages should probably be slow-to-recruit -- do we have to duplicate the units?
