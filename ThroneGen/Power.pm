@@ -34,6 +34,12 @@ has 'dm_claimed'  => (
 	isa       => 'Str',
 	predicate => 'has_dm_claimed',
 );
+has 'dm_unclaimed'  => (
+	# active when both when throne is claimed and unclaimed
+	is        => 'ro',
+	isa       => 'Str',
+	predicate => 'has_dm_unclaimed',
+);
 has 'dm_increased_domspread'  => (
 	is        => 'ro',
 	isa       => 'Int',

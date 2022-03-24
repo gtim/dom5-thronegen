@@ -217,7 +217,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "adventure ruin",
 					title => "adventure ruin ($success% success)",
-					dm_claimed => "#adventureruin $success",
+					dm_unclaimed => "#adventureruin $success",
 				);
 			}
 		),
@@ -232,7 +232,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "gain xp",
 					title => "enter to gain $xp xp",
-					dm_claimed => "#xp $xp",
+					dm_unclaimed => "#xp $xp",
 				);
 			}
 		),

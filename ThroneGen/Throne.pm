@@ -63,6 +63,13 @@ sub write_to_dm {
 	print  $fh "#level 0\n";
 	print  $fh "#loc 213999 -- unique, allowed everywhere\n";
 	print  $fh "#rarity 11 -- lvl1 throne\n";
+
+	# always-on throne powers 
+	for my $power ( @{ $self->powers } ) {
+		print $fh $power->dm_unclaimed."\n" if $power->has_dm_unclaimed;
+	}
+
+	# claimed-only throne powers
 	print  $fh "#claim\n";
 	printf $fh "#dominion %d\n", $self->_domspread();
 	for my $power ( @{ $self->powers } ) {
