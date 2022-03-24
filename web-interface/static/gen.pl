@@ -18,7 +18,7 @@ print $cgi->header('application/json');
 
 # generate five 5pt thrones
 
-my @thrones = map { ThroneGen::Throne->new( pts => 5 ) } ( 1..5 );
+my @thrones = map { ThroneGen::Throne->new( pts => 4 ) } ( 1..5 );
 
 # make JSON
 
