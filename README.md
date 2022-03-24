@@ -21,8 +21,10 @@
 ### misc big plans
 * throne themes -- how to solve?
   * Manual tagging themes onto everything...?
+    * Maybe automate tagging based on what kind of words are used for sites/units/spells associated with these tags in vanilla/DE
   * Something more exotic like finding/making a word association corpus from vast quantities of text, and seeing if it can produce something sensible...?
 * web interface for easy sharing
+  * show how many pts each power costs
 
 ### bugs
 * underwater thrones can have recruitable non-aquatic mages
