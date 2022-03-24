@@ -207,6 +207,22 @@ has 'generators' => (
 		),
 
 
+		# Adventure site
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1],
+			generate => sub {
+				my $pts = shift;
+				my $success = 15 * $pts;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "adventure ruin",
+					title => "adventure ruin ($success% success)",
+					dm_claimed => "#adventureruin $success",
+				);
+			}
+		),
+
+
 		# recruitable mage
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3,4],
