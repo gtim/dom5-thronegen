@@ -11,6 +11,7 @@ use ThroneGen::Power;
 use ThroneGen::PowerGenerator;
 use List::Util qw/shuffle/;
 use Carp;
+use POSIX qw/round/;
 
 sub random_generator {
 	my $self = shift;
@@ -50,10 +51,11 @@ has 'generators' => (
 		),
 
 		# slave income
+		# 2.5 slaves per pt, round result randomly
 		ThroneGen::PowerGenerator->new(
 			generate => sub {
 				my $pts = shift;
-				my $slaves = 3 * $pts;
+				my $slaves = round( 2.5 * $pts + rand-0.5 );
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "slaves per month",
