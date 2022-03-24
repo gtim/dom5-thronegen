@@ -86,7 +86,7 @@ has 'generators' => (
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "extra temple checks per month",
-					title => "$candles additional temple checks per month",
+					title => "$candles additional temple check".($candles>1?'s':'')." per month",
 					dm_increased_domspread => $candles,
 				);
 			}
