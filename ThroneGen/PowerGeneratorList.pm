@@ -144,7 +144,64 @@ has 'generators' => (
 					pts => $pts,
 					type => "ritual discount",
 					title => ucfirst($school) . " ritual discount $discount%",
-					dm_claimed => sprintf( '#%scost %d%%', $school, $discount ),
+					dm_claimed => "#${school}cost $discount",
+				);
+			}
+		),
+
+
+		#
+		# ritual range bonus
+		#
+		# single path +2: 1 pt
+		# single path +3: 2 pt
+		# elemental/sorcery +1: 1pt 
+		# elemental/sorcery +2: 2pt 
+		# elemental/sorcery +3: 3pt 
+		# all +1: 2pt 
+		# all +2: 4pt 
+		
+		# ritual range bonus, single path
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2],
+			generate => sub {
+				my $pts = shift;
+				my $path = (qw/fire air water earth astral death nature blood/)[ int rand 8 ];
+				my $range = $pts+1;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "ritual range bonus",
+					title => ucfirst($path) . " ritual range +$range",
+					dm_claimed => "#${path}range $range",
+				);
+			}
+		),
+		# ritual range bonus, elemental/sorcery
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2,3],
+			generate => sub {
+				my $pts = shift;
+				my $paths = (qw/element sorcery/)[ int rand 2 ];
+				my $range = $pts;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "ritual range bonus",
+					title => ucfirst($paths) . " ritual range +$range",
+					dm_claimed => "#${paths}range $range",
+				);
+			}
+		),
+		# ritual range bonus, all paths
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2,4],
+			generate => sub {
+				my $pts = shift;
+				my $range = $pts/2;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "ritual range bonus",
+					title => "ritual range +$range",
+					dm_claimed => "#allrange $range",
 				);
 			}
 		),
