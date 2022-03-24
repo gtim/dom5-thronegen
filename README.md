@@ -13,8 +13,6 @@
   * #supply
 * useful effects, hopefully easy in current framework
   * #heal - perhaps dubious because this is the lesser talked about way to unfeeblemind tarts and people might find this a bit wild
-  * #xp
-  * #adventureruin
   * all of the bless bonuses
   * #recallgod
   * #domwar

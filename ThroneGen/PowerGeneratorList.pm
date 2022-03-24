@@ -222,6 +222,21 @@ has 'generators' => (
 			}
 		),
 
+		# Gain XP for commander + units
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2,3],
+			generate => sub {
+				my $pts = shift;
+				my $xp = 8 * $pts;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "gain xp",
+					title => "enter to gain $xp xp",
+					dm_claimed => "#xp $xp",
+				);
+			}
+		),
+
 
 		# recruitable mage
 		ThroneGen::PowerGenerator->new(
