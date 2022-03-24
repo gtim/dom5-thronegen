@@ -6,10 +6,6 @@
   * #decunrest
   * #supply
 * useful effects, hopefully easy in current framework
-  * #scry, #scryrange
-  * spell school cost reduction
-  * path ritual range boosters
-  * element/sorcery/all range boosters
   * #heal - perhaps dubious because this is the lesser talked about way to unfeeblemind tarts and people might find this a bit wild
   * #xp
   * #adventureruin
