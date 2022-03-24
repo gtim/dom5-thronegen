@@ -1,5 +1,11 @@
 # thronegen
 
+## design goals
+* make thrones a bit fresh and a little more interesting
+* viable in vanilla games to spice things up a little, without making the mod central to the game
+* throne power level: good lvl2 thrones or slightly stronger
+* balanced, not swingy
+
 ### throne powers to implement
 * questionable value items - more likely usable for negative effects, but negative effects probably need to be capped to avoid being swingy
   * #res
