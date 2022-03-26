@@ -55,7 +55,7 @@ has 'generators' => (
 		ThroneGen::PowerGenerator->new(
 			generate => sub {
 				my $pts = shift;
-				my $slaves = round( 2.5 * $pts + rand-0.5 );
+				my $slaves = round( 2.5 * $pts + rand()-0.5 );
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "slaves per month",
