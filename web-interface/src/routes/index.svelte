@@ -7,7 +7,7 @@
 		const json = await response.json();
 		if ( response.ok ) {
 			console.log(json.thrones);
-			return json.thrones;
+			return json;
 		} else {
 			throw new Error(json);
 		}
@@ -27,8 +27,8 @@
 {#if promise}
 	{#await promise}
 		<p>generating...</p>
-	{:then thrones}
-		{#each thrones as throne}
+	{:then generated}
+		{#each generated.thrones as throne}
 			<div>
 				<p>Throne</p>
 				<ul>
@@ -38,9 +38,18 @@
 				</ul>
 			</div>
 		{/each}
+		<textarea>{generated.dm}</textarea>
 	{:catch error}
 		<p style="color:red;">
 			<span style="font-weight:bold;">Error: {error.message}</span>
 		</p>
 	{/await}
 {/if}
+
+
+<style>
+	textarea {
+		width:100%;
+		height:640px;
+	}
+</style>

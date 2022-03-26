@@ -20,10 +20,12 @@ print $cgi->header('application/json');
 
 my @thrones = map { ThroneGen::Throne->new( pts => 4 ) } ( 1..5 );
 
+#
 # make JSON
+#
 
+# thrones
 my @j_thrones;
-
 for my $throne ( @thrones ) {
 	my $j_throne = {
 		pts => $throne->pts,
@@ -37,4 +39,16 @@ for my $throne ( @thrones ) {
 	push @j_thrones, $j_throne;
 }
 
-print encode_json( { thrones => \@j_thrones } );
+# dm
+my $dm_content;
+open( my $fh, '>', \$dm_content) or die $!;
+ThroneGen::DM->new(
+	thrones => \@thrones,
+	fh => $fh,
+)->write();
+
+# json encode and output
+print encode_json( {
+	thrones => \@j_thrones,
+	dm => $dm_content,
+} );
