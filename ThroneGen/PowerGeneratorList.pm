@@ -252,7 +252,7 @@ has 'generators' => (
 
 		# bless resists
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [1,2,3],
+			pts_allowed => [1,2],
 			generate => sub {
 				my $pts = shift;
 				my $res = 5 * $pts;
@@ -267,9 +267,36 @@ has 'generators' => (
 			}
 		),
 
+		# bless atk/def/prec/morale/reinvig
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2,3],
+			generate => sub {
+				my $pts = shift;
+				my %stats = (
+					att      => 'attack',
+					def      => 'defense',
+					prec     => 'precision',
+					mor      => 'morale',
+					reinvig  => 'reinvigoration',
+				);
+				my $stat = _random_element( keys %stats );
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "bless",
+					title => "Blessed get +$pts $stats{$stat}",
+					dm_claimed => "#bless$stat $pts",
+				);
+			}
+		),
+
 
 	] },
 );
+
+sub _random_element {
+	# return random element from list
+	return $_[ int rand( 0+@_ ) ];
+}
 
 
 __PACKAGE__->meta->make_immutable;
