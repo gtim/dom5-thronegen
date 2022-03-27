@@ -244,6 +244,30 @@ has 'generators' => (
 			}
 		),
 
+		#
+		#
+		# Blesses
+		#
+		#
+
+		# bless resists
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2,3],
+			generate => sub {
+				my $pts = shift;
+				my $res = 5 * $pts;
+				my $element_cmd = (qw/fire cold shock pois/)[int rand 4];
+				my $element_full = $element_cmd eq 'pois' ? 'poison' : $element_cmd;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "bless",
+					title => "Blessed get +$res $element_full resistance",
+					dm_claimed => "#bless${element_cmd}res $res",
+				);
+			}
+		),
+
+
 	] },
 );
 
