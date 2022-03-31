@@ -264,7 +264,7 @@ has 'generators' => (
 			pts_allowed => [2,4],
 			generate => sub {
 				my $pts = shift;
-				my $callgod = $pts/2;
+				my $conflictbonus = $pts/2;
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "dom conflict bonus",
