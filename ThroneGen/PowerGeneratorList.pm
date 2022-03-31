@@ -305,6 +305,34 @@ has 'generators' => (
 				);
 			}
 		),
+		
+		# bless awe
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [6],
+			generate => sub {
+				my $pts = shift;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "bless",
+					title => "Blessed get Awe +1",
+					dm_claimed => "#blessawe 1",
+				);
+			}
+		),
+		
+		# bless animal awe
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2],
+			generate => sub {
+				my $pts = shift;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "bless",
+					title => "Blessed get Animal Awe +1",
+					dm_claimed => "#blessanimawe 1",
+				);
+			}
+		),
 
 
 	] },
