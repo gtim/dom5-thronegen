@@ -244,6 +244,36 @@ has 'generators' => (
 			}
 		),
 
+		# Call God bonus
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2,4],
+			generate => sub {
+				my $pts = shift;
+				my $callgod = $pts/2;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "call god",
+					title => "+$callgod Call God bonus",
+					dm_claimed => "#recallgod $callgod",
+				);
+			}
+		),
+
+		# dominions conflict bonus
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2,4],
+			generate => sub {
+				my $pts = shift;
+				my $callgod = $pts/2;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "dom conflict bonus",
+					title => "+$conflictbonus Dominion conflict bonus",
+					dm_claimed => "#domwar $conflictbonus",
+				);
+			}
+		),
+
 		#
 		#
 		# Blesses
