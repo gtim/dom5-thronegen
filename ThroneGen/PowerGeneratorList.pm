@@ -267,7 +267,7 @@ has 'generators' => (
 			}
 		),
 
-		# bless atk/def/prec/morale/reinvig
+		# bless atk/def/prec/morale/reinvig/hp/undying
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
@@ -278,6 +278,8 @@ has 'generators' => (
 					prec     => 'precision',
 					mor      => 'morale',
 					reinvig  => 'reinvigoration',
+					hp       => 'hp',
+					dtv      => 'undying',
 				);
 				my $stat = _random_element( keys %stats );
 				return ThroneGen::Power->new(
@@ -285,6 +287,21 @@ has 'generators' => (
 					type => "bless",
 					title => "Blessed get +$pts $stats{$stat}",
 					dm_claimed => "#bless$stat $pts",
+				);
+			}
+		),
+		
+		# bless darkvision
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [2,4],
+			generate => sub {
+				my $pts = shift;
+				my $dv = $pts/2 * 50;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "bless",
+					title => "Blessed get darkvision +$dv",
+					dm_claimed => "#blessdarkvis $dv",
 				);
 			}
 		),
