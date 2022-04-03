@@ -38,7 +38,9 @@ sub can_generate {
 	# checks if the generator can generate a power for the supplied number of points
 	my ( $self, $pts ) = @_;
 	# check pts_allowed
-	return 1 if $self->pts_allowed && any { $_ == $pts } @{$self->pts_allowed};
+	if ( $self->pts_allowed ) {
+		return any { $_ == $pts } @{$self->pts_allowed};
+	}
 	# check min/max
 	return 0 if $pts < $self->pts_min || $pts > $self->pts_max;
 	# else: all OK
