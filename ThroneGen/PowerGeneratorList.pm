@@ -72,13 +72,14 @@ has 'generators' => (
 
 		# gold income
 		ThroneGen::PowerGenerator->new(
+			pts_min => -1,
 			generate => sub {
 				my $pts = shift;
-				my $gold = 50 * $pts;
+				my $gold = $pts >= 0 ? 50 * $pts : -100;
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "gold per month",
-					title => "+$gold gold per month",
+					title => sprintf( '%+d gold per month', $gold ),
 					dm_claimed => "#gold $gold",
 				);
 			}

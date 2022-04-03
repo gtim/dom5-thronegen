@@ -7,7 +7,6 @@
   * #supply
 * potential for negative effects to refund points
   * causes unrest
-  * negative gold
   * curse
   * horror mark 
 * potential for event-driven alternative effects, but this is harder to implement and much more difficult to communicate via ingame text
