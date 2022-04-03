@@ -6,6 +6,10 @@
   * #decunrest
   * #supply
 * potential for negative effects to refund points
+  * causes unrest
+  * negative gold
+  * curse
+  * horror mark 
 * potential for event-driven alternative effects, but this is harder to implement and much more difficult to communicate via ingame text
   * ... but turn 1 event info messages that can be screenshotted and shared amongst the players in the game, plus a reference comment section in the .dm could help that
 
@@ -24,10 +28,11 @@
 throne powers that probably won't be included:
   * air shield - too situational
   * #heal - perhaps dubious because this is the lesser talked about way to unfeeblemind tarts and people might find this a bit wild
+  * #disease
+  * negative nation scales
 
 design goals:
 * make thrones a bit fresh and a little more interesting, but not whacky
 * viable in vanilla games to spice things up a little, without making the mod central to the game
 * throne power level: good lvl2 thrones or slightly stronger
 * balanced, not swingy
-
