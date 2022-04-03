@@ -86,14 +86,16 @@ has 'generators' => (
 
 		# dom spread
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [2,4,6,8,10,12,14,16,18,20],
+			pts_allowed => [-1,2,4,6,8,10,12,14,16,18,20],
 			generate => sub {
 				my $pts = shift;
-				my $candles = $pts/2;
+				my $candles = $pts > 0 ? $pts/2 : -1;
+				my $plural_s = $candles == 1 ? '' : 's';
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "extra temple checks per month",
-					title => "$candles additional temple check".($candles>1?'s':'')." per month",
+					title => ( $candles > 0 ? "$candles additional temple check$plural_s per month"
+					                        : "$candles less temple check$plural_s per month" ),
 					dm_increased_domspread => $candles,
 				);
 			}

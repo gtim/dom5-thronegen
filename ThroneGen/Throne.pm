@@ -27,14 +27,26 @@ has 'powers' => (
 	lazy => 1,
 	default => sub {
 		my $self = shift;
+
+		# distribute points
+		
 		my @pts;
-		# First power: spend at least half points
-		push @pts, _rand_int_between_inclusive( ceil( $self->pts/2 ), $self->pts );
-		# Second power: spend remaining points
-		if ( $self->pts - $pts[0] > 0 ) {
-			push @pts, $self->pts - $pts[0];
+		my $pts_left = $self->pts;
+		# Chance for negative power
+		if ( rand() < 0.2 ) {
+			push @pts, -1;
+			$pts_left += 1;
 		}
+		# First power: spend at least half points
+		push @pts, _rand_int_between_inclusive( ceil( $pts_left/2 ), $pts_left );
+		$pts_left -= $pts[-1];
+		# Second power: spend remaining points
+		if ( $pts_left > 0 ) {
+			push @pts, $pts_left;
+		}
+
 		# generate powers
+		
 		local $_;
 		my @powers;
 		for my $num_tries ( 1..100 ) {
