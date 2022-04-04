@@ -84,6 +84,21 @@ has 'generators' => (
 				);
 			}
 		),
+		
+		# cause unrest
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [-1],
+			generate => sub {
+				my $pts = shift;
+				my $unrest = 10;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "unrest",
+					title => "causes $unrest unrest per month",
+					dm_claimed => "#decunrest -$unrest",
+				);
+			}
+		),
 
 		# dom spread
 		ThroneGen::PowerGenerator->new(
