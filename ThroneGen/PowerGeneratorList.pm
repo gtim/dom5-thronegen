@@ -413,6 +413,32 @@ has 'generators' => (
 				);
 			}
 		),
+		# reduced supply
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [-1],
+			generate => sub {
+				my $pts = shift;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "supply",
+					title => "-150 supply",
+					dm_unclaimed => "#supply -150",
+				);
+			}
+		),
+		# reduced resources
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [-1],
+			generate => sub {
+				my $pts = shift;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "resources",
+					title => "-100 resources",
+					dm_unclaimed => "#res -100",
+				);
+			}
+		),
 
 	] },
 );
