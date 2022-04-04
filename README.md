@@ -1,8 +1,17 @@
 # thronegen
 
-### throne powers to implement
-* potential for event-driven alternative effects, but this is harder to implement and much more difficult to communicate via ingame text
-  * ... but turn 1 event info messages that can be screenshotted and shared amongst the players in the game, plus a reference comment section in the .dm could help that
+###
+
+To do before test game:
+- [ ] power: recruitable unit that's only situationally useful. maybe bad infantry with resistance
+- [ ] 0pt-power: bonus wall defender
+- [ ] 0pt-power: bonus wall mage
+- [ ] 0pt-power: change province scale
+- [ ] power: auto-construct a lab/temple (through events)
+- [ ] make the good recruitable mages slow-to-recruit
+- [ ] minor balancing run
+- [ ] very simple throne names
+- [ ] make a channel and get buried in criticism, adjust balance accordingly
 
 ### misc big plans
 * throne themes -- how to solve?
