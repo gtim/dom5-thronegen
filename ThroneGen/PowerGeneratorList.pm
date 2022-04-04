@@ -84,21 +84,6 @@ has 'generators' => (
 				);
 			}
 		),
-		
-		# cause unrest
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1],
-			generate => sub {
-				my $pts = shift;
-				my $unrest = 10;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "unrest",
-					title => "causes $unrest unrest per month",
-					dm_claimed => "#decunrest -$unrest",
-				);
-			}
-		),
 
 		# dom spread
 		ThroneGen::PowerGenerator->new(
@@ -382,6 +367,52 @@ has 'generators' => (
 			}
 		),
 
+		#
+		#
+		# Negative effects
+		#
+		#
+		
+		# cause unrest
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [-1],
+			generate => sub {
+				my $pts = shift;
+				my $unrest = 10;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "unrest",
+					title => "causes $unrest unrest per month",
+					dm_claimed => "#decunrest -$unrest",
+				);
+			}
+		),
+		# curse
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [-1],
+			generate => sub {
+				my $pts = shift;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "curse",
+					title => "curses 1% of units in province per month",
+					dm_claimed => "#curse 1",
+				);
+			}
+		),
+		# horror mark
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [-1],
+			generate => sub {
+				my $pts = shift;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => "horror mark",
+					title => "horror marks 1% of units in province per month",
+					dm_claimed => "#horrormark 1",
+				);
+			}
+		),
 
 	] },
 );

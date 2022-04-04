@@ -5,9 +5,6 @@
   * #res
   * #decunrest
   * #supply
-* potential for negative effects to refund points
-  * curse
-  * horror mark 
 * potential for event-driven alternative effects, but this is harder to implement and much more difficult to communicate via ingame text
   * ... but turn 1 event info messages that can be screenshotted and shared amongst the players in the game, plus a reference comment section in the .dm could help that
 
