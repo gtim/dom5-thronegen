@@ -21,6 +21,12 @@ has 'site_id' => (
 	is       => 'rw',
 	isa      => 'Int'
 );
+has 'name' => (
+	is     => 'ro',
+	isa     => 'Str',
+	lazy    => 1,
+	default => sub { 'Throne of ' . $_[0]->site_id }
+);
 has 'powers' => (
 	is => 'ro',
 	isa => 'ArrayRef[ThroneGen::Power]',
@@ -72,7 +78,7 @@ sub write_to_dm {
 	croak "Throne::write_to_dm called before setting site_id" unless $self->site_id;
 	printf $fh "#selectsite %d\n", $self->site_id;
 	print  $fh "#clear\n";
-	printf $fh "#name \"The Throne of Site ID %d\"\n", $self->site_id;
+	print  $fh "#name \"".$self->name."\"\n";
 	print  $fh "#path 8\n";
 	print  $fh "#level 0\n";
 	print  $fh "#loc 213999 -- unique, allowed everywhere\n";
@@ -91,6 +97,16 @@ sub write_to_dm {
 	}
 	print  $fh "#end\n";
 	print  $fh "\n";
+
+	# events from throne powers
+	for my $power ( @{ $self->powers } ) {
+		if ( $power->has_dm_event ) {
+			my $event_dm = $power->dm_event;
+			my $throne_name = $self->name;
+			$event_dm =~ s/THRONE_NAME/$throne_name/g;
+			print $fh $event_dm . "\n";
+		}
+	}
 }
 
 sub _domspread {

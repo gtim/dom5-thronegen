@@ -7,7 +7,7 @@ To do before test game:
 - [ ] 0pt-power: bonus wall defender
 - [ ] 0pt-power: bonus wall mage
 - [x] 0pt-power: change province scale
-- [ ] power: auto-construct a lab/temple (through events)
+- [x] power: auto-construct a lab/temple (through events)
 - [ ] make the good recruitable mages slow-to-recruit
 - [ ] minor balancing run
 - [ ] very simple throne names

@@ -40,6 +40,11 @@ has 'dm_unclaimed'  => (
 	isa       => 'Str',
 	predicate => 'has_dm_unclaimed',
 );
+has 'dm_event'  => (
+	is        => 'ro',
+	isa       => 'Str',
+	predicate => 'has_dm_event',
+);
 has 'dm_increased_domspread'  => (
 	is        => 'ro',
 	isa       => 'Int',
