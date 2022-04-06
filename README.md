@@ -13,6 +13,16 @@ To do before test game:
 - [ ] very simple throne names
 - [ ] make a channel and get buried in criticism, adjust balance accordingly
 
+### throne power ideas (good/bad/ugly)
+* permanent lab
+* improve scales in neighbouring provinces
+* freespawn units
+* temporary global effects
+  * increase world scales
+  * increase/decrease world unrest
+  * darkness, curse, horrormark, heal, age
+* negative: cause specific affliction to one(?) unit per turn (blind/NHW/eyeloss/armloss/..)
+
 ### misc big plans
 * throne themes -- how to solve?
   * Manual tagging themes onto everything...?
