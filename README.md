@@ -6,7 +6,7 @@ To do before test game:
 - [ ] power: recruitable unit that's only situationally useful. maybe bad infantry with resistance
 - [ ] 0pt-power: bonus wall defender
 - [ ] 0pt-power: bonus wall mage
-- [ ] 0pt-power: change province scale
+- [x] 0pt-power: change province scale
 - [ ] power: auto-construct a lab/temple (through events)
 - [ ] make the good recruitable mages slow-to-recruit
 - [ ] minor balancing run

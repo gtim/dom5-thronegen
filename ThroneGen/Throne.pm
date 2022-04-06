@@ -32,7 +32,9 @@ has 'powers' => (
 		
 		my @pts;
 		my $pts_left = $self->pts;
-		# Chance for negative power
+		# 40% chance for  0 pt power
+		push @pts, 0 if rand() < 0.4;
+		# 20% chance for -1 pt power
 		if ( rand() < 0.2 ) {
 			push @pts, -1;
 			$pts_left += 1;
@@ -42,7 +44,7 @@ has 'powers' => (
 		$pts_left -= $pts[-1];
 		# Second power: spend remaining points
 		if ( $pts_left > 0 ) {
-			push @pts, $pts_left;
+			unshift @pts, $pts_left;
 		}
 
 		# generate powers

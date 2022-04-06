@@ -72,10 +72,9 @@ has 'generators' => (
 
 		# gold income
 		ThroneGen::PowerGenerator->new(
-			pts_min => -1,
 			generate => sub {
 				my $pts = shift;
-				my $gold = $pts >= 0 ? 50 * $pts : -100;
+				my $gold = 50 * $pts;
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "gold per month",
@@ -373,6 +372,19 @@ has 'generators' => (
 		#
 		#
 		
+		# less gold income
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [-1],
+			generate => sub {
+				my $gold = -100;
+				return ThroneGen::Power->new(
+					pts => -1,
+					type => "gold per month",
+					title => '-100 gold per month',
+					dm_claimed => "#gold -100",
+				);
+			}
+		),
 		# cause unrest
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [-1],
@@ -439,6 +451,39 @@ has 'generators' => (
 				);
 			}
 		),
+
+		#
+		# 0pt-powers
+		#
+		
+		# province scale
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [0],
+			generate => sub {
+				my %cmds = (
+					'Turmoil'      => '#incscale 0',
+					'Sloth'        => '#incscale 1',
+					'Cold'         => '#incscale 2',
+					'Death'        => '#incscale 3',
+					'Misfortune'   => '#incscale 4',
+					'Drain'        => '#incscale 5',
+					'Order'        => '#decscale 0',
+					'Productivity' => '#decscale 1',
+					'Heat'         => '#decscale 2',
+					'Growth'       => '#decscale 3',
+					'Luck'         => '#decscale 4',
+					'Magic'        => '#decscale 5',
+				);
+				my $scale = _random_element( keys %cmds );
+				return ThroneGen::Power->new(
+					pts => 0,
+					type => "province scale",
+					title => "Increases $scale in province",
+					dm_unclaimed => $cmds{$scale},
+				);
+			},
+		),
+
 
 	] },
 );
