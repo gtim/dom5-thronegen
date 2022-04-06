@@ -283,13 +283,14 @@ has 'generators' => (
 				return ThroneGen::Power->new(
 					pts => 1,
 					type => "permanent temple",
-					title => "permanent temple",
+					title => "free permanent temple when claimed",
 					dm_event => "#newevent\n"
-					           ."#msg \"A temple has sprung from the ground. [THRONE_NAME]\"\n"
+					           ."#msg \"As the throne is claimed, a temple to ##godname## springs from the ground. [THRONE_NAME]\"\n"
 					           ."#nation -2 -- province owner\n"
 					           ."#rarity 5 -- checked every turn\n"
 					           ."#req_site 1 -- only happens to province specified in msg\n"
 					           ."#req_temple 0 -- requires lack of temple\n"
+					           ."#req_claimedthrone 1 -- throne must be claimed\n"
 					           ."#req_pop0ok -- happens in dead provinces as well\n"
 					           ."#temple 1 -- constructs a temple\n"
 					           ."#end\n"
