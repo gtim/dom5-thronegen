@@ -10,6 +10,7 @@ use namespace::autoclean;
 use ThroneGen::Power;
 use ThroneGen::PowerGenerator;
 use ThroneGen::PowerGenerator::RecruitableMage;
+use ThroneGen::PowerGenerator::Simple;
 
 use List::Util qw/shuffle/;
 use Carp;
@@ -217,18 +218,11 @@ has 'generators' => (
 
 
 		# Adventure site
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [1],
-			generate => sub {
-				my $pts = shift;
-				my $success = 15 * $pts;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "adventure ruin",
-					title => "adventure ruin ($success% success)",
-					dm_unclaimed => "#adventureruin $success",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => 1,
+			type => "adventure ruin",
+			title => "adventure ruin (15% success)",
+			dm_unclaimed => "#adventureruin 15",
 		),
 
 		# Gain XP for commander + units
@@ -277,25 +271,20 @@ has 'generators' => (
 		),
 
 		# permanent temple
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [1],
-			generate => sub {
-				return ThroneGen::Power->new(
-					pts => 1,
-					type => "permanent temple",
-					title => "free permanent temple when claimed",
-					dm_event => "#newevent\n"
-					           ."#msg \"As the throne is claimed, a temple to ##godname## springs from the ground. [THRONE_NAME]\"\n"
-					           ."#nation -2 -- province owner\n"
-					           ."#rarity 5 -- checked every turn\n"
-					           ."#req_site 1 -- only happens to province specified in msg\n"
-					           ."#req_temple 0 -- requires lack of temple\n"
-					           ."#req_claimedthrone 1 -- throne must be claimed\n"
-					           ."#req_pop0ok -- happens in dead provinces as well\n"
-					           ."#temple 1 -- constructs a temple\n"
-					           ."#end\n"
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => 1,
+			type => "permanent temple",
+			title => "free permanent temple when claimed",
+			dm_event => "#newevent\n"
+				   ."#msg \"As the throne is claimed, a temple to ##godname## springs from the ground. [THRONE_NAME]\"\n"
+				   ."#nation -2 -- province owner\n"
+				   ."#rarity 5 -- checked every turn\n"
+				   ."#req_site 1 -- only happens to province specified in msg\n"
+				   ."#req_temple 0 -- requires lack of temple\n"
+				   ."#req_claimedthrone 1 -- throne must be claimed\n"
+				   ."#req_pop0ok -- happens in dead provinces as well\n"
+				   ."#temple 1 -- constructs a temple\n"
+				   ."#end\n"
 		),
 
 		#
@@ -361,31 +350,19 @@ has 'generators' => (
 		),
 		
 		# bless awe
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [6],
-			generate => sub {
-				my $pts = shift;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "bless",
-					title => "Blessed get Awe +1",
-					dm_claimed => "#blessawe 1",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => 6,
+			type => "bless",
+			title => "Blessed get Awe +1",
+			dm_claimed => "#blessawe 1",
 		),
 		
 		# bless animal awe
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [2],
-			generate => sub {
-				my $pts = shift;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "bless",
-					title => "Blessed get Animal Awe +1",
-					dm_claimed => "#blessanimawe 1",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => 2,
+			type => "bless",
+			title => "Blessed get Animal Awe +1",
+			dm_claimed => "#blessanimawe 1",
 		),
 
 		#
@@ -395,83 +372,46 @@ has 'generators' => (
 		#
 		
 		# less gold income
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1],
-			generate => sub {
-				my $gold = -100;
-				return ThroneGen::Power->new(
-					pts => -1,
-					type => "gold per month",
-					title => '-100 gold per month',
-					dm_claimed => "#gold -100",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => -1,
+			type => "gold per month",
+			title => '-100 gold per month',
+			dm_claimed => "#gold -100",
 		),
 		# cause unrest
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1],
-			generate => sub {
-				my $pts = shift;
-				my $unrest = 10;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "unrest",
-					title => "causes $unrest unrest per month",
-					dm_claimed => "#decunrest -$unrest",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => -1,
+			type => "unrest",
+			title => "causes 10 unrest per month",
+			dm_claimed => "#decunrest -10",
 		),
 		# curse
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1],
-			generate => sub {
-				my $pts = shift;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "curse",
-					title => "curses 1% of units in province per month",
-					dm_claimed => "#curse 1",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => -1,
+			type => "curse",
+			title => "curses 1% of units in province per month",
+			dm_claimed => "#curse 1",
 		),
 		# horror mark
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1],
-			generate => sub {
-				my $pts = shift;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "horror mark",
-					title => "horror marks 1% of units in province per month",
-					dm_claimed => "#horrormark 1",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => -1,
+			type => "horror mark",
+			title => "horror marks 1% of units in province per month",
+			dm_claimed => "#horrormark 1",
 		),
 		# reduced supply
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1],
-			generate => sub {
-				my $pts = shift;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "supply",
-					title => "-150 supply",
-					dm_unclaimed => "#supply -150",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => -1,
+			type => "supply",
+			title => "-150 supply",
+			dm_unclaimed => "#supply -150",
 		),
 		# reduced resources
-		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1],
-			generate => sub {
-				my $pts = shift;
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "resources",
-					title => "-100 resources",
-					dm_unclaimed => "#res -100",
-				);
-			}
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => -1,
+			type => "resources",
+			title => "-100 resources",
+			dm_unclaimed => "#res -100",
 		),
 
 		#
