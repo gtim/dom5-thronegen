@@ -9,8 +9,9 @@ use namespace::autoclean;
 
 use ThroneGen::Power;
 use ThroneGen::PowerGenerator;
-use ThroneGen::PowerGenerator::RecruitableMage;
 use ThroneGen::PowerGenerator::Simple;
+use ThroneGen::PowerGenerator::RecruitableMage;
+use ThroneGen::PowerGenerator::WallMage;
 
 use List::Util qw/shuffle/;
 use Carp;
@@ -445,6 +446,10 @@ has 'generators' => (
 				);
 			},
 		),
+		
+		# wall mage
+		ThroneGen::PowerGenerator::WallMage->new(),
+
 
 
 	] },
