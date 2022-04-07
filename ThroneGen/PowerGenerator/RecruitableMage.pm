@@ -24,7 +24,6 @@ has '+generate' => (
 				# X1
 				{ pts => 1, name => 'Azure Initiate',             id => 96   }, # W1, water-breathing
 				{ pts => 1, name => 'Cloud Mage',                 id => 92   }, # A1
-				{ pts => 1, name => 'Hedge Wizard',               id => 1182 }, # N1
 				{ pts => 1, name => 'Pyromancer',                 id => 98   }, # F1
 				{ pts => 1, name => 'Revenant',                   id => 98   }, # D1, undead
 
@@ -90,6 +89,7 @@ has '+generate' => (
 				{ pts => 4, name => 'Yeti Shaman',                id => 2642 }, # A2W2, sturdy chassis, high map-move
 
 				# not included
+				#{pts => 1, name => 'Hedge Wizard',               id => 1182 }, # N1, underwhelming as N1 tribes are common
 				#{pts => 2, name => 'Adventurer (N2)',            id => 2327 }, # #autohealer too strong
 				#{pts => 4, name => 'Cyclops',                    id => 156  }, # E3, chassis too strong 
 				#{pts => 4, name => 'Dust Priest',                id => 1978 }, # too many paths
