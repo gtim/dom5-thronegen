@@ -31,11 +31,11 @@ has 'name' => (
 		for my $power ( @{ $self->powers } ) {
 			if ( $power->has_theme ) {
 				my $theme = ThroneGen::ThematicWords->instance->word_on_theme( $power->theme );
-				return "Throne of $theme";
+				return "The Throne of $theme";
 			}
 		}
 		carp "no theme found for throne";
-		return 'Throne of ???';
+		return 'The Throne of ???';
 	}
 );
 has 'powers' => (
