@@ -48,10 +48,12 @@ has 'generators' => (
 				my $pts = shift;
 				my $gem_id = int rand 7;
 				my $gem_str = (qw/F A W E S D N/)[$gem_id];
+				my $theme =  {F => 'fire', A => 'air', W => 'water', E => 'earth', S => 'astral', D => 'death', N => 'nature' }->{$gem_str};
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "$gem_str per month",
 					title => sprintf( '+%d %s gem%s per month', $pts, $gem_str, ($pts==1?'':'s') ),
+					theme => $theme,
 					dm_claimed => "#gems $gem_id $pts",
 				);
 			}

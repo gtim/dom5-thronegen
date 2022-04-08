@@ -15,7 +15,7 @@ my @thrones = map { ThroneGen::Throne->new( pts => 4 ) } ( 1..3 );
 # print thrones
 
 for my $throne ( @thrones ) {
-	say "Throne";
+	say $throne->name;
 	say "  " . $_->title for ( @{$throne->powers} );
 	say "";
 }

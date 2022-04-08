@@ -26,6 +26,12 @@ has 'title' => (
 	isa       => 'Str',
 	required  => 1,
 );
+has 'theme' => (
+	# theme used for throne name
+	is        => 'ro',
+	isa       => 'Str',
+	predicate => 'has_theme',
+);
 
 # dm_* attributes have direct effect on the generated .dm
 
