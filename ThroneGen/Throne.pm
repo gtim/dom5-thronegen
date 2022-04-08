@@ -28,7 +28,7 @@ has 'name' => (
 	lazy    => 1,
 	default => sub {
 		my $self = shift;
-		for my $power ( @{ $self->powers } ) {
+		for my $power ( sort { $b->pts <=> $a->pts } @{ $self->powers } ) {
 			if ( $power->has_theme ) {
 				my $theme = ThroneGen::ThematicWords->instance->word_on_theme( $power->theme );
 				return "The Throne of $theme";
