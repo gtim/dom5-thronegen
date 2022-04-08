@@ -7,6 +7,7 @@ use lib $FindBin::Bin;
 use ThroneGen::Throne;
 use ThroneGen::DM;
 
+
 # generate five 5pt thrones
 
 my @thrones = map { ThroneGen::Throne->new( pts => 4 ) } ( 1..3 );

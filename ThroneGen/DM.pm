@@ -20,30 +20,60 @@ has 'fh' => (
 	isa      => 'FileHandle',
 	default  => sub { \*STDOUT },
 );
+has 'dm_id' => (
+	# randomly generated ID (not a seed)
+	is => 'ro',
+	isa => 'Str',
+	default => sub {
+		my @symbols = ('a'..'z', 0..9);
+		return join '', map { $symbols[int rand @symbols] } 1..6;
+	}
+);
 
 sub write {
 	my $self = shift;
 
-	$self->write_header();
-
-	my $throne_id = $First_Throne_ID;
-	for my $throne ( @{$self->thrones} ) {
-		croak "more thrones than vanilla thrones" if $throne_id > $Last_Throne_ID;
-		$throne->site_id( $throne_id );
-		$throne->write_to_dm( $self->fh );
-		$throne_id++;
+	# assigne thrones site IDs
+	my $throne_id_first_unused;
+	{
+		my $throne_id = $First_Throne_ID;
+		for my $throne ( @{$self->thrones} ) {
+			croak "more thrones than vanilla thrones" if $throne_id > $Last_Throne_ID;
+			$throne->site_id( $throne_id );
+			$throne_id++;
+		}
+		$throne_id_first_unused = $throne_id;
 	}
 
-	$self->write_disable_throne_IDs( $throne_id..$Last_Throne_ID );
+	# write header
+	$self->write_header();
+
+	# write thrones
+	$_->write_to_dm( $self->fh ) for ( @{$self->thrones} );
+
+	# disable unused thrones
+	$self->write_disable_throne_IDs( $throne_id_first_unused..$Last_Throne_ID );
 
 }
 
 sub write_header {
 	my $self = shift;
-	print {$self->fh} "#modname \"ThroneGen\"\n";
-	print {$self->fh} "#description \"TODO\"\n";
-	print {$self->fh} "#version 0.1\n";
-	print {$self->fh} "\n";
+	printf {$self->fh} "#modname \"ThroneGen #%s\"\n", $self->dm_id;
+	print  {$self->fh} "#description \"" . $self->description . "\"\n";
+	print  {$self->fh} "#version 0.1\n";
+	print  {$self->fh} "\n";
+}
+
+sub description {
+	my $self = shift;
+	my $desc = "Replaces all thrones with randomly generated ones. The thrones included with this instance are:\n\n";
+	for my $throne ( @{$self->thrones} ) {
+		$desc .= $throne->name . "\n";
+		$desc .= "- " . $_->title . "\n" for ( @{$throne->powers} );
+	}
+	$desc .= "\n";
+	$desc .= "You can generate new ones at thronegen.illwiki.com.";
+	return $desc;
 }
 
 sub write_disable_throne_IDs {
