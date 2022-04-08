@@ -29,9 +29,6 @@ To do before test game:
     * Maybe automate tagging based on what kind of words are used for sites/units/spells associated with these tags in vanilla/DE
   * Something more exotic like finding/making a word association corpus from vast quantities of text, and seeing if it can produce something sensible...?
 
-### bugs / stuff to fix
-* underwater thrones can have recruitable non-aquatic mages
-
 ### random notes
 
 throne powers that probably won't be included:
