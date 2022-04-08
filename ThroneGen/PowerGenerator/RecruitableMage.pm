@@ -19,7 +19,6 @@ has '+generate' => (
 			# so far, A is covered
 			# TODO: these should probably be put in a separate csv file
 			# TODO: a simple linter comparing these IDs+names with inspector data files, also checking uniqueness of IDs/names
-			# TODO: many of these should probably be copied and made slow-to-recruit
 			my @mages = (
 				# X1
 				{ pts => 1, name => 'Azure Initiate',             id => 96   }, # W1, water-breathing
@@ -49,9 +48,9 @@ has '+generate' => (
 				{ pts => 3, name => 'Adept of the Pyriphlegeton', id => 99   }, # F3, slow-rec
 				{ pts => 3, name => 'Hydromancer',                id => 103  }, # W3, slow-rec
 				# X2Y1
-				{ pts => 3, name => 'Bloodhenge Druid',           id => 122  }, # N1B2, TODO copy and make slowrec
+				{ pts => 3, name => 'Bloodhenge Druid',           id => 122, copy_and_make_slowrec => 1  }, # N1B2
 				{ pts => 3, name => 'Enchanter',                  id => 338  }, # S1N2, slow-rec
-				{ pts => 3, name => 'Ice Druid',                  id => 309  }, # W2N1, H1, TODO copy and make slowrec
+				{ pts => 3, name => 'Ice Druid',                  id => 309, copy_and_make_slowrec => 1  }, # W2N1, H1
 				{ pts => 3, name => 'Mage of Autumn',             id => 2545 }, # E2D1, slow-rec
 				{ pts => 3, name => 'Mage of Spring',             id => 2543 }, # A2N1, slow-rec
 				{ pts => 3, name => 'Mage of Summer',             id => 2544 }, # F2N1, slow-rec
@@ -77,7 +76,7 @@ has '+generate' => (
 				{ pts => 4, name => 'Adept of the Silver Order',  id => 100  }, # A2S2R1, slow-rec
 				{ pts => 4, name => 'Black Sorceress',            id => 344  }, # F1E1S2 0.2R, slow-rec
 				{ pts => 4, name => 'Blackrose Sorceress',        id => 2362 }, # D1N2B1R1, slow-rec
-				{ pts => 4, name => 'Circle Master',              id => 95   }, # D2B2,  TODO copy and make slowrec
+				{ pts => 4, name => 'Circle Master',              id => 95, copy_and_make_slowrec => 1 }, # D2B2
 				{ pts => 4, name => 'Crystal Mage',               id => 340  }, # E2S2, slow-rec
 				{ pts => 4, name => 'Gnome',                      id => 345  }, # E2N2, slow-rec, glamour, stealthy
 				{ pts => 4, name => 'High Magus',                 id => 481  }, # F2E1S2, slow-rec
@@ -123,22 +122,36 @@ has '+generate' => (
 			my @applicable_mages = grep { $_->{pts} == $pts } @mages;
 			my %mage = %{ $applicable_mages[ int rand @applicable_mages ] };
 
-			# slow-rec
-			my %slowrec = ();
-			if ( $mage{make_slowrec} ) {
-				%slowrec = ( dm_monster => "#selectmonster $mage{id} -- $mage{name}\n"
-				                          ."#slowrec\n"
-				                          ."#end\n" );
-			}
+			my $type = 'recruitable mage';
+			my $title = "recruitable $mage{name}";
 
-			# return power
-			return ThroneGen::Power->new(
-				pts => $pts,
-				type => "recruitable mage",
-				title => "recruitable $mage{name}",
-				dm_claimed => "#com $mage{id} -- recruitable $mage{name}",
-				%slowrec
-			);
+			if ( $mage{copy_and_make_slowrec} ) {
+				# copy mage and add slow-rec tag to the copy
+				return ThroneGen::Power->new(
+					pts => $pts, type => $type, title => $title,
+					dm_claimed => "#com \"$mage{name} \"\n",
+					dm_monster => "#newmonster -- create a new $mage{name} that is slow-rec\n"
+				                     ."#copystats $mage{id}\n"
+				                     ."#name \"$mage{name} \"\n"
+				                     ."#copyspr $mage{id}\n"
+				                     ."#slowrec\n"
+				                     ."#end\n",
+				);
+			} elsif ( $mage{make_slowrec} ) {
+				# add slow-rec tag to monster
+				return ThroneGen::Power->new(
+					pts => $pts, type => $type, title => $title,
+					dm_claimed => "#com $mage{id} -- recruitable $mage{name}",
+					dm_monster => "#selectmonster $mage{id} -- $mage{name}\n"
+				                     ."#slowrec\n"
+				                     ."#end\n",
+				);
+			} else {
+				return ThroneGen::Power->new(
+					pts => $pts, type => $type, title => $title,
+					dm_claimed => "#com $mage{id} -- recruitable $mage{name}",
+				);
+			}
 		}
 	}
 );

@@ -6,9 +6,9 @@ To do before test game:
 - [x] 0pt-power: bonus wall mage
 - [x] 0pt-power: change province scale
 - [x] power: auto-construct a lab/temple (through events)
-- [ ] make the good recruitable mages slow-to-recruit
-- [ ] minor balancing run
+- [x] make the good recruitable mages slow-to-recruit
 - [ ] very simple throne names
+- [ ] minor balancing run
 - [ ] make a channel and get buried in criticism, adjust balance accordingly
 
 ### throne power ideas (both good and bad)
@@ -31,7 +31,6 @@ To do before test game:
 
 ### bugs / stuff to fix
 * underwater thrones can have recruitable non-aquatic mages
-* all high-value mages should probably be slow-to-recruit -- do we have to duplicate the units?
 
 ### random notes
 
