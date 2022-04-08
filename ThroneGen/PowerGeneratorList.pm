@@ -411,19 +411,19 @@ has 'generators' => (
 			dm_claimed => "#decunrest -10",
 		),
 		# curse
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "curse",
 			title => "curses 1% of units in province per month",
+			theme => 'death',
 			dm_claimed => "#curse 1",
 		),
 		# horror mark
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "horror mark",
 			title => "horror marks 1% of units in province per month",
+			theme => 'horror'.
 			dm_claimed => "#horrormark 1",
 		),
 		# reduced supply
