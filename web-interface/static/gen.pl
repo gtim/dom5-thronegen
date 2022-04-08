@@ -28,6 +28,7 @@ my @thrones = map { ThroneGen::Throne->new( pts => 4 ) } ( 1..5 );
 my @j_thrones;
 for my $throne ( @thrones ) {
 	my $j_throne = {
+		name => $throne->name,
 		pts => $throne->pts,
 		powers => [
 			map { {

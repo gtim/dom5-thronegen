@@ -32,7 +32,7 @@
 		<div id="thrones">
 		{#each generated.thrones as throne}
 			<div>
-				<p>Throne</p>
+				<p>{throne.name}</p>
 				<ul>
 				{#each throne.powers as power}
 					<li>{power.title} ({power.pts} pts)</li>
