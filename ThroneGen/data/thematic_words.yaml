@@ -150,20 +150,73 @@ nature:
 - Throns
 
 blood:
-- Blood
-- Slaves
-- Demons
-- Witchcraft
-- Bloodstone
-- Bloodmarble
-- the Devil
-- Gore
-- Torture
-- the Broken
-- Disfigurement
 - Bats
-- Sacrifice
-- the Sanguine
+- Blood
+- Bloodmarble
+- Bloodstone
+- Demons
+- Desire
+- Disfigurement
+- Flesh
+- Gore
+- Hunger
+- Lust
+- Passion
 - Pentagrams
-- the Abyss
+- Sacrifice
 - Slaughter
+- Slaves
+- the Abyss
+- the Broken
+- the Devil
+- the Sanguine
+- Torture
+- Witchcraft
+
+
+
+
+gold:
+- Diamonds
+- Glitter
+- Gold
+- Mines
+- Splendour
+- Greed
+- Wealth
+- Luxury
+- Riches
+- Treasures
+
+awe:
+- Awe
+- Beauty
+- Fame
+- Glory
+- Grandeur
+- Greatness
+- Heaven
+- Magnificence
+- Pride
+- Splendour
+- the Rising Sun
+- Valour
+
+scrying:
+- Scrying
+- Eyes
+- Mirrors
+- the Mirror
+- Sight
+- Sights
+- the Sphere
+- Divination
+- Crystals
+- Vision
+- Dreams
+- Glass
+
+adventure:
+- Adventure
+- Peril
+- Exploration

@@ -40,6 +40,7 @@ has 'generators' => (
 	isa => 'ArrayRef[ThroneGen::PowerGenerator]',
 	default => sub { [
 		# recruitable mage
+		# TODO add themes
 		ThroneGen::PowerGenerator::RecruitableMage->new(),
 
 		# gem income
@@ -69,6 +70,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "slaves per month",
 					title => "+$slaves slaves per month",
+					theme => 'blood',
 					dm_claimed => "#gems 7 $slaves",
 				);
 			}
@@ -83,12 +85,14 @@ has 'generators' => (
 					pts => $pts,
 					type => "gold per month",
 					title => sprintf( '%+d gold per month', $gold ),
+					theme => 'gold',
 					dm_claimed => "#gold $gold",
 				);
 			}
 		),
 
 		# dom spread
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [-1,2,4,6,8,10,12,14,16,18,20],
 			generate => sub {
@@ -106,6 +110,7 @@ has 'generators' => (
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4,6],
 			generate => sub {
@@ -140,12 +145,14 @@ has 'generators' => (
 					pts => $pts,
 					type => "enter to scry",
 					title => "priest can enter to scry, range $scry_range for $scry_duration turn".($scry_duration>1?'s':''),
+					theme => 'scrying',
 					dm_claimed => "#scry $scry_duration\n#scryrange $scry_range",
 				);
 			}
 		),
 
 		# ritual discounts
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,5,8],
 			generate => sub {
@@ -175,6 +182,7 @@ has 'generators' => (
 		# all +2: 4pt 
 		
 		# ritual range bonus, single path
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2],
 			generate => sub {
@@ -190,6 +198,7 @@ has 'generators' => (
 			}
 		),
 		# ritual range bonus, elemental/sorcery
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
@@ -205,6 +214,7 @@ has 'generators' => (
 			}
 		),
 		# ritual range bonus, all paths
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -226,9 +236,11 @@ has 'generators' => (
 			type => "adventure ruin",
 			title => "adventure ruin (15% success)",
 			dm_unclaimed => "#adventureruin 15",
+			theme => 'adventure',
 		),
 
 		# Gain XP for commander + units
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
@@ -244,6 +256,7 @@ has 'generators' => (
 		),
 
 		# Call God bonus
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -259,6 +272,7 @@ has 'generators' => (
 		),
 
 		# dominions conflict bonus
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -274,6 +288,7 @@ has 'generators' => (
 		),
 
 		# permanent temple
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => 1,
 			type => "permanent temple",
@@ -297,6 +312,7 @@ has 'generators' => (
 		#
 
 		# bless resists
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2],
 			generate => sub {
@@ -314,6 +330,7 @@ has 'generators' => (
 		),
 
 		# bless atk/def/prec/morale/reinvig/hp/undying
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
@@ -338,6 +355,7 @@ has 'generators' => (
 		),
 		
 		# bless darkvision
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -357,10 +375,12 @@ has 'generators' => (
 			pts => 6,
 			type => "bless",
 			title => "Blessed get Awe +1",
+			theme => 'awe',
 			dm_claimed => "#blessawe 1",
 		),
 		
 		# bless animal awe
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => 2,
 			type => "bless",
@@ -375,6 +395,7 @@ has 'generators' => (
 		#
 		
 		# less gold income
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "gold per month",
@@ -382,6 +403,7 @@ has 'generators' => (
 			dm_claimed => "#gold -100",
 		),
 		# cause unrest
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "unrest",
@@ -389,6 +411,7 @@ has 'generators' => (
 			dm_claimed => "#decunrest -10",
 		),
 		# curse
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "curse",
@@ -396,6 +419,7 @@ has 'generators' => (
 			dm_claimed => "#curse 1",
 		),
 		# horror mark
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "horror mark",
@@ -403,6 +427,7 @@ has 'generators' => (
 			dm_claimed => "#horrormark 1",
 		),
 		# reduced supply
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "supply",
@@ -410,6 +435,7 @@ has 'generators' => (
 			dm_unclaimed => "#supply -150",
 		),
 		# reduced resources
+		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "resources",
@@ -422,6 +448,7 @@ has 'generators' => (
 		#
 		
 		# province scale
+		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [0],
 			generate => sub {
@@ -450,6 +477,7 @@ has 'generators' => (
 		),
 		
 		# wall mage
+		# TODO add themes
 		ThroneGen::PowerGenerator::WallMage->new(),
 
 
