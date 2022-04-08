@@ -1,3 +1,10 @@
+
+#
+#
+# Magic paths
+#
+#
+
 fire: 
 - Brass
 - Deserts
@@ -173,6 +180,126 @@ blood:
 - Torture
 - Witchcraft
 
+#
+#
+# Scales
+#
+#
+
+order:
+- Refuge
+- Honor
+- Law
+- Order
+- Calm
+- Peace
+- Reason
+- Virtue
+- Tranquility
+- Rulers
+- Balance
+
+turmoil:
+- Chaos
+- Conflict
+- Confusion
+- Conspiracy
+- Instability
+- Outlaws
+- Rage
+- Strife
+- Thieves
+- Tumult
+- Turmoil
+- Unrest
+- Upheaval
+- Vagabonds
+- War
+- Wrath
+
+productivity:
+- Dwarves
+- Production
+- Industry
+- Ore
+- Iron
+- Toil
+- Labour
+- Reward
+- Harvest
+- Mines
+- the Mountain
+- Productivity
+
+sloth:
+- Apathy
+- Breathing
+- Idleness
+- Indolence
+- Joy
+- Lethargy
+- Meadows
+- Sloth
+- Slumber
+
+growth:
+- Abundance
+- Faeries
+- Fecundity
+- Fertility
+- Growth
+- Harvest
+- Health
+- Life
+- Settlement
+- Sprouting
+
+# death words are listed under magic paths
+
+luck:
+- Luck
+- Fortune
+- Totems
+- Good Omens
+- Faeries
+- Favour
+- Joy
+- Felicity
+- the Wheel
+- Wishes
+- the Stars
+
+misfortune:
+- Bad Omens
+- Calamity
+- Curses
+- Doom
+- Ill Omens
+- Misery
+- Misfortune
+- Opals
+- Pity
+- Prophesy
+- the Moon
+- Unluck
+
+# TODO: heat, cold, magic, drain
+heat:
+- Heat
+cold:
+- Cold
+magic:
+- Magic
+drain:
+- Drain
+
+
+
+#
+#
+# Misc
+#
+#
 
 
 

@@ -110,18 +110,17 @@ has 'generators' => (
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4,6],
 			generate => sub {
 				my $pts = shift;
 				my $scale_points = $pts/2;
 				my @scales = (
-					{ name => 'order',      cmd => 'goddomchaos',      inverted => 1 },
-					{ name => 'production', cmd => 'goddomlazy',       inverted => 1 },
-					{ name => 'growth',     cmd => 'goddomdeath',      inverted => 1 },
-					{ name => 'luck',       cmd => 'goddommisfortune', inverted => 1 },
-					{ name => 'magic',      cmd => 'goddomdrain',      inverted => 1 },
+					{ name => 'order',        cmd => 'goddomchaos',      inverted => 1 },
+					{ name => 'productivity', cmd => 'goddomlazy',       inverted => 1 },
+					{ name => 'growth',       cmd => 'goddomdeath',      inverted => 1 },
+					{ name => 'luck',         cmd => 'goddommisfortune', inverted => 1 },
+					{ name => 'magic',        cmd => 'goddomdrain',      inverted => 1 },
 				);
 				my %scale = %{ $scales[ int rand @scales ] };
 				my $dm_cmd = sprintf '#%s %d', $scale{cmd}, $scale_points * ($scale{inverted}?-1:1);
@@ -129,6 +128,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "increase $scale{name} in nation",
 					title => "+$scale_points $scale{name} scale in nation",
+					theme => $scale{name},
 					dm_claimed => $dm_cmd,
 				);
 			}
@@ -403,11 +403,11 @@ has 'generators' => (
 			dm_claimed => "#gold -100",
 		),
 		# cause unrest
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "unrest",
 			title => "causes 10 unrest per month",
+			theme => 'turmoil',
 			dm_claimed => "#decunrest -10",
 		),
 		# curse
@@ -435,11 +435,11 @@ has 'generators' => (
 			dm_unclaimed => "#supply -150",
 		),
 		# reduced resources
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "resources",
 			title => "-100 resources",
+			theme => 'sloth',
 			dm_unclaimed => "#res -100",
 		),
 
@@ -448,7 +448,6 @@ has 'generators' => (
 		#
 		
 		# province scale
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [0],
 			generate => sub {
@@ -471,6 +470,7 @@ has 'generators' => (
 					pts => 0,
 					type => "province scale",
 					title => "Increases $scale in province",
+					theme => lc($scale),
 					dm_unclaimed => $cmds{$scale},
 				);
 			},
