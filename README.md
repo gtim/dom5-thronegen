@@ -3,8 +3,6 @@
 ###
 
 To do before test game:
-- [ ] power: recruitable unit that's only situationally useful. maybe bad infantry with resistance
-- [ ] 0pt-power: bonus wall defender
 - [x] 0pt-power: bonus wall mage
 - [x] 0pt-power: change province scale
 - [x] power: auto-construct a lab/temple (through events)
@@ -13,7 +11,7 @@ To do before test game:
 - [ ] very simple throne names
 - [ ] make a channel and get buried in criticism, adjust balance accordingly
 
-### throne power ideas (good/bad/ugly)
+### throne power ideas (both good and bad)
 * permanent lab
 * improve scales in neighbouring provinces
 * freespawn units
@@ -21,6 +19,8 @@ To do before test game:
   * increase world scales
   * increase/decrease world unrest
   * darkness, curse, horrormark, heal, age
+* recruitable unit that's only situationally useful. e.g. bad infantry with resistances/amphibious/wings
+* bonus wall defender
 * negative: cause specific affliction to one(?) unit per turn (blind/NHW/eyeloss/armloss/..)
 
 ### misc big plans
