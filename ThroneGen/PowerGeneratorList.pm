@@ -423,7 +423,7 @@ has 'generators' => (
 			pts => -1,
 			type => "horror mark",
 			title => "horror marks 1% of units in province per month",
-			theme => 'horror'.
+			theme => 'horror',
 			dm_claimed => "#horrormark 1",
 		),
 		# reduced supply
