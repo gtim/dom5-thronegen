@@ -107,6 +107,11 @@ sub write_to_dm {
 			print $fh $event_dm . "\n";
 		}
 	}
+	
+	# units from throne powers
+	for my $power ( @{ $self->powers } ) {
+		print $fh $power->dm_monster . "\n" if $power->has_dm_monster;
+	}
 }
 
 sub _domspread {

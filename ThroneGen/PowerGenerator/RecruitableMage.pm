@@ -42,16 +42,16 @@ has '+generate' => (
 				{ pts => 2, name => 'Magus',                      id => 480  }, # F1E1S1
 				
 				# X2 but neater
-				{ pts => 3, name => 'Damned Boatswain',           id => 3350 }, # A/W/D 2, undead, fear
+				{ pts => 3, name => 'Damned Boatswain',           id => 3350, make_slowrec => 1 }, # A/W/D 2, undead, fear
 				{ pts => 3, name => 'Fire Lord',                  id => 389  }, # F2, slow-rec, mounted, sturdy, combat-caster
 				{ pts => 3, name => 'Illusionist',                id => 389  }, # A2, slow-rec, glamour, stealth, hide army
 				# X3
 				{ pts => 3, name => 'Adept of the Pyriphlegeton', id => 99   }, # F3, slow-rec
 				{ pts => 3, name => 'Hydromancer',                id => 103  }, # W3, slow-rec
 				# X2Y1
-				{ pts => 3, name => 'Bloodhenge Druid',           id => 122  }, # N1B2
+				{ pts => 3, name => 'Bloodhenge Druid',           id => 122  }, # N1B2, TODO copy and make slowrec
 				{ pts => 3, name => 'Enchanter',                  id => 338  }, # S1N2, slow-rec
-				{ pts => 3, name => 'Ice Druid',                  id => 309  }, # W2N1, H1
+				{ pts => 3, name => 'Ice Druid',                  id => 309  }, # W2N1, H1, TODO copy and make slowrec
 				{ pts => 3, name => 'Mage of Autumn',             id => 2545 }, # E2D1, slow-rec
 				{ pts => 3, name => 'Mage of Spring',             id => 2543 }, # A2N1, slow-rec
 				{ pts => 3, name => 'Mage of Summer',             id => 2544 }, # F2N1, slow-rec
@@ -61,7 +61,7 @@ has '+generate' => (
 				{ pts => 3, name => 'Wizard of the Crescent Moon',id => 999  }, # W2S1R1, slow-rec
 				# misc
 				{ pts => 3, name => 'Enchantress',                id => 363  }, # N2 R1.5, slow-rec
-				{ pts => 3, name => 'Giant Shaman',               id => 2640 }, # N2R1, sturdy size 5
+				{ pts => 3, name => 'Giant Shaman',               id => 2640, make_slowrec => 1 }, # N2R1, sturdy size 5
 				{ pts => 3, name => 'Sorcerer',                   id => 339  }, # D1B1R2, slow-rec
 				{ pts => 3, name => 'Sorcerer of the Sands',      id => 2245 }, # F1A1E1R1, slow-rec
 				{ pts => 3, name => 'Warrior Mage',               id => 875  }, # R1+R1, mounted, sturdy, combat-caster
@@ -77,16 +77,16 @@ has '+generate' => (
 				{ pts => 4, name => 'Adept of the Silver Order',  id => 100  }, # A2S2R1, slow-rec
 				{ pts => 4, name => 'Black Sorceress',            id => 344  }, # F1E1S2 0.2R, slow-rec
 				{ pts => 4, name => 'Blackrose Sorceress',        id => 2362 }, # D1N2B1R1, slow-rec
-				{ pts => 4, name => 'Circle Master',              id => 95   }, # D2B2
+				{ pts => 4, name => 'Circle Master',              id => 95   }, # D2B2,  TODO copy and make slowrec
 				{ pts => 4, name => 'Crystal Mage',               id => 340  }, # E2S2, slow-rec
 				{ pts => 4, name => 'Gnome',                      id => 345  }, # E2N2, slow-rec, glamour, stealthy
 				{ pts => 4, name => 'High Magus',                 id => 481  }, # F2E1S2, slow-rec
 				{ pts => 4, name => 'Sorceress',                  id => 343  }, # A2S2 0.2R, slow-rec
 				{ pts => 4, name => 'Wormwood Witch',             id => 2358 }, # A2D1N1R1, slow-rec
 				# misc
-				{ pts => 4, name => 'Giant Sorcerer',             id => 2641 }, # E2R1, sturdy size 6, grab and swallow
+				{ pts => 4, name => 'Giant Sorcerer',             id => 2641, make_slowrec => 1 }, # E2R1, sturdy size 6, grab and swallow
 				{ pts => 4, name => 'Lore Master',                id => 479  }, # R1+R1+#1, slow-rec
-				{ pts => 4, name => 'Yeti Shaman',                id => 2642 }, # A2W2, sturdy chassis, high map-move
+				{ pts => 4, name => 'Yeti Shaman',                id => 2642, make_slowrec => 1 }, # A2W2, sturdy chassis, high map-move
 
 				# not included
 				#{pts => 1, name => 'Hedge Wizard',               id => 1182 }, # N1, underwhelming as N1 tribes are common
@@ -118,13 +118,26 @@ has '+generate' => (
 				#Vastness
 				#Worm Mage
 			);
+			
+			# pick a mage randomly
 			my @applicable_mages = grep { $_->{pts} == $pts } @mages;
 			my %mage = %{ $applicable_mages[ int rand @applicable_mages ] };
+
+			# slow-rec
+			my %slowrec = ();
+			if ( $mage{make_slowrec} ) {
+				%slowrec = ( dm_monster => "#selectmonster $mage{id} -- $mage{name}\n"
+				                          ."#slowrec\n"
+				                          ."#end\n" );
+			}
+
+			# return power
 			return ThroneGen::Power->new(
 				pts => $pts,
 				type => "recruitable mage",
 				title => "recruitable $mage{name}",
-				dm_claimed => "#com $mage{id} -- recruitable $mage{name}"
+				dm_claimed => "#com $mage{id} -- recruitable $mage{name}",
+				%slowrec
 			);
 		}
 	}
