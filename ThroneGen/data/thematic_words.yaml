@@ -7,11 +7,13 @@
 
 fire: 
 - Brass
+- Coal
 - Deserts
 - Dragons
+- Droughts
+- Ember
 - Fire
 - Flames
-- Gold
 - Heat
 - Magma
 - Rage
@@ -24,6 +26,7 @@ fire:
 - the Phoenix
 - the Sun
 - Volcanoes
+- Wildfire
 
 air:
 - Air
@@ -31,6 +34,7 @@ air:
 - Cyclones
 - Diamond
 - Eagles
+- Hurricanes
 - Lightning
 - Mirrors
 - Reflections
@@ -45,24 +49,32 @@ air:
 - Wildness
 
 water:
+- Blizzards
 - Coral
 - Floods
 - Freezing
+- Frozen Deeps
 - Frost
 - Ice
 - Kelp
 - Lakes
 - Mercury
+- Mists
 - Pearls
+- Rainfall
 - Rivers
 - Seas
 - Sinking
 - the Depths
 - the Flood
 - the Maelstrom
+- the Monsoon
 - the Ocean
 - the Sea
 - the Waters
+- Tides
+- Tundras
+- the Waves
 - Water
 - Wells
 - Whales
@@ -75,6 +87,7 @@ earth:
 - Forges
 - Forging
 - Iron
+- Landslides
 - Minerals
 - Mines
 - Mountains
@@ -123,6 +136,7 @@ death:
 - Obsidian
 - Onyx
 - Pestilence
+- Plague
 - Ruins
 - Sepulchres
 - Shade
@@ -244,6 +258,7 @@ sloth:
 
 growth:
 - Abundance
+- Blossoms
 - Faeries
 - Fecundity
 - Fertility
@@ -283,15 +298,43 @@ misfortune:
 - the Moon
 - Unluck
 
-# TODO: heat, cold, magic, drain
-heat:
-- Heat
+# heat is aliased to fire in ThematicWords.pm
 cold:
+- Blizzards
 - Cold
+- Frost
+- Frostbite
+- Hail
+- Ice
+- Snow
+- Snowfall
+- Snow Storms
+- Winter
+
 magic:
+- Conjury
+- Crystals
+- Enchantments
+- Energy
 - Magic
+- Rituals
+- Invocation
+- Charms
+- Spells
+- Sorcery
+- the Moon
+- the Old Ways
+- Wizardry
+
 drain:
 - Drain
+- Fading
+- Gloom
+- Haze
+- Languor
+- Oblivion
+- Obscurity
+- Pallor
 
 
 
@@ -318,6 +361,7 @@ gold:
 awe:
 - Awe
 - Beauty
+- Celestial Beauty
 - Fame
 - Glory
 - Grandeur
@@ -327,6 +371,7 @@ awe:
 - Pride
 - Splendour
 - the Rising Sun
+- the Skies
 - Valour
 
 scrying:
@@ -345,8 +390,10 @@ scrying:
 
 adventure:
 - Adventure
-- Peril
 - Exploration
+- Heroes
+- Peril
+- Quests
 
 horror:
 - Blasphemy

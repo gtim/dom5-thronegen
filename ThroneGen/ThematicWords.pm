@@ -16,6 +16,9 @@ has 'words' => (
 
 sub word_on_theme {
 	my ( $self, $theme ) = @_;
+	if ( $theme eq 'heat' ) {
+		$theme = 'fire';
+	}
 	croak "unknown theme: $theme" unless exists $self->words->{$theme};
 	my $words = $self->words->{$theme};
 	return $words->[ int rand @$words ];
