@@ -92,21 +92,27 @@ has 'generators' => (
 		),
 
 		# dom spread
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [-1,2,4,6,8,10,12,14,16,18,20],
+			pts_allowed => [2,4,6,8,10,12,14,16,18,20],
 			generate => sub {
 				my $pts = shift;
-				my $candles = $pts > 0 ? $pts/2 : -1;
+				my $candles = $pts/2;
 				my $plural_s = $candles == 1 ? '' : 's';
 				return ThroneGen::Power->new(
 					pts => $pts,
-					type => "extra temple checks per month",
-					title => ( $candles > 0 ? "$candles additional temple check$plural_s per month"
-					                        : "$candles less temple check$plural_s per month" ),
+					type => "temple checks per month",
+					title => "$candles additional temple check$plural_s per month",
 					dm_increased_domspread => $candles,
+					theme => 'piety',
 				);
 			}
+		),
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => -1,
+			type => "temple checks per month",
+			title => "one less temple check per month",
+			dm_increased_domspread => -1,
+			# TODO add theme
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
@@ -256,7 +262,6 @@ has 'generators' => (
 		),
 
 		# Call God bonus
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -267,12 +272,12 @@ has 'generators' => (
 					type => "call god",
 					title => "+$callgod Call God bonus",
 					dm_claimed => "#recallgod $callgod",
+					theme => 'piety',
 				);
 			}
 		),
 
 		# dominions conflict bonus
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -283,12 +288,12 @@ has 'generators' => (
 					type => "dom conflict bonus",
 					title => "+$conflictbonus Dominion conflict bonus",
 					dm_claimed => "#domwar $conflictbonus",
+					theme => 'piety',
 				);
 			}
 		),
 
 		# permanent temple
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => 1,
 			type => "permanent temple",
@@ -302,7 +307,8 @@ has 'generators' => (
 				   ."#req_claimedthrone 1 -- throne must be claimed\n"
 				   ."#req_pop0ok -- happens in dead provinces as well\n"
 				   ."#temple 1 -- constructs a temple\n"
-				   ."#end\n"
+				   ."#end\n",
+			theme => 'piety',
 		),
 
 		#

@@ -185,6 +185,7 @@ blood:
 - Passion
 - Pentagrams
 - Sacrifice
+- Sacrilege
 - Slaughter
 - Slaves
 - the Abyss
@@ -359,6 +360,7 @@ gold:
 - Treasures
 
 awe:
+- Adoration
 - Awe
 - Beauty
 - Celestial Beauty
@@ -412,3 +414,31 @@ horror:
 - the Uncanny
 - the Unsettling
 - Torture
+
+piety:
+- Adoration
+- Belief
+- Candles
+- Consecration
+- Devotion
+- Divinity
+- Holiness
+- Hymns
+- Idols
+- Martyrs
+- Miracles
+- Piety
+- Prayers
+- Preaching
+- Relics
+- Reverence
+- Sacrament
+- Sanctity
+- Sanctuary
+- Sermons
+- Shrines
+- Temples
+- the Divine
+- the Holy
+- Vows
+- Worship
