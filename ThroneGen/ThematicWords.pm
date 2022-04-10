@@ -30,13 +30,9 @@ coerce 'Themes',
 	via { [ $_ ] };
 
 sub word_on_theme {
-	my ( $self, $themes ) = @_;
-	# theme: arrayref of strings
-	# string must correspond to themes defined in thematic_words.yaml
+	my ( $self, $theme ) = @_;
+	# theme string must correspond to themes defined in thematic_words.yaml
 
-	# if multiple themes, pick one at random
-	my $theme = $themes->[ int rand @$themes ];
-	
 	# alias
 	if ( $theme eq 'heat' ) {
 		$theme = 'fire';

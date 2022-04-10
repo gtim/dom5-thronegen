@@ -5,6 +5,7 @@ use namespace::autoclean;
 use Carp;
 use POSIX qw/ceil/;
 use List::Util qw/uniq/;
+use List::MoreUtils qw/mode/;
 
 use ThroneGen::PowerGeneratorList;
 use ThroneGen::ThematicWords;
@@ -29,14 +30,14 @@ has 'name' => (
 	default => sub {
 		my $self = shift;
 		local $_;
-		my @themed_powers = sort { $b->pts <=> $a->pts } grep { $_->has_themes } @{ $self->powers };
-		if ( @themed_powers > 0 ) {
-			my $word = ThroneGen::ThematicWords->instance->word_on_theme( $themed_powers[0]->themes );
-			return "The Throne of $word";
-		} else {
+		my @themes = map { @{ $_->themes } } @{ $self->powers };
+		if ( @themes == 0 ) {
 			carp "no theme found for throne";
 			return 'The Throne of No Theme Found';
 		}
+		my ( undef, $most_common_theme ) = mode @themes;
+		my $word = ThroneGen::ThematicWords->instance->word_on_theme( $most_common_theme );
+		return "The Throne of $word";
 	}
 );
 has 'powers' => (

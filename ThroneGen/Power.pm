@@ -31,7 +31,7 @@ has 'themes' => (
 	# theme used for throne name
 	is        => 'ro',
 	isa       => 'Themes',
-	predicate => 'has_themes',
+	default   => sub { [] },
 	coerce    => 1,
 );
 
