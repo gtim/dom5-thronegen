@@ -1,6 +1,7 @@
 package ThroneGen::ThematicWords;
 
 use MooseX::Singleton;
+use Moose::Util::TypeConstraints;
 use namespace::autoclean;
 use Carp;
 use YAML qw//;
@@ -15,15 +16,22 @@ has 'words' => (
 	},
 );
 
+subtype 'Themes',
+	as 'ArrayRef[Str]';
+
+coerce 'Themes',
+	from 'Str',
+	via { [ $_ ] };
+	# TODO: check strings for allowed themes
+
+
 sub word_on_theme {
-	my ( $self, $theme ) = @_;
-	# theme: string or arrayref of strings
+	my ( $self, $themes ) = @_;
+	# theme: arrayref of strings
 	# string must correspond to themes defined in thematic_words.yaml
 
 	# if multiple themes, pick one at random
-	if ( reftype($theme) && reftype($theme) eq 'ARRAY' ) {
-		$theme = $theme->[ int rand @$theme ];
-	}
+	my $theme = $themes->[ int rand @$themes ];
 	
 	# alias
 	if ( $theme eq 'heat' ) {

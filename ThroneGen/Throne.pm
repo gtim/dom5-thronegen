@@ -29,10 +29,10 @@ has 'name' => (
 	default => sub {
 		my $self = shift;
 		local $_;
-		my @themed_powers = sort { $b->pts <=> $a->pts } grep { $_->has_theme } @{ $self->powers };
+		my @themed_powers = sort { $b->pts <=> $a->pts } grep { $_->has_themes } @{ $self->powers };
 		if ( @themed_powers > 0 ) {
-			my $theme = ThroneGen::ThematicWords->instance->word_on_theme( $themed_powers[0]->theme );
-			return "The Throne of $theme";
+			my $word = ThroneGen::ThematicWords->instance->word_on_theme( $themed_powers[0]->themes );
+			return "The Throne of $word";
 		} else {
 			carp "no theme found for throne";
 			return 'The Throne of No Theme Found';

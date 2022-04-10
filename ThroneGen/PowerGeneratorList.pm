@@ -53,7 +53,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "$gem_str per month",
 					title => sprintf( '+%d %s gem%s per month', $pts, $gem_str, ($pts==1?'':'s') ),
-					theme => $theme,
+					themes => $theme,
 					dm_claimed => "#gems $gem_id $pts",
 				);
 			}
@@ -69,7 +69,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "slaves per month",
 					title => "+$slaves slaves per month",
-					theme => 'blood',
+					themes => 'blood',
 					dm_claimed => "#gems 7 $slaves",
 				);
 			}
@@ -84,7 +84,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "gold per month",
 					title => sprintf( '%+d gold per month', $gold ),
-					theme => 'gold',
+					themes => 'gold',
 					dm_claimed => "#gold $gold",
 				);
 			}
@@ -102,7 +102,7 @@ has 'generators' => (
 					type => "temple checks per month",
 					title => "$candles additional temple check$plural_s per month",
 					dm_increased_domspread => $candles,
-					theme => 'piety',
+					themes => 'piety',
 				);
 			}
 		),
@@ -132,7 +132,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "increase $scale{name} in nation",
 					title => "+$scale_points $scale{name} scale in nation",
-					theme => $scale{name},
+					themes => $scale{name},
 					dm_claimed => $dm_cmd,
 				);
 			}
@@ -149,7 +149,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "enter to scry",
 					title => "priest can enter to scry, range $scry_range for $scry_duration turn".($scry_duration>1?'s':''),
-					theme => 'scrying',
+					themes => 'scrying',
 					dm_claimed => "#scry $scry_duration\n#scryrange $scry_range",
 				);
 			}
@@ -240,7 +240,7 @@ has 'generators' => (
 			type => "adventure ruin",
 			title => "adventure ruin (15% success)",
 			dm_unclaimed => "#adventureruin 15",
-			theme => 'adventure',
+			themes => 'adventure',
 		),
 
 		# Gain XP for commander + units
@@ -270,7 +270,7 @@ has 'generators' => (
 					type => "call god",
 					title => "+$callgod Call God bonus",
 					dm_claimed => "#recallgod $callgod",
-					theme => 'piety',
+					themes => 'piety',
 				);
 			}
 		),
@@ -286,7 +286,7 @@ has 'generators' => (
 					type => "dom conflict bonus",
 					title => "+$conflictbonus Dominion conflict bonus",
 					dm_claimed => "#domwar $conflictbonus",
-					theme => 'piety',
+					themes => 'piety',
 				);
 			}
 		),
@@ -306,7 +306,7 @@ has 'generators' => (
 				   ."#req_pop0ok -- happens in dead provinces as well\n"
 				   ."#temple 1 -- constructs a temple\n"
 				   ."#end\n",
-			theme => 'piety',
+			themes => 'piety',
 		),
 
 		#
@@ -379,7 +379,7 @@ has 'generators' => (
 			pts => 6,
 			type => "bless",
 			title => "Blessed get Awe +1",
-			theme => 'awe',
+			themes => 'awe',
 			dm_claimed => "#blessawe 1",
 		),
 		
@@ -410,7 +410,7 @@ has 'generators' => (
 			pts => -1,
 			type => "unrest",
 			title => "causes 10 unrest per month",
-			theme => 'turmoil',
+			themes => 'turmoil',
 			dm_claimed => "#decunrest -10",
 		),
 		# curse
@@ -418,7 +418,7 @@ has 'generators' => (
 			pts => -1,
 			type => "curse",
 			title => "curses 1% of units in province per month",
-			theme => 'death',
+			themes => 'death',
 			dm_claimed => "#curse 1",
 		),
 		# horror mark
@@ -426,7 +426,7 @@ has 'generators' => (
 			pts => -1,
 			type => "horror mark",
 			title => "horror marks 1% of units in province per month",
-			theme => 'horror',
+			themes => 'horror',
 			dm_claimed => "#horrormark 1",
 		),
 		# reduced supply
@@ -441,7 +441,7 @@ has 'generators' => (
 			pts => -1,
 			type => "resources",
 			title => "-100 resources",
-			theme => 'sloth',
+			themes => 'sloth',
 			dm_unclaimed => "#res -100",
 		),
 
@@ -472,7 +472,7 @@ has 'generators' => (
 					pts => 0,
 					type => "province scale",
 					title => "Increases $scale in province",
-					theme => lc($scale),
+					themes => lc($scale),
 					dm_unclaimed => $cmds{$scale},
 				);
 			},

@@ -8,6 +8,7 @@ package ThroneGen::Power;
 
 use Moose;
 use namespace::autoclean;
+use ThroneGen::ThematicWords;
 
 has 'pts' => (
 	is        => 'ro',
@@ -26,11 +27,12 @@ has 'title' => (
 	isa       => 'Str',
 	required  => 1,
 );
-has 'theme' => (
+has 'themes' => (
 	# theme used for throne name
 	is        => 'ro',
-	isa       => 'Str|ArrayRef[Str]',
-	predicate => 'has_theme',
+	isa       => 'Themes',
+	predicate => 'has_themes',
+	coerce    => 1,
 );
 
 # dm_* attributes have direct effect on the generated .dm
