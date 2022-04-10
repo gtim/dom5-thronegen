@@ -28,14 +28,15 @@ has 'name' => (
 	lazy    => 1,
 	default => sub {
 		my $self = shift;
-		for my $power ( sort { $b->pts <=> $a->pts } @{ $self->powers } ) {
-			if ( $power->has_theme ) {
-				my $theme = ThroneGen::ThematicWords->instance->word_on_theme( $power->theme );
-				return "The Throne of $theme";
-			}
+		local $_;
+		my @themed_powers = sort { $b->pts <=> $a->pts } grep { $_->has_theme } @{ $self->powers };
+		if ( @themed_powers > 0 ) {
+			my $theme = ThroneGen::ThematicWords->instance->word_on_theme( $themed_powers[0]->theme );
+			return "The Throne of $theme";
+		} else {
+			carp "no theme found for throne";
+			return 'The Throne of No Theme Found';
 		}
-		carp "no theme found for throne";
-		return 'The Throne of ???';
 	}
 );
 has 'powers' => (

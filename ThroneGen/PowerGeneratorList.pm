@@ -40,7 +40,6 @@ has 'generators' => (
 	isa => 'ArrayRef[ThroneGen::PowerGenerator]',
 	default => sub { [
 		# recruitable mage
-		# TODO add themes
 		ThroneGen::PowerGenerator::RecruitableMage->new(),
 
 		# gem income
@@ -112,7 +111,6 @@ has 'generators' => (
 			type => "temple checks per month",
 			title => "one less temple check per month",
 			dm_increased_domspread => -1,
-			# TODO add theme
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
@@ -401,7 +399,6 @@ has 'generators' => (
 		#
 		
 		# less gold income
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "gold per month",
@@ -433,7 +430,6 @@ has 'generators' => (
 			dm_claimed => "#horrormark 1",
 		),
 		# reduced supply
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "supply",
