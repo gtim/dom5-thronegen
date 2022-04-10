@@ -7,6 +7,7 @@ use Carp;
 use YAML qw//;
 use Data::Dumper qw(Dumper);
 use Scalar::Util qw/reftype/;
+use List::Util qw/all/;
 
 has 'words' => (
 	is => 'ro',
@@ -17,13 +18,16 @@ has 'words' => (
 );
 
 subtype 'Themes',
-	as 'ArrayRef[Str]';
+	as 'ArrayRef[Str]',
+	where {
+		my $tw = ThroneGen::ThematicWords->instance;
+		return all { exists $tw->words->{$_} } @$_;
+	},
+	message { "invalid themes: " . join( ', ', @$_ ) };
 
 coerce 'Themes',
 	from 'Str',
 	via { [ $_ ] };
-	# TODO: check strings for allowed themes
-
 
 sub word_on_theme {
 	my ( $self, $themes ) = @_;
