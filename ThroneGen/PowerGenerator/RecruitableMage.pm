@@ -36,9 +36,9 @@ has '+generate' => (
 				{ pts => 2, name => 'Necromancer',                id => 310,  theme => 'death'     }, # D2
 				{ pts => 2, name => 'Wind Master',                id => 93,   theme => 'air'       }, # A2
 				# X1Y1Z1
-				{ pts => 2, name => 'Alchemist',                  id => 551  }, # F1E1S1, TODO add theme
-				{ pts => 2, name => 'Black Witch',                id => 2361, theme => 'misfortune' }, # D1N1R1, TODO add theme
-				{ pts => 2, name => 'Magus',                      id => 480,  theme => 'magic'  }, # F1E1S1, TODO add theme
+				{ pts => 2, name => 'Alchemist',                  id => 551,  theme => 'gold'  }, # F1E1S1
+				{ pts => 2, name => 'Black Witch',                id => 2361, theme => 'misfortune' }, # D1N1R1
+				{ pts => 2, name => 'Magus',                      id => 480,  theme => 'magic'  }, # F1E1S1
 				
 				# X2 but neater
 				{ pts => 3, name => 'Damned Boatswain',           id => 3350, theme => 'death', make_slowrec => 1 }, # A/W/D 2, undead, fear
@@ -51,8 +51,8 @@ has '+generate' => (
 				{ pts => 3, name => 'Bloodhenge Druid',           id => 122,  theme => 'blood', copy_and_make_slowrec => 1  }, # N1B2
 				{ pts => 3, name => 'Enchanter',                  id => 338,  theme => 'nature'  }, # S1N2, slow-rec
 				{ pts => 3, name => 'Ice Druid',                  id => 309,  theme => 'cold', copy_and_make_slowrec => 1  }, # W2N1, H1
-				{ pts => 3, name => 'Mage of Autumn',             id => 2545 }, # E2D1, slow-rec, TODO add theme
-				{ pts => 3, name => 'Mage of Spring',             id => 2543 }, # A2N1, slow-rec, TODO add theme
+				{ pts => 3, name => 'Mage of Autumn',             id => 2545, theme => ['earth','death'] }, # E2D1, slow-rec,
+				{ pts => 3, name => 'Mage of Spring',             id => 2543, theme => ['air','nature'] }, # A2N1, slow-rec,
 				{ pts => 3, name => 'Mage of Summer',             id => 2544, theme => 'fire' }, # F2N1, slow-rec
 				{ pts => 3, name => 'Mage of Winter',             id => 2546, theme => 'cold' }, # W2D1, slow-rec
 				{ pts => 3, name => 'Moon Mage',                  id => 342,  theme => 'astral' }, # S2D1, slow-rec
@@ -62,8 +62,8 @@ has '+generate' => (
 				{ pts => 3, name => 'Enchantress',                id => 363,  theme => 'nature'  }, # N2 R1.5, slow-rec
 				{ pts => 3, name => 'Giant Shaman',               id => 2640, theme => 'nature', make_slowrec => 1 }, # N2R1, sturdy size 5
 				{ pts => 3, name => 'Sorcerer',                   id => 339,  theme => ['magic','death','blood']  }, # D1B1R2, slow-rec
-				{ pts => 3, name => 'Sorcerer of the Sands',      id => 2245 }, # F1A1E1R1, slow-rec, TODO add theme
-				{ pts => 3, name => 'Warrior Mage',               id => 875  }, # R1+R1, mounted, sturdy, combat-caster, TODO add theme
+				{ pts => 3, name => 'Sorcerer of the Sands',      id => 2245, theme => 'fire' }, # F1A1E1R1, slow-rec
+				{ pts => 3, name => 'Warrior Mage',               id => 875,  theme => 'magic'  }, # R1+R1, mounted, sturdy, combat-caster, TODO better theme
 				{ pts => 3, name => 'Wizard (Water)',             id => 302,  theme => 'water'  }, # W1R2, slow-rec
 				{ pts => 3, name => 'Wizard (Fire)',              id => 312,  theme => 'fire'  }, # F1R2, slow-rec
 
@@ -77,7 +77,7 @@ has '+generate' => (
 				{ pts => 4, name => 'Black Sorceress',            id => 344,  theme => ['magic','astral']  }, # F1E1S2 0.2R, slow-rec
 				{ pts => 4, name => 'Blackrose Sorceress',        id => 2362, theme => ['nature','misfortune'] }, # D1N2B1R1, slow-rec
 				{ pts => 4, name => 'Circle Master',              id => 95,   theme => ['blood','death'], copy_and_make_slowrec => 1 }, # D2B2
-				{ pts => 4, name => 'Crystal Mage',               id => 340,  theme => ['earth','astral']  }, # E2S2, slow-rec, TODO add theme
+				{ pts => 4, name => 'Crystal Mage',               id => 340,  theme => ['earth','astral']  }, # E2S2, slow-rec,
 				{ pts => 4, name => 'Gnome',                      id => 345,  theme => ['earth','nature']  }, # E2N2, slow-rec, glamour, stealthy
 				{ pts => 4, name => 'High Magus',                 id => 481,  theme => ['fire','magic']  }, # F2E1S2, slow-rec
 				{ pts => 4, name => 'Sorceress',                  id => 343,  theme => ['astral','air','magic']  }, # A2S2 0.2R, slow-rec
