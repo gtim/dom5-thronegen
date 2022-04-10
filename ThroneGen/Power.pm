@@ -29,7 +29,7 @@ has 'title' => (
 has 'theme' => (
 	# theme used for throne name
 	is        => 'ro',
-	isa       => 'Str',
+	isa       => 'Str|ArrayRef[Str]',
 	predicate => 'has_theme',
 );
 

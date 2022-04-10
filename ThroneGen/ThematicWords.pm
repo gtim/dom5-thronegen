@@ -5,6 +5,7 @@ use namespace::autoclean;
 use Carp;
 use YAML qw//;
 use Data::Dumper qw(Dumper);
+use Scalar::Util qw/reftype/;
 
 has 'words' => (
 	is => 'ro',
@@ -16,10 +17,21 @@ has 'words' => (
 
 sub word_on_theme {
 	my ( $self, $theme ) = @_;
+	# theme: string or arrayref of strings
+	# string must correspond to themes defined in thematic_words.yaml
+
+	# if multiple themes, pick one at random
+	if ( reftype($theme) && reftype($theme) eq 'ARRAY' ) {
+		$theme = $theme->[ int rand @$theme ];
+	}
+	
+	# alias
 	if ( $theme eq 'heat' ) {
 		$theme = 'fire';
 	}
 	croak "unknown theme: $theme" unless exists $self->words->{$theme};
+
+	# pick a random appropriate word
 	my $words = $self->words->{$theme};
 	return $words->[ int rand @$words ];
 }
