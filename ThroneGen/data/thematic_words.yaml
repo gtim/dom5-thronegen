@@ -128,9 +128,9 @@ death:
 - Crypts
 - Darkness
 - Death
-- Disease
 - Draining
 - Ebony
+- Famine
 - Gloom
 - Graves
 - Mausoleums
@@ -177,6 +177,7 @@ blood:
 - Blood
 - Bloodmarble
 - Bloodstone
+- Corruption
 - Demons
 - Desire
 - Disfigurement
@@ -221,6 +222,7 @@ turmoil:
 - Conflict
 - Confusion
 - Conspiracy
+- Imbalance
 - Instability
 - Outlaws
 - Rage
@@ -401,6 +403,7 @@ adventure:
 
 horror:
 - Blasphemy
+- Corruption
 - Defiling
 - Desecration
 - Gore Tide
@@ -416,6 +419,16 @@ horror:
 - the Uncanny
 - the Unsettling
 - Torture
+
+poison:
+- Blight
+- Disease
+- Jade
+- Pestilence
+- Plague
+- Poison
+- Sickness
+- Scourges
 
 piety:
 - Adoration

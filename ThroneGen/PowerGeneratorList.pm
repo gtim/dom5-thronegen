@@ -327,10 +327,12 @@ has 'generators' => (
 				my $res = 5 * $pts;
 				my $element_cmd = (qw/fire cold shock pois/)[int rand 4];
 				my $element_full = $element_cmd eq 'pois' ? 'poison' : $element_cmd;
+				my %themes = ( fire => 'heat', cold => 'cold', shock => 'air', pois => 'poison' );
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "bless",
 					title => "Blessed get +$res $element_full resistance",
+					themes => $themes{$element_cmd},
 					dm_claimed => "#bless${element_cmd}res $res",
 				);
 			}
