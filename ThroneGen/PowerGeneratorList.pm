@@ -189,7 +189,6 @@ has 'generators' => (
 		# all +2: 4pt 
 		
 		# ritual range bonus, single path
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2],
 			generate => sub {
@@ -200,12 +199,12 @@ has 'generators' => (
 					pts => $pts,
 					type => "ritual range bonus",
 					title => ucfirst($path) . " ritual range +$range",
+					themes => $path,
 					dm_claimed => "#${path}range $range",
 				);
 			}
 		),
 		# ritual range bonus, elemental/sorcery
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
@@ -216,12 +215,12 @@ has 'generators' => (
 					pts => $pts,
 					type => "ritual range bonus",
 					title => ucfirst($paths) . " ritual range +$range",
+					themes => 'magic',
 					dm_claimed => "#${paths}range $range",
 				);
 			}
 		),
 		# ritual range bonus, all paths
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -231,6 +230,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "ritual range bonus",
 					title => "ritual range +$range",
+					themes => 'magic',
 					dm_claimed => "#allrange $range",
 				);
 			}
