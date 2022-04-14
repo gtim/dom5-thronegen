@@ -156,7 +156,6 @@ has 'generators' => (
 		),
 
 		# ritual discounts
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,5,8],
 			generate => sub {
@@ -164,10 +163,14 @@ has 'generators' => (
 				my %discount = ( 2 => 10, 5 => 20, 8 => 30 );
 				my $discount = $discount{$pts} || croak "unspecified ritual discount for $pts pts";
 				my $school = (qw/conj alt evo const ench thau blood/)[ int rand 7 ];
+				my $theme = 'magic';
+				$theme = 'blood' if $school eq 'blood';
+				$theme = 'productivity' if $school eq 'const';
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "ritual discount",
 					title => ucfirst($school) . " ritual discount $discount%",
+					themes => $theme,
 					dm_claimed => "#${school}cost $discount",
 				);
 			}
