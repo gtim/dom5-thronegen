@@ -13,7 +13,9 @@ has 'words' => (
 	is => 'ro',
 	isa => 'HashRef',
 	default => sub {
-		return YAML::LoadFile( 'ThroneGen/data/thematic_words.yaml' );
+		my $words = YAML::LoadFile( 'ThroneGen/data/thematic_words.yaml' );
+		$words->{heat} = $words->{fire}; # alias
+		return $words;
 	},
 );
 
@@ -33,10 +35,6 @@ sub word_on_theme {
 	my ( $self, $theme ) = @_;
 	# theme string must correspond to themes defined in thematic_words.yaml
 
-	# alias
-	if ( $theme eq 'heat' ) {
-		$theme = 'fire';
-	}
 	croak "unknown theme: $theme" unless exists $self->words->{$theme};
 
 	# pick a random appropriate word
