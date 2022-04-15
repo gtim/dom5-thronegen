@@ -423,7 +423,7 @@ has 'generators' => (
 			pts => -1,
 			type => "curse",
 			title => "curses 1% of units in province per month",
-			themes => 'death',
+			themes => 'misfortune',
 			dm_claimed => "#curse 1",
 		),
 		# horror mark
