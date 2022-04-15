@@ -401,19 +401,17 @@ adventure:
 - Peril
 - Quests
 
+# battle: atk/def bless and +xp, maybe these should be split
 battle:
-- Battle
 - Battle Prowess
 - Bravery
-- Conquest
+- Excellence
 - Expertise
 - Mastery
 - Perfection
 - Proficiency
-- Rage
 - Skill
-- Victory
-- War
+- the Old Masters
 - Warriors
 
 

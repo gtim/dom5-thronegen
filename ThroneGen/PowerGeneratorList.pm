@@ -248,7 +248,6 @@ has 'generators' => (
 		),
 
 		# Gain XP for commander + units
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
@@ -258,6 +257,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "gain xp",
 					title => "enter to gain $xp xp",
+					themes => 'battle',
 					dm_unclaimed => "#xp $xp",
 				);
 			}
@@ -390,11 +390,11 @@ has 'generators' => (
 		),
 		
 		# bless animal awe
-		# TODO add themes
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => 2,
 			type => "bless",
 			title => "Blessed get Animal Awe +1",
+			themes => 'awe',
 			dm_claimed => "#blessanimawe 1",
 		),
 
