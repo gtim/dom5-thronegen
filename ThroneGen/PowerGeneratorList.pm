@@ -484,7 +484,6 @@ has 'generators' => (
 		),
 		
 		# wall mage
-		# TODO add themes
 		ThroneGen::PowerGenerator::WallMage->new(),
 
 
