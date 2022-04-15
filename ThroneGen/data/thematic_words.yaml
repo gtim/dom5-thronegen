@@ -401,6 +401,22 @@ adventure:
 - Peril
 - Quests
 
+battle:
+- Battle
+- Battle Prowess
+- Bravery
+- Conquest
+- Expertise
+- Mastery
+- Perfection
+- Proficiency
+- Rage
+- Skill
+- Victory
+- War
+- Warriors
+
+
 horror:
 - Blasphemy
 - Corruption

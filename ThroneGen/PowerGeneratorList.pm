@@ -319,7 +319,6 @@ has 'generators' => (
 		#
 
 		# bless resists
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2],
 			generate => sub {
@@ -339,25 +338,26 @@ has 'generators' => (
 		),
 
 		# bless atk/def/prec/morale/reinvig/hp/undying
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
 				my $pts = shift;
-				my %stats = (
-					att      => 'attack',
-					def      => 'defense',
-					prec     => 'precision',
-					mor      => 'morale',
-					reinvig  => 'reinvigoration',
-					hp       => 'hp',
-					dtv      => 'undying',
+				my %stats = ( # blesscommand -> [ human-readable word, theme ]
+					att      => ['attack',         'battle' ],
+					def      => ['defense',        'battle' ],
+					prec     => ['precision',      'battle' ],
+					mor      => ['morale',         'awe'    ],
+					reinvig  => ['reinvigoration', 'growth' ],
+					hp       => ['hp',             'growth' ],
+					dtv      => ['undying',        'death'  ],
 				);
 				my $stat = _random_element( keys %stats );
+				my $word = $stats{$stat}[0];
+				my $theme = $stats{$stat}[1];
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "bless",
-					title => "Blessed get +$pts $stats{$stat}",
+					title => "Blessed get +$pts $word",
 					dm_claimed => "#bless$stat $pts",
 				);
 			}
