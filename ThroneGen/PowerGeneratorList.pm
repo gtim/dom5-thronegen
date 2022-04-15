@@ -5,6 +5,7 @@ package ThroneGen::PowerGeneratorList;
 #
 
 use MooseX::Singleton;
+use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 use ThroneGen::Power;

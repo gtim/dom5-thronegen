@@ -7,6 +7,7 @@ package ThroneGen::Power;
 #
 
 use Moose;
+use MooseX::StrictConstructor;
 use namespace::autoclean;
 use ThroneGen::ThematicWords;
 

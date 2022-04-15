@@ -7,6 +7,7 @@ package ThroneGen::PowerGenerator;
 #
 
 use Moose;
+use MooseX::StrictConstructor;
 use namespace::autoclean;
 use List::Util qw/any/;
 

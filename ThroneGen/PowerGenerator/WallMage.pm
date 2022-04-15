@@ -1,6 +1,7 @@
 package ThroneGen::PowerGenerator::WallMage;
 
 use Moose;
+use MooseX::StrictConstructor;
 use namespace::autoclean;
 use ThroneGen::Power;
 use Carp;

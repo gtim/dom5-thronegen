@@ -1,6 +1,7 @@
 package ThroneGen::PowerGenerator::RecruitableMage;
 
 use Moose;
+use MooseX::StrictConstructor;
 use namespace::autoclean;
 use ThroneGen::Power;
 
@@ -129,7 +130,7 @@ has '+generate' => (
 			if ( $mage{copy_and_make_slowrec} ) {
 				# copy mage and add slow-rec tag to the copy
 				return ThroneGen::Power->new(
-					pts => $pts, type => $type, title => $title, theme => $mage{theme}, 
+					pts => $pts, type => $type, title => $title, themes => $mage{theme}, 
 					dm_claimed => "#com \"$mage{name} \"\n",
 					dm_monster => "#newmonster -- create a new $mage{name} that is slow-rec\n"
 				                     ."#copystats $mage{id}\n"
@@ -141,7 +142,7 @@ has '+generate' => (
 			} elsif ( $mage{make_slowrec} ) {
 				# add slow-rec tag to monster
 				return ThroneGen::Power->new(
-					pts => $pts, type => $type, title => $title, theme => $mage{theme}, 
+					pts => $pts, type => $type, title => $title, themes => $mage{theme}, 
 					dm_claimed => "#com $mage{id} -- recruitable $mage{name}",
 					dm_monster => "#selectmonster $mage{id} -- $mage{name}\n"
 				                     ."#slowrec\n"
@@ -149,7 +150,7 @@ has '+generate' => (
 				);
 			} else {
 				return ThroneGen::Power->new(
-					pts => $pts, type => $type, title => $title, theme => $mage{theme}, 
+					pts => $pts, type => $type, title => $title, themes => $mage{theme}, 
 					dm_claimed => "#com $mage{id} -- recruitable $mage{name}",
 				);
 			}

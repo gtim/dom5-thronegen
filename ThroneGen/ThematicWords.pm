@@ -1,6 +1,7 @@
 package ThroneGen::ThematicWords;
 
 use MooseX::Singleton;
+use MooseX::StrictConstructor;
 use Moose::Util::TypeConstraints;
 use namespace::autoclean;
 use Carp;

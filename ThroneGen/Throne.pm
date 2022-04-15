@@ -1,6 +1,7 @@
 package ThroneGen::Throne;
 
 use Moose;
+use MooseX::StrictConstructor;
 use namespace::autoclean;
 use Carp;
 use POSIX qw/ceil/;

@@ -1,6 +1,7 @@
 package ThroneGen::PowerGenerator::Simple;
 
 use Moose;
+use MooseX::StrictConstructor;
 use namespace::autoclean;
 use ThroneGen::Power;
 
