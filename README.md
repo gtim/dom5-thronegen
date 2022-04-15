@@ -7,7 +7,7 @@ To do before test game:
 - [x] 0pt-power: change province scale
 - [x] power: auto-construct a lab/temple (through events)
 - [x] make the good recruitable mages slow-to-recruit
-- [ ] very simple throne names
+- [x] very simple throne names
 - [ ] minor balancing run
 - [ ] make a channel and get buried in criticism, adjust balance accordingly
 
@@ -22,12 +22,6 @@ To do before test game:
 * recruitable unit that's only situationally useful. e.g. bad infantry with resistances/amphibious/wings
 * bonus wall defender
 * negative: cause specific affliction to one(?) unit per turn (blind/NHW/eyeloss/armloss/..)
-
-### misc big plans
-* throne themes -- how to solve?
-  * Manual tagging themes onto everything...?
-    * Maybe automate tagging based on what kind of words are used for sites/units/spells associated with these tags in vanilla/DE
-  * Something more exotic like finding/making a word association corpus from vast quantities of text, and seeing if it can produce something sensible...?
 
 ### random notes
 

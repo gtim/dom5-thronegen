@@ -110,6 +110,7 @@ astral:
 - Pearls
 - Spheres
 - Spires
+- Starlight
 - Stars
 - the Crescent Moon
 - the Future
@@ -381,18 +382,31 @@ awe:
 - Valour
 
 scrying:
-- Scrying
+- Crystal
+- Divination
+- Dreams
 - Eyes
+- Glass
 - Mirrors
-- the Mirror
+- Perception
+- Scrying
+- Senses
 - Sight
 - Sights
+- the Mirror
 - the Sphere
-- Divination
-- Crystal
 - Vision
-- Dreams
-- Glass
+
+darkness:
+- Darkness
+- Dusk
+- Mists
+- Shades
+- Shadows
+- Shrouds
+- the Dark
+- the Moon
+- Twilight
 
 adventure:
 - Adventure

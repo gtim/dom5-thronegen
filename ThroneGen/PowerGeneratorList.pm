@@ -365,7 +365,6 @@ has 'generators' => (
 		),
 		
 		# bless darkvision
-		# TODO add themes
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
 			generate => sub {
@@ -375,6 +374,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "bless",
 					title => "Blessed get darkvision +$dv",
+					themes => 'darkness',
 					dm_claimed => "#blessdarkvis $dv",
 				);
 			}
