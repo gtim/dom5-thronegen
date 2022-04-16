@@ -31,6 +31,7 @@ for my $throne ( @thrones ) {
 		name => $throne->name,
 		pts => $throne->pts,
 		powers => [
+			sort { $b->{pts} <=> $a->{pts} }
 			map { {
 				pts => $_->pts,
 				title => $_->title,
