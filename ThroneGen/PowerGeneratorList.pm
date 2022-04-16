@@ -44,18 +44,21 @@ has 'generators' => (
 		ThroneGen::PowerGenerator::RecruitableMage->new(),
 
 		# gem income
+		# 1/2/3 pts => 2/3/4 gems,
+		# 4+ pts => num pts + 1 + 0-1 gems
 		ThroneGen::PowerGenerator->new(
 			generate => sub {
 				my $pts = shift;
+				my $num_gems = $pts <= 3 ? $pts + 1 : $pts + 1 + int rand 2;
 				my $gem_id = int rand 7;
 				my $gem_str = (qw/F A W E S D N/)[$gem_id];
 				my $theme =  {F => 'fire', A => 'air', W => 'water', E => 'earth', S => 'astral', D => 'death', N => 'nature' }->{$gem_str};
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "$gem_str per month",
-					title => sprintf( '+%d %s gem%s per month', $pts, $gem_str, ($pts==1?'':'s') ),
+					title => sprintf( '+%d %s gem%s per month', $num_gems, $gem_str, ($num_gems==1?'':'s') ),
 					themes => $theme,
-					dm_claimed => "#gems $gem_id $pts",
+					dm_claimed => "#gems $gem_id $num_gems",
 				);
 			}
 		),
@@ -265,15 +268,14 @@ has 'generators' => (
 
 		# Call God bonus
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [2,4],
+			pts_allowed => [1,2],
 			generate => sub {
 				my $pts = shift;
-				my $callgod = $pts/2;
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "call god",
-					title => "+$callgod Call God bonus",
-					dm_claimed => "#recallgod $callgod",
+					title => "+$pts Call God bonus",
+					dm_claimed => "#recallgod $pts",
 					themes => 'piety',
 				);
 			}
