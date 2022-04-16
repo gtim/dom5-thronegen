@@ -28,59 +28,69 @@ has 'name' => (
 	is     => 'ro',
 	isa     => 'Str',
 	lazy    => 1,
-	default => sub {
-		my $self = shift;
-		local $_;
-		my @themes = map { @{ $_->themes } } @{ $self->powers };
-		if ( @themes == 0 ) {
-			carp "no theme found for throne";
-			return 'The Throne of No Theme Found';
-		}
-		my ( undef, $most_common_theme ) = mode @themes;
-		my $throne_name = ThroneGen::ThematicWords->instance->throne_name_on_theme( $most_common_theme );
-		return $throne_name;
-	}
+	builder => '_generate_throne_name',
 );
 has 'powers' => (
 	is => 'ro',
 	isa => 'ArrayRef[ThroneGen::Power]',
 	lazy => 1,
-	default => sub {
-		my $self = shift;
-
-		# distribute points
-		
-		my @pts;
-		my $pts_left = $self->pts;
-		# 40% chance for  0 pt power
-		push @pts, 0 if rand() < 0.4;
-		# 20% chance for -1 pt power
-		if ( rand() < 0.2 ) {
-			push @pts, -1;
-			$pts_left += 1;
-		}
-		# First power: spend at least half points
-		push @pts, _rand_int_between_inclusive( ceil( $pts_left/2 ), $pts_left );
-		$pts_left -= $pts[-1];
-		# Second power: spend remaining points
-		if ( $pts_left > 0 ) {
-			unshift @pts, $pts_left;
-		}
-
-		# generate powers
-		
-		local $_;
-		my @powers;
-		for my $num_tries ( 1..100 ) {
-			@powers = map { ThroneGen::PowerGeneratorList->instance->random_power($_) } @pts;
-			if ( scalar( uniq map { $_->type } @powers ) == scalar @powers ) {
-				# all powers have unique types
-				return \@powers;
-			}
-		}
-		croak "no unique power types found for point distribution [@pts] after many tries";
-	}
+	builder => '_generate_powers',
 );
+
+sub _generate_throne_name {
+	my $self = shift;
+	local $_;
+	my @themes = map { @{ $_->themes } } @{ $self->powers };
+	if ( @themes == 0 ) {
+		carp "no theme found for throne";
+		return 'The Throne of No Theme Found';
+	}
+	my ( undef, $most_common_theme ) = mode @themes;
+	my $throne_name = ThroneGen::ThematicWords->instance->throne_name_on_theme( $most_common_theme );
+	return $throne_name;
+}
+
+sub _generate_powers {
+	my $self = shift;
+
+	# make point distribution
+	
+	my @pts;
+	my $pts_left = $self->pts;
+	# 40% chance for  0 pt power
+	push @pts, 0 if rand() < 0.4;
+	# 20% chance for -1 pt power
+	if ( rand() < 0.2 ) {
+		push @pts, -1;
+		$pts_left += 1;
+	}
+	# First power: spend at least half points
+	push @pts, _rand_int_between_inclusive( ceil( $pts_left/2 ), $pts_left );
+	$pts_left -= $pts[-1];
+	# Second power: spend remaining points
+	if ( $pts_left > 0 ) {
+		unshift @pts, $pts_left;
+	}
+
+	# generate powers
+	
+	@pts = sort {$b<=>$a} @pts;
+	my @powers;
+	for my $num_tries ( 1..100 ) {
+		@powers = ();
+		for my $pt ( @pts ) {
+			my $power = ThroneGen::PowerGeneratorList->instance->random_power($pt);
+			push @powers, $power;
+		}
+		local $_;
+		if ( scalar( uniq map { $_->type } @powers ) == scalar @powers ) {
+			# all powers have unique types
+			return \@powers;
+		}
+		my @titles = map { $_->title } @powers;
+	}
+	croak "no unique power types found for point distribution [@pts] after many tries";
+}
 
 sub _rand_int_between_inclusive {
 	my ( $min, $max ) = @_;
