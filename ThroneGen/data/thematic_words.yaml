@@ -6,198 +6,216 @@
 #
 
 fire: 
-- Brass
-- Coal
-- Deserts
-- Dragons
-- Droughts
-- Ember
-- Fire
-- Flames
-- Heat
-- Magma
-- Rage
-- Rubies
-- Scorching Storms
-- Scorching Winds
-- Summer
-- Sunlight
-- Suns
-- the Phoenix
-- the Sun
-- Volcanoes
-- Wildfire
+  of: 
+    - Coal
+    - Deserts
+    - Droughts
+    - Embers
+    - Fire
+    - Flames
+    - Heat
+    - Magma
+    - Rage
+    - Scorching Storms
+    - Scorching Winds
+    - Summer
+    - Sunlight
+    - Suns
+    - the Phoenix
+    - the Sun
+    - Volcanoes
+    - Wildfire
+  adjective:
+    - Brass
+    - Ruby
 
 air:
-- Air
-- Clouds
-- Cyclones
-- Diamond
-- Eagles
-- Hurricanes
-- Lightning
-- Mirrors
-- Reflections
-- Shock
-- Silver
-- Storms
-- Tempests
-- the Sky
-- the Wind
-- Thunder
-- Whirlwinds
-- Wildness
+  of:
+    - Air
+    - Clouds
+    - Cyclones
+    - Eagles
+    - Hurricanes
+    - Lightning
+    - Mirrors
+    - Reflections
+    - Shock
+    - Storms
+    - Tempests
+    - the Sky
+    - the Wind
+    - Thunder
+    - Whirlwinds
+    - Wildness
+  adjective:
+    - Diamond
+    - Silver
 
 water:
-- Blizzards
-- Coral
-- Currents
-- Floods
-- Freezing
-- Frozen Deeps
-- Frost
-- Ice
-- Kelp
-- Lakes
-- Mercury
-- Mists
-- Pearls
-- Rainfall
-- Rivers
-- Seas
-- Sinking
-- the Depths
-- the Flood
-- the Maelstrom
-- the Monsoon
-- the Ocean
-- the Sea
-- the Waters
-- Tides
-- Torrents
-- Tundras
-- the Waves
-- Water
-- Wells
-- Whales
+  of:
+    - Blizzards
+    - Currents
+    - Floods
+    - Freezing
+    - Frozen Deeps
+    - Frost
+    - Ice
+    - Kelp
+    - Lakes
+    - Mercury
+    - Mists
+    - Pearls
+    - Rain
+    - Rivers
+    - Seas
+    - Sinking
+    - the Coasts
+    - the Depths
+    - the Flood
+    - the Maelstrom
+    - the Monsoon
+    - the Ocean
+    - the Sea
+    - the Waters
+    - Tides
+    - Torrents
+    - Tundras
+    - the Waves
+    - Water
+    - Wells
+    - Whales
+  adjective:
+    - Coral
+    - Frozen
 
 earth:
-- Basalt
-- Caves
-- Earth
-- Earthquakes
-- Forges
-- Forging
-- Iron
-- Landslides
-- Minerals
-- Mines
-- Mountains
-- Pillars
-- Stone
-- Metal
+  of:
+    - Caves
+    - Earth
+    - Earthquakes
+    - Forges
+    - Forging
+    - Landslides
+    - Minerals
+    - Mines
+    - Mountains
+    - Pillars
+    - Stone
+    - Metal
+  adjective:
+    - Basalt
+    - Iron
 
 astral:
-- Circles
-- Cubes
-- Enchantment
-- Enlightenment
-- Labyrinths
-- Lore
-- Mazes
-- Opals
-- Openings
-- Pearls
-- Spheres
-- Spires
-- Starlight
-- Stars
-- the Crescent Moon
-- the Future
-- the Moon
-- the Outside
-- the Past
-- the Present
-- the Sphere
-- the Spire
-- the Stars
-- the Strange
-- the Void
-- Time
+  of:
+    - Circles
+    - Cubes
+    - Enchantment
+    - Enlightenment
+    - Labyrinths
+    - Lore
+    - Mazes
+    - Openings
+    - Pearls
+    - Spheres
+    - Spires
+    - Starlight
+    - Stars
+    - the Crescent Moon
+    - the Future
+    - the Moon
+    - the Outside
+    - the Past
+    - the Present
+    - the Sphere
+    - the Spire
+    - the Stars
+    - the Strange
+    - the Void
+    - Time
+  adjective:
+    - Opal
 
 death: 
-- Crypts
-- Darkness
-- Death
-- Draining
-- Ebony
-- Famine
-- Gloom
-- Graves
-- Mausoleums
-- Necromancy
-- Obsidian
-- Onyx
-- Pestilence
-- Plague
-- Ruins
-- Sepulchres
-- Shade
-- Shades
-- Shadows
-- Skulls
-- the Damned
-- the Dark
-- the Dead
-- the Undead
-- the Unholy
-- Tombs
+  of:
+    - Crypts
+    - Darkness
+    - Death
+    - Draining
+    - Eternal Slumber
+    - Famine
+    - Gloom
+    - Graves
+    - Mausoleums
+    - Necromancy
+    - Pestilence
+    - Plague
+    - Ruins
+    - Sepulchres
+    - Shade
+    - Shades
+    - Shadows
+    - Skulls
+    - the Damned
+    - the Dark
+    - the Dead
+    - the Undead
+    - the Unholy
+    - Tombs
+  adjective:
+    - Ebony
+    - Obsidian
+    - Onyx
 
 nature: 
-- Nature
-- Forests
-- Groves
-- Gaia
-- the Grove
-- Wildness
-- the Wild
-- Forests
-- the Woods
-- Wood
-- Oaks
-- Life
-- Swamps
-- Gardens
-- Ivy
-- Jungles
-- Beasts
-- Throns
+  of:
+    - Bark
+    - Beasts
+    - Forests
+    - Gaia
+    - Gardens
+    - Groves
+    - Ivy
+    - Jungles
+    - Life
+    - Nature
+    - Oaks
+    - Swamps
+    - the Grove
+    - the Wild
+    - the Woods
+    - Thorns
+    - Wildness
+  adjective:
+    - Wooden
 
 blood:
-- Bats
-- Blood
-- Bloodmarble
-- Bloodstone
-- Corruption
-- Demons
-- Desire
-- Disfigurement
-- Flesh
-- Gore
-- Hunger
-- Lust
-- Passion
-- Pentagrams
-- Sacrifice
-- Sacrilege
-- Slaughter
-- Slaves
-- the Abyss
-- the Broken
-- the Devil
-- the Sanguine
-- Torture
-- Witchcraft
+  of:
+    - Bats
+    - Blood
+    - Corruption
+    - Demons
+    - Desire
+    - Disfigurement
+    - Flesh
+    - Gore
+    - Hunger
+    - Lust
+    - Passion
+    - Pentagrams
+    - Sacrifice
+    - Sacrilege
+    - Slaughter
+    - Slaves
+    - the Abyss
+    - the Broken
+    - the Devil
+    - the Sanguine
+    - Torture
+    - Witchcraft
+  adjective:
+    - Bloodmarble
+    - Bloodstone
 
 #
 #
@@ -206,141 +224,159 @@ blood:
 #
 
 order:
-- Refuge
-- Honor
-- Law
-- Order
-- Calm
-- Peace
-- Reason
-- Virtue
-- Tranquility
-- Rulers
-- Balance
+  of:
+    - Refuge
+    - Honor
+    - Law
+    - Order
+    - Calm
+    - Peace
+    - Reason
+    - Virtue
+    - Tranquility
+    - Rulers
+    - Balance
 
 turmoil:
-- Chaos
-- Conflict
-- Confusion
-- Conspiracy
-- Imbalance
-- Instability
-- Outlaws
-- Rage
-- Strife
-- Thieves
-- Tumult
-- Turmoil
-- Unrest
-- Upheaval
-- Vagabonds
-- War
-- Wrath
+  of:
+    - Chaos
+    - Conflict
+    - Confusion
+    - Conspiracy
+    - Imbalance
+    - Instability
+    - Outlaws
+    - Rage
+    - Strife
+    - Thieves
+    - Tumult
+    - Turmoil
+    - Unrest
+    - Upheaval
+    - Vagabonds
+    - War
+    - Wrath
 
 productivity:
-- Dwarves
-- Production
-- Industry
-- Ore
-- Iron
-- Toil
-- Labour
-- Reward
-- Harvest
-- Mines
-- the Mountain
-- Productivity
+  of:
+    - Dwarves
+    - Harvest
+    - Industry
+    - Labour
+    - Mines
+    - Ore
+    - Production
+    - Productivity
+    - Reward
+    - the Mountain
+    - Toil
+  adjective:
+    - Iron
 
 sloth:
-- Apathy
-- Breathing
-- Idleness
-- Indolence
-- Joy
-- Lethargy
-- Meadows
-- Sloth
-- Slumber
+  of:
+    - Apathy
+    - Breathing
+    - Idleness
+    - Indolence
+    - Joy
+    - Lethargy
+    - Meadows
+    - Sloth
+    - Slumber
 
 growth:
-- Abundance
-- Blossoms
-- Faeries
-- Fecundity
-- Fertility
-- Growth
-- Harvest
-- Health
-- Life
-- Settlement
-- Sprouting
+  of:
+    - Abundance
+    - Blossoms
+    - Faeries
+    - Fecundity
+    - Fertility
+    - Growth
+    - Harvest
+    - Health
+    - Life
+    - Settlement
+    - Sprouting
 
 # death words are listed under magic paths
 
 luck:
-- Luck
-- Fortune
-- Totems
-- Good Omens
-- Faeries
-- Favour
-- Joy
-- Felicity
-- the Wheel
-- Wishes
-- the Stars
+  of:
+    - Luck
+    - Fortune
+    - Totems
+    - Good Omens
+    - Faeries
+    - Favour
+    - Joy
+    - Felicity
+    - the Wheel
+    - Wishes
+    - the Stars
 
 misfortune:
-- Bad Omens
-- Calamity
-- Curses
-- Doom
-- Ill Omens
-- Misery
-- Misfortune
-- Opals
-- Pity
-- Prophesy
-- the Moon
-- Unluck
+  of:
+    - Bad Omens
+    - Calamity
+    - Curses
+    - Doom
+    - Ill Omens
+    - Misery
+    - Misfortune
+    - Pity
+    - Prophesy
+    - the Moon
+    - Unluck
+  adjective:
+    - Opal
 
 # heat is aliased to fire in ThematicWords.pm
 cold:
-- Blizzards
-- Cold
-- Frost
-- Frostbite
-- Hail
-- Ice
-- Snow
-- Snowfall
-- Snow Storms
-- Winter
+  of:
+    - Blizzards
+    - Cold
+    - Frost
+    - Frost and Snow
+    - Frostbite
+    - Hail
+    - Ice
+    - Snow
+    - Snow and Ice
+    - Snowfall
+    - Snow Storms
+    - Winter
+  adjective:
+    - Frozen
 
 magic:
-- Conjury
-- Crystals
-- Enchantments
-- Energy
-- Magic
-- Rituals
-- Invocation
-- Charms
-- Spells
-- Sorcery
-- the Moon
-- the Old Ways
-- Wizardry
+  of:
+    - Conjury
+    - Enchantments
+    - Magic
+    - Rituals
+    - Invocation
+    - Charms
+    - Spells
+    - Sorcery
+    - the Moon
+    - the Old Ways
+    - Wizardry
+  adjective:
+    - Crystal
 
 drain:
-- Drain
-- Fading
-- Gloom
-- Haze
-- Languor
-- Oblivion
-- Obscurity
-- Pallor
+  of:
+    - Drain
+    - Gloom
+    - Haze
+    - Languor
+    - Oblivion
+    - Obscurity
+    - Pallor
+  adjective:
+    - Fading
+    - Pale
 
 
 
@@ -353,135 +389,151 @@ drain:
 
 
 gold:
-- Diamonds
-- Glitter
-- Gold
-- Mines
-- Splendour
-- Greed
-- Wealth
-- Luxury
-- Riches
-- Treasures
+  of:
+    - Glitter
+    - Gold
+    - Mines
+    - Splendour
+    - Greed
+    - Wealth
+    - Luxury
+    - Riches
+    - Treasures
+  adjective:
+    - Golden
+    - Diamond
 
 awe:
-- Adoration
-- Awe
-- Beauty
-- Celestial Beauty
-- Fame
-- Glory
-- Grandeur
-- Greatness
-- Heaven
-- Magnificence
-- Pride
-- Splendour
-- the Rising Sun
-- the Skies
-- Valour
+  of:
+    - Adoration
+    - Awe
+    - Beauty
+    - Celestial Beauty
+    - Fame
+    - Glory
+    - Grandeur
+    - Greatness
+    - Heaven
+    - Magnificence
+    - Pride
+    - Splendour
+    - the Rising Sun
+    - the Skies
+    - Valour
+  adjective:
+    - Shining
 
 scrying:
-- Crystal
-- Divination
-- Dreams
-- Eyes
-- Glass
-- Mirrors
-- Perception
-- Scrying
-- Senses
-- Sight
-- Sights
-- the Mirror
-- the Sphere
-- Vision
+  of:
+    - Divination
+    - Dreams
+    - Eyes
+    - Mirrors
+    - Perception
+    - Scrying
+    - Senses
+    - Sight
+    - Sights
+    - the Mirror
+    - the Sphere
+    - Vision
+  adjective:
+    - Crystal
+    - Glass
 
 darkness:
-- Darkness
-- Dusk
-- Mists
-- Shades
-- Shadows
-- Shrouds
-- the Dark
-- the Moon
-- Twilight
+  of:
+    - Darkness
+    - Dusk
+    - Mists
+    - Shades
+    - Shadows
+    - Shrouds
+    - the Dark
+    - the Moon
+    - Twilight
 
 adventure:
-- Adventure
-- Exploration
-- Heroes
-- Peril
-- Quests
+  of:
+    - Adventure
+    - Exploration
+    - Heroes
+    - Peril
+    - Quests
 
 # battle: atk/def bless and +xp, maybe these should be split
 battle:
-- Battle Prowess
-- Bravery
-- Excellence
-- Expertise
-- Mastery
-- Perfection
-- Proficiency
-- Skill
-- the Old Masters
-- Warriors
+  of:
+    - Battle Prowess
+    - Bravery
+    - Excellence
+    - Expertise
+    - Mastery
+    - Perfection
+    - Proficiency
+    - Skill
+    - the Old Masters
+    - Warriors
 
 
 horror:
-- Blasphemy
-- Corruption
-- Defiling
-- Desecration
-- Gore Tide
-- Horror
-- Impossibility
-- Infinite Horror
-- Nightmares
-- Pain
-- Red Skies
-- the Beyond
-- the Impossible
-- the Shattered
-- the Uncanny
-- the Unsettling
-- Torture
+  of:
+    - Blasphemy
+    - Corruption
+    - Defiling
+    - Desecration
+    - Gore Tide
+    - Horror
+    - Impossibility
+    - Infinite Horror
+    - Nightmares
+    - Pain
+    - Red Skies
+    - the Beyond
+    - the Uncanny
+    - the Unsettling
+    - Torture
+  adjective:
+    - Shattered
+    - Impossible
 
 poison:
-- Blight
-- Disease
-- Jade
-- Pestilence
-- Plague
-- Poison
-- Sickness
-- Scourges
+  of:
+    - Blight
+    - Disease
+    - Pestilence
+    - Plague
+    - Poison
+    - Sickness
+    - Scourges
+  adjective:
+    - Jade
 
 piety:
-- Adoration
-- Belief
-- Candles
-- Consecration
-- Devotion
-- Divinity
-- Holiness
-- Hymns
-- Idols
-- Martyrs
-- Miracles
-- Piety
-- Prayers
-- Preaching
-- Relics
-- Reverence
-- Sacrament
-- Sanctity
-- Sanctuary
-- Sermons
-- Shrines
-- Temples
-- the Divine
-- the Holy
-- Vows
-- Worship
+  of:
+    - Adoration
+    - Belief
+    - Candles
+    - Consecration
+    - Devotion
+    - Divinity
+    - Holiness
+    - Hymns
+    - Idols
+    - Martyrs
+    - Miracles
+    - Piety
+    - Prayers
+    - Preaching
+    - Relics
+    - Reverence
+    - Sacrament
+    - Sanctity
+    - Sanctuary
+    - Sermons
+    - Temples
+    - the Divine
+    - Vows
+    - Worship
+  adjective:
+    - Holy

@@ -37,8 +37,8 @@ has 'name' => (
 			return 'The Throne of No Theme Found';
 		}
 		my ( undef, $most_common_theme ) = mode @themes;
-		my $word = ThroneGen::ThematicWords->instance->word_on_theme( $most_common_theme );
-		return "The Throne of $word";
+		my $throne_name = ThroneGen::ThematicWords->instance->throne_name_on_theme( $most_common_theme );
+		return $throne_name;
 	}
 );
 has 'powers' => (
