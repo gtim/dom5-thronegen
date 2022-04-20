@@ -72,22 +72,36 @@ sub _generate_powers {
 		unshift @pts, $pts_left;
 	}
 
-	# generate powers
+	# generate powers that fit restrictions
 	
 	@pts = sort {$b<=>$a} @pts;
 	my @powers;
 	for my $num_tries ( 1..100 ) {
-		@powers = ();
+
+		# generate first power
+		@powers = ( ThroneGen::PowerGeneratorList->instance->random_power( pts => shift @pts ) );
+
+		# generate following powers
 		for my $pt ( @pts ) {
-			my $power = ThroneGen::PowerGeneratorList->instance->random_power($pt);
+			my $power;
+			if ( rand() < 0.5 ) {
+				# 50% chance to for same theme as first power
+				$power = ThroneGen::PowerGeneratorList->instance->random_power( pts => $pt, themes => $powers[0]{themes} );
+			}
+			if ( ! $power ) {
+				# either theme not forced, or forced theme did not succeed
+				$power = ThroneGen::PowerGeneratorList->instance->random_power( pts => $pt );
+			}
 			push @powers, $power;
 		}
+
+		# check if all powers have unique types 
 		local $_;
 		if ( scalar( uniq map { $_->type } @powers ) == scalar @powers ) {
 			# all powers have unique types
 			return \@powers;
 		}
-		my @titles = map { $_->title } @powers;
+		print "not unique powers: re-rolling\n";
 	}
 	croak "no unique power types found for point distribution [@pts] after many tries";
 }

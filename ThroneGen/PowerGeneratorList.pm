@@ -15,6 +15,7 @@ use ThroneGen::PowerGenerator::RecruitableMage;
 use ThroneGen::PowerGenerator::WallMage;
 
 use List::Util qw/shuffle/;
+use Ref::Util qw/is_arrayref/;
 use Carp;
 use POSIX qw/round/;
 
@@ -24,15 +25,48 @@ sub random_generator {
 }
 
 sub random_power {
-	# generate a random power for the supplied number of points
-	my ( $self, $pts ) = @_;
+	# generate a random power, subject to restrictions
+	# argument: hash with optional keys:
+	#   pts: exact number of points for power
+	#   themes: themes, at least one theme from list must be present in power theme list
+	
+	my $self = shift;
+	my %criteria = @_;
+	
 	for my $gen ( shuffle @{$self->generators} ) {
-		if ( $gen->can_generate( $pts ) ) {
-			return $gen->generate->( $pts );
+		next if exists $criteria{pts} && ! $gen->can_generate_pts( $criteria{pts} );
+		next if exists $criteria{themes} && ! $gen->can_generate_themes( $criteria{themes} );
+
+		# fulfills criteria: try to generate
+		# this is not guaranteed to succeed as themes might be chosen randomly, and the requested pts might not even allow for the requested theme.
+		for ( 1..40 ) {
+			my $power = $gen->generate->( $criteria{pts} );
+			if ( ! exists $criteria{themes} || _do_themes_overlap( $power->themes, $criteria{themes} ) ) {
+				return $power;
+			} else {
+				print "  try again $_\n";
+			}
 		}
 	}
 	# no generator can generate such a power
-	croak "asked to generate a $pts-pt power, which no generator is able to";
+	carp sprintf( "did not succeed generating a power with pts: %s, themes: %s",
+		$criteria{pts} // 'unspecified',
+		is_arrayref($criteria{themes}) ? join('|',@{$criteria{themes}}) : $criteria{themes},
+	);
+	return 0;
+}
+
+sub _do_themes_overlap {
+	# TODO: temporary function to be removed when Themes object is introduced
+	my ( $themes1, $themes2 ) = @_;
+	my @themes1 = is_arrayref( $themes1 ) ? @$themes1 : $themes1;
+	my @themes2 = is_arrayref( $themes2 ) ? @$themes2 : $themes2;
+	for my $t1 ( @themes1 ) {
+		for my $t2 ( @themes2 ) {
+			return 1 if $t1 eq $t2;
+		}
+	}
+	return 0;
 }
 
 
@@ -60,7 +94,8 @@ has 'generators' => (
 					themes => $theme,
 					dm_claimed => "#gems $gem_id $num_gems",
 				);
-			}
+			},
+			possible_themes => [qw/fire air water earth astral death nature/],
 		),
 
 		# slave income
@@ -76,7 +111,8 @@ has 'generators' => (
 					themes => 'blood',
 					dm_claimed => "#gems 7 $slaves",
 				);
-			}
+			},
+			possible_themes => 'blood',
 		),
 
 		# gold income
@@ -91,7 +127,8 @@ has 'generators' => (
 					themes => 'gold',
 					dm_claimed => "#gold $gold",
 				);
-			}
+			},
+			possible_themes => 'gold',
 		),
 
 		# dom spread
@@ -108,21 +145,23 @@ has 'generators' => (
 					dm_increased_domspread => $candles,
 					themes => 'piety',
 				);
-			}
+			},
+			possible_themes => 'piety',
 		),
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
 			type => "temple checks per month",
 			title => "one less temple check per month",
+			themes => 'piety',
 			dm_increased_domspread => -1,
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [2,4,6],
+			pts_allowed => [3,6,9],
 			generate => sub {
 				my $pts = shift;
-				my $scale_points = $pts/2;
+				my $scale_points = $pts/3;
 				my @scales = (
 					{ name => 'order',        cmd => 'goddomchaos',      inverted => 1 },
 					{ name => 'productivity', cmd => 'goddomlazy',       inverted => 1 },
@@ -139,7 +178,8 @@ has 'generators' => (
 					themes => $scale{name},
 					dm_claimed => $dm_cmd,
 				);
-			}
+			},
+			possible_themes => [qw/order productivity growth luck magic/],
 		),
 
 		# scrying
@@ -156,7 +196,8 @@ has 'generators' => (
 					themes => 'scrying',
 					dm_claimed => "#scry $scry_duration\n#scryrange $scry_range",
 				);
-			}
+			},
+			possible_themes => 'scrying',
 		),
 
 		# ritual discounts
@@ -177,7 +218,8 @@ has 'generators' => (
 					themes => $theme,
 					dm_claimed => "#${school}cost $discount",
 				);
-			}
+			},
+			possible_themes => [qw/magic blood productivity/],
 		),
 
 
@@ -206,7 +248,8 @@ has 'generators' => (
 					themes => $path,
 					dm_claimed => "#${path}range $range",
 				);
-			}
+			},
+			possible_themes => [qw/fire air water earth astral death nature blood/],
 		),
 		# ritual range bonus, elemental/sorcery
 		ThroneGen::PowerGenerator->new(
@@ -222,7 +265,8 @@ has 'generators' => (
 					themes => 'magic',
 					dm_claimed => "#${paths}range $range",
 				);
-			}
+			},
+			possible_themes => 'magic',
 		),
 		# ritual range bonus, all paths
 		ThroneGen::PowerGenerator->new(
@@ -237,7 +281,8 @@ has 'generators' => (
 					themes => 'magic',
 					dm_claimed => "#allrange $range",
 				);
-			}
+			},
+			possible_themes => 'magic',
 		),
 
 
@@ -263,7 +308,8 @@ has 'generators' => (
 					themes => 'battle',
 					dm_unclaimed => "#xp $xp",
 				);
-			}
+			},
+			possible_themes => 'battle',
 		),
 
 		# Call God bonus
@@ -278,7 +324,8 @@ has 'generators' => (
 					dm_claimed => "#recallgod $pts",
 					themes => 'piety',
 				);
-			}
+			},
+			possible_themes => 'piety',
 		),
 
 		# dominions conflict bonus
@@ -294,7 +341,8 @@ has 'generators' => (
 					dm_claimed => "#domwar $conflictbonus",
 					themes => 'piety',
 				);
-			}
+			},
+			possible_themes => 'piety',
 		),
 
 		# permanent temple
@@ -337,7 +385,8 @@ has 'generators' => (
 					themes => $themes{$element_cmd},
 					dm_claimed => "#bless${element_cmd}res $res",
 				);
-			}
+			},
+			possible_themes => [qw/heat cold air poison/],
 		),
 
 		# bless atk/def/prec/morale/reinvig/hp/undying
@@ -363,7 +412,8 @@ has 'generators' => (
 					title => "Blessed get +$pts $word",
 					dm_claimed => "#bless$stat $pts",
 				);
-			}
+			},
+			possible_themes => [qw/battle air awe growth death/],
 		),
 		
 		# bless darkvision
@@ -379,7 +429,8 @@ has 'generators' => (
 					themes => 'darkness',
 					dm_claimed => "#blessdarkvis $dv",
 				);
-			}
+			},
+			possible_themes => 'darkness',
 		),
 		
 		# bless awe
@@ -411,6 +462,7 @@ has 'generators' => (
 			pts => -1,
 			type => "gold per month",
 			title => '-100 gold per month',
+			themes => 'sloth',
 			dm_claimed => "#gold -100",
 		),
 		# cause unrest
@@ -442,6 +494,7 @@ has 'generators' => (
 			pts => -1,
 			type => "supply",
 			title => "-150 supply",
+			themes => 'death', # TODO find a better theme
 			dm_unclaimed => "#supply -150",
 		),
 		# reduced resources
@@ -484,6 +537,7 @@ has 'generators' => (
 					dm_unclaimed => $cmds{$scale},
 				);
 			},
+			possible_themes => [qw/turmoil sloth cold death misfortune drain order productivity heat growth luck magic/],
 		),
 		
 		# wall mage
