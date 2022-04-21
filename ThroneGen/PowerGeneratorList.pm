@@ -14,7 +14,7 @@ use ThroneGen::PowerGenerator::Simple;
 use ThroneGen::PowerGenerator::RecruitableMage;
 use ThroneGen::PowerGenerator::WallMage;
 
-use List::Util qw/shuffle/;
+use List::Util qw/shuffle any/;
 use Ref::Util qw/is_arrayref/;
 use Carp;
 use POSIX qw/round/;
@@ -29,29 +29,39 @@ sub random_power {
 	# argument: hash with optional keys:
 	#   pts: exact number of points for power
 	#   themes: themes, at least one theme from list must be present in power theme list
+	#   disallowed_types arrayref of types not allowed
 	
 	my $self = shift;
 	my %criteria = @_;
-	
+
+
 	for my $gen ( shuffle @{$self->generators} ) {
 		next if exists $criteria{pts} && ! $gen->can_generate_pts( $criteria{pts} );
 		next if exists $criteria{themes} && ! $gen->can_generate_themes( $criteria{themes} );
 
-		# fulfills criteria: try to generate
-		# this is not guaranteed to succeed as themes might be chosen randomly, and the requested pts might not even allow for the requested theme.
-		for ( 1..40 ) {
+		# can fulfill pts+themes criteria: try to generate
+		# this is not guaranteed to succeed as:
+		#   - themes might be chosen randomly
+		#   - disallowed types are checked later
+		#   - the requested pts/disallowed_types might not even allow for the requested theme
+		for ( 1..100 ) {
 			my $power = $gen->generate->( $criteria{pts} );
-			if ( ! exists $criteria{themes} || _do_themes_overlap( $power->themes, $criteria{themes} ) ) {
-				return $power;
-			} else {
-				print "  try again $_\n";
+			if ( exists $criteria{themes} && ! _do_themes_overlap( $power->themes, $criteria{themes} ) ) {
+				# themes don't overlap; try again
+				next;
 			}
+			if ( exists $criteria{disallowed_types} && any { $_ eq $power->type } @{$criteria{disallowed_types}} ) {
+				# type is disallowed: try again
+				next;
+			}
+			return $power;
 		}
 	}
 	# no generator can generate such a power
-	carp sprintf( "did not succeed generating a power with pts: %s, themes: %s",
+	carp sprintf( "did not succeed generating power: { pts: %s, themes: %s, disallowed types: %s }",
 		$criteria{pts} // 'unspecified',
-		is_arrayref($criteria{themes}) ? join('|',@{$criteria{themes}}) : $criteria{themes},
+		exists($criteria{themes}) ? ( is_arrayref($criteria{themes}) ? join('|',@{$criteria{themes}}) : $criteria{themes} ) : '-',
+		exists($criteria{disallowed_types}) ? join(', ', @{$criteria{disallowed_types}}) : '-',
 	);
 	return 0;
 }

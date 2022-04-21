@@ -76,33 +76,38 @@ sub _generate_powers {
 	
 	@pts = sort {$b<=>$a} @pts;
 	my @powers;
-	for my $num_tries ( 1..100 ) {
 
-		# generate first power
-		@powers = ( ThroneGen::PowerGeneratorList->instance->random_power( pts => shift @pts ) );
+	# generate first power
+	@powers = ( ThroneGen::PowerGeneratorList->instance->random_power( pts => shift @pts ) );
 
-		# generate following powers
-		for my $pt ( @pts ) {
-			my $power;
-			if ( rand() < 0.5 ) {
-				# 50% chance to for same theme as first power
-				$power = ThroneGen::PowerGeneratorList->instance->random_power( pts => $pt, themes => $powers[0]{themes} );
-			}
-			if ( ! $power ) {
-				# either theme not forced, or forced theme did not succeed
-				$power = ThroneGen::PowerGeneratorList->instance->random_power( pts => $pt );
-			}
-			push @powers, $power;
+	# generate following powers
+	for my $pt ( @pts ) {
+		my $power;
+		if ( rand() < 0.5 ) {
+			# 50% chance to for same theme as first power
+			$power = ThroneGen::PowerGeneratorList->instance->random_power(
+				pts => $pt,
+				disallowed_types => [ map { $_->type } @powers ],
+				themes => $powers[0]{themes},
+			);
 		}
-
-		# check if all powers have unique types 
-		local $_;
-		if ( scalar( uniq map { $_->type } @powers ) == scalar @powers ) {
-			# all powers have unique types
-			return \@powers;
+		if ( ! $power ) {
+			# either theme not forced, or forced theme did not succeed
+			$power = ThroneGen::PowerGeneratorList->instance->random_power(
+				pts => $pt,
+				disallowed_types => [ map { $_->type } @powers ],
+			);
 		}
-		print "not unique powers: re-rolling\n";
+		if ( ! $power ) {
+			# did not succeed to generate throne while respecting pts and disallowed types,
+			# so we recurse. this should be rare.
+			carp "no unique power types found for point distribution [@pts] on first try: recursing";
+			return $self->_generate_powers();
+		}
+		push @powers, $power;
 	}
+	return \@powers;
+
 	croak "no unique power types found for point distribution [@pts] after many tries";
 }
 
