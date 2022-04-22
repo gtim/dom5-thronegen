@@ -85,12 +85,12 @@ has 'generators' => (
 	isa => 'ArrayRef[ThroneGen::PowerGenerator]',
 	default => sub { [
 		# recruitable mage
-		ThroneGen::PowerGenerator::RecruitableMage->new(),
+		( ThroneGen::PowerGenerator::RecruitableMage->new() ) x 2,
 
 		# gem income
 		# 1/2/3 pts => 2/3/4 gems,
 		# 4+ pts => num pts + 1 + 0-1 gems
-		ThroneGen::PowerGenerator->new(
+		( ThroneGen::PowerGenerator->new(
 			generate => sub {
 				my $pts = shift;
 				my $num_gems = $pts <= 3 ? $pts + 1 : $pts + 1 + int rand 2;
@@ -106,7 +106,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => [qw/fire air water earth astral death nature/],
-		),
+		) ) x 4, # TODO: neater way of adjusting rarity
 
 		# slave income
 		# 2.5 slaves per pt, round result randomly
@@ -167,7 +167,7 @@ has 'generators' => (
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
-		ThroneGen::PowerGenerator->new(
+		(ThroneGen::PowerGenerator->new(
 			pts_allowed => [3,6,9],
 			generate => sub {
 				my $pts = shift;
@@ -190,7 +190,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => [qw/order productivity growth luck magic/],
-		),
+		)) x 2,
 
 		# scrying
 		ThroneGen::PowerGenerator->new(
