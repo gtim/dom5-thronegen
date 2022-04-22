@@ -52,6 +52,12 @@
 {/if}
 </div>
 
+<div id="github_footer">
+	<a href="https://github.com/gtim/dom5-thronegen" rel="noopener noreferrer">
+		<img src="/GitHub-Mark-32px.png" alt="Github" title="Feedback and pull requests are welcome on Github"/>
+	</a>
+</div>
+
 
 <style>
 	#thrones {
@@ -67,5 +73,13 @@
 	textarea {
 		width:100%;
 		height:100%;
+	}
+	#github_footer {
+		position:absolute;
+		bottom:16px;
+		right:16px;
+		width:32px;
+		height:32px;
+		padding:0;
 	}
 </style>
