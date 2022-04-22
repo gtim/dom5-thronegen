@@ -420,6 +420,7 @@ has 'generators' => (
 					pts => $pts,
 					type => "bless",
 					title => "Blessed get +$pts $word",
+					themes => $theme,
 					dm_claimed => "#bless$stat $pts",
 				);
 			},

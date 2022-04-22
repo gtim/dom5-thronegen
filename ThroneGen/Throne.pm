@@ -40,15 +40,18 @@ has 'powers' => (
 sub _generate_throne_name {
 	my $self = shift;
 	local $_;
-	# themes weighed by power value
+
+	# themes weighted by power value
 	my @themes = map { ( @{ $_->themes } ) x max( $_->pts, 1 ) } @{ $self->powers };
 	if ( @themes == 0 ) {
 		carp "no theme found for throne";
 		return 'The Throne of No Theme Found';
 	}
+	
 	# find most common theme (after weights)
 	my ( undef, @most_common_themes ) = mode @themes;
 	my $most_common_theme = $most_common_themes[ int rand @most_common_themes ];
+	
 	# generate throne name on the theme
 	my $throne_name = ThroneGen::ThematicWords->instance->throne_name_on_theme( $most_common_theme );
 	return $throne_name;
