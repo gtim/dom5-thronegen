@@ -111,6 +111,7 @@ has 'generators' => (
 		# slave income
 		# 2.5 slaves per pt, round result randomly
 		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2],
 			generate => sub {
 				my $pts = shift;
 				my $slaves = round( 2.5 * $pts + rand()-0.5 );
