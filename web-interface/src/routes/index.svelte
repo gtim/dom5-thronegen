@@ -1,5 +1,7 @@
 <script>
 
+	import { browser } from '$app/env';
+
 	let promise;
 
 	async function genNewThrones() {
@@ -14,6 +16,10 @@
 	}
 
 	function clickButton() {
+		promise = genNewThrones();
+	}
+
+	if (browser) {
 		promise = genNewThrones();
 	}
 
