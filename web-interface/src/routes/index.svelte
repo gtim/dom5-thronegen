@@ -26,9 +26,11 @@
 </script>
 
 
-<h1>thronegen</h1>
+<h1>Throne Generator</h1>
 
-<button on:click={clickButton}>generate thrones</button>
+<div id="buttondiv">
+	<button on:click={clickButton}>generate thrones</button>
+</div>
 
 <div id="container">
 {#if promise}
@@ -38,7 +40,7 @@
 		<div id="thrones">
 		{#each generated.thrones as throne}
 			<div>
-				<p>{throne.name}</p>
+				<p class="throne_name">{throne.name}</p>
 				<ul>
 				{#each throne.powers as power}
 					<li>{power.title} ({power.pts} pts)</li>
@@ -66,22 +68,35 @@
 
 
 <style>
+	h1, #buttondiv {
+		text-align:center;
+	}
+	#container {
+		width:fit-content;
+		margin:0 auto;
+	}
 	#thrones {
-		float:left;
-		padding:16px;
+		margin-top:32px;
+		width:480px;
+	}
+	#thrones p {
+		margin:0;
+	}
+	#thrones ul {
+		margin-top:8px;
+	}
+	.throne_name {
+		font-weight:bold;
 	}
 	#dm {
-		overflow:hidden;
-		max-width:480px;
-		height:480px;
-		margin-left:64px;
+		margin-top:48px;
 	}
 	textarea {
-		width:100%;
-		height:100%;
+		width:480px;
+		height:474px;
 	}
 	#github_footer {
-		position:absolute;
+		position:fixed;
 		bottom:16px;
 		right:16px;
 		width:32px;
