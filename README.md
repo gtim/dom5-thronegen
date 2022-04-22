@@ -8,8 +8,9 @@ To do before test game:
 - [x] power: auto-construct a lab/temple (through events)
 - [x] make the good recruitable mages slow-to-recruit
 - [x] very simple throne names
-- [ ] minor balancing run
-- [ ] make a channel and get buried in criticism, adjust balance accordingly
+- [x] minor balancing run
+- [x] make a discord channel
+- [ ] get buried in criticism adjust balance accordingly
 
 ### throne power ideas (both good and bad)
 * permanent lab
