@@ -7,11 +7,14 @@
 
 fire: 
   of: 
+    - Ashes
     - Coal
     - Deserts
     - Droughts
     - Embers
+    - Fever
     - Fire
+    - Fires
     - Flames
     - Heat
     - Magma
@@ -20,6 +23,7 @@ fire:
     - Scorching Winds
     - Summer
     - Sunlight
+    - Sunshine
     - Suns
     - the Phoenix
     - the Sun
@@ -27,7 +31,10 @@ fire:
     - Wildfire
   adjective:
     - Brass
+    - Burning
+    - Everburning
     - Ruby
+    - Garnet
 
 air:
   of:
@@ -36,12 +43,14 @@ air:
     - Cyclones
     - Eagles
     - Hurricanes
+    - Illusions
     - Lightning
     - Mirrors
     - Reflections
     - Shock
     - Storms
     - Tempests
+    - the Four Winds
     - the Sky
     - the Wind
     - Thunder
@@ -53,9 +62,11 @@ air:
 
 water:
   of:
+    - All Waters
     - Blizzards
     - Currents
     - Floods
+    - Fountains
     - Freezing
     - Frozen Deeps
     - Frost
@@ -75,6 +86,7 @@ water:
     - the Maelstrom
     - the Monsoon
     - the Ocean
+    - the Raging Seas
     - the Sea
     - the Waters
     - Tides
@@ -82,25 +94,33 @@ water:
     - Tundras
     - the Waves
     - Water
+    - Waterfalls
     - Wells
     - Whales
+    - Whirlpools
   adjective:
+    - Azure
     - Coral
+    - Flooded
     - Frozen
 
 earth:
   of:
     - Caves
+    - Chasms
     - Earth
     - Earthquakes
     - Forges
     - Forging
+    - Gorges
     - Landslides
     - Minerals
     - Mines
     - Mountains
     - Pillars
+    - Ravines
     - Stone
+    - Tremors
     - Metal
   adjective:
     - Basalt
@@ -108,44 +128,55 @@ earth:
 
 astral:
   of:
+    - Arcane Mysteries
     - Circles
+    - Crystallized Dreams
     - Cubes
     - Enchantment
     - Enlightenment
+    - Eternity
     - Labyrinths
     - Lore
     - Mazes
     - Openings
     - Pearls
+    - Shooting Stars
     - Spheres
     - Spires
     - Starlight
     - Stars
+    - the Coming Age
     - the Crescent Moon
     - the Future
     - the Moon
     - the Outside
     - the Past
     - the Present
-    - the Sphere
-    - the Spire
+    - the Spheres
     - the Stars
-    - the Strange
     - the Void
     - Time
+    - Truth
   adjective:
+    - Ethereal
     - Opal
+    - Strange
 
 death: 
   of:
+    - Aging
     - Crypts
     - Darkness
     - Death
-    - Draining
+    - Decay
     - Eternal Slumber
+    - Evil Intentions
     - Famine
+    - Fear
     - Gloom
     - Graves
+    - Hatred
+    - Malady
     - Mausoleums
     - Necromancy
     - Pestilence
@@ -156,41 +187,54 @@ death:
     - Shades
     - Shadows
     - Skulls
+    - Stenches
     - the Damned
     - the Dark
     - the Dead
     - the Undead
-    - the Unholy
+    - the Underworld
     - Tombs
   adjective:
     - Ebony
     - Obsidian
     - Onyx
+    - Stygian
+    - Unholy
+    - Wailing
+    - Wilted
+    - Withering
 
 nature: 
   of:
     - Bark
     - Beasts
+    - Branches
+    - Flowers and Insects
     - Forests
     - Gaia
     - Gardens
     - Groves
     - Ivy
     - Jungles
+    - Leaves
     - Life
     - Nature
+    - Nurture
     - Oaks
-    - Swamps
     - the Grove
     - the Wild
     - the Woods
     - Thorns
     - Wildness
   adjective:
+    - Howling
+    - Living
+    - Verdant
     - Wooden
 
 blood:
   of:
+    - Agony
     - Bats
     - Blood
     - Corruption
@@ -200,22 +244,32 @@ blood:
     - Flesh
     - Gore
     - Hunger
+    - Impurity
+    - Intoxication
     - Lust
+    - Many Names
     - Passion
     - Pentagrams
+    - Revelry
     - Sacrifice
     - Sacrilege
+    - Sin
     - Slaughter
+    - Slavers
     - Slaves
     - the Abyss
     - the Broken
     - the Devil
     - the Sanguine
+    - Thirst
     - Torture
     - Witchcraft
   adjective:
     - Bloodmarble
     - Bloodstone
+    - Broken
+    - Desecrated
+    - Thirsting
 
 #
 #
@@ -225,49 +279,70 @@ blood:
 
 order:
   of:
-    - Refuge
+    - Balance
+    - Calm
+    - Civilisation
     - Honor
+    - Justice
     - Law
     - Order
-    - Calm
     - Peace
     - Reason
-    - Virtue
-    - Tranquility
+    - Refuge
     - Rulers
-    - Balance
+    - Tranquility
+    - Virtue
+  adjective:
+    - Unbroken
 
 turmoil:
   of:
+    - Bloodshed
     - Chaos
     - Conflict
     - Confusion
     - Conspiracy
+    - Discontent
+    - Discord
+    - Disorder
     - Imbalance
+    - Injustice
     - Instability
+    - Intrigue
+    - Liars
     - Outlaws
     - Rage
     - Strife
+    - Theft
     - Thieves
     - Tumult
     - Turmoil
     - Unrest
     - Upheaval
     - Vagabonds
+    - Violence
     - War
     - Wrath
+    - Wooden
+  adjective:
+    - Roaring
 
 productivity:
   of:
+    - Anvils
     - Dwarves
+    - Hammers
     - Harvest
     - Industry
     - Labour
     - Mines
     - Ore
+    - Plows
     - Production
     - Productivity
     - Reward
+    - Roads
+    - Smiths
     - the Mountain
     - Toil
   adjective:
@@ -285,46 +360,59 @@ sloth:
 growth:
   of:
     - Abundance
+    - Birth
     - Blossoms
     - Faeries
     - Fecundity
     - Fertility
+    - the Fields
     - Growth
     - Harvest
     - Health
     - Life
+    - Nurture
     - Settlement
     - Sprouting
+    - Vitality
+    - Youth
+  adjective:
+    - Growing
 
 # death words are listed under magic paths
 
 luck:
   of:
-    - Luck
-    - Fortune
-    - Totems
-    - Good Omens
     - Faeries
     - Favour
-    - Joy
     - Felicity
-    - the Wheel
-    - Wishes
+    - Fortune
+    - Good Omens
+    - Joy
+    - Luck
+    - Shooting Stars
     - the Stars
+    - the Wheel
+    - Totems
+    - Wishes
 
 misfortune:
   of:
     - Bad Omens
     - Calamity
+    - Crows
     - Curses
     - Doom
+    - Good Gifts
+    - Grief
     - Ill Omens
     - Misery
     - Misfortune
     - Pity
     - Prophesy
+    - Sorrow
     - the Moon
     - Unluck
+    - Woe
   adjective:
     - Opal
 
@@ -343,6 +431,7 @@ cold:
     - Snowfall
     - Snow Storms
     - Winter
+    - Long Winters
   adjective:
     - Frozen
 
@@ -361,10 +450,12 @@ magic:
     - Wizardry
   adjective:
     - Crystal
+    - Ivory
 
 drain:
   of:
     - Drain
+    - Fading Stars
     - Gloom
     - Haze
     - Languor
@@ -372,7 +463,12 @@ drain:
     - Obscurity
     - Pallor
   adjective:
+    - Ashen
     - Fading
+    - Grey
+    - Sombre
+    - Wilted
+    - Withering
     - Pale
 
 
@@ -397,8 +493,9 @@ gold:
     - Riches
     - Treasures
   adjective:
-    - Golden
     - Diamond
+    - Golden
+    - Opulent
 
 awe:
   of:
@@ -407,7 +504,9 @@ awe:
     - Beauty
     - Celestial Beauty
     - Fame
+    - Gleaming
     - Glory
+    - Grace
     - Grandeur
     - Greatness
     - Heaven
@@ -422,9 +521,12 @@ awe:
 
 scrying:
   of:
+    - Clarity
     - Divination
     - Dreams
     - Eyes
+    - Instinct
+    - Many Eyes
     - Mirrors
     - Perception
     - Scrying
@@ -437,22 +539,26 @@ scrying:
   adjective:
     - Crystal
     - Glass
+    - Many-Eyed
 
 darkness:
   of:
     - Darkness
     - Dusk
+    - Eclipses
     - Mists
     - Shades
     - Shadows
     - Shrouds
     - the Dark
     - the Moon
+    - the Night Sky
     - Twilight
 
 adventure:
   of:
     - Adventure
+    - Courage
     - Exploration
     - Heroes
     - Peril
@@ -466,6 +572,7 @@ battle:
     - Excellence
     - Expertise
     - Mastery
+    - Might
     - Perfection
     - Proficiency
     - Skill
@@ -475,24 +582,32 @@ battle:
 
 horror:
   of:
+    - Agony
     - Blasphemy
     - Corruption
     - Defiling
+    - Delirium
     - Desecration
+    - Dread
     - Gore Tide
     - Horror
     - Impossibility
     - Infinite Horror
+    - Insanity
+    - Madness
     - Nightmares
     - Pain
     - Red Skies
+    - Suffering
     - the Beyond
     - the Uncanny
     - the Unsettling
     - Torture
   adjective:
-    - Shattered
     - Impossible
+    - Shattered
+    - Twisting
+    - Wailing
 
 poison:
   of:
@@ -503,34 +618,39 @@ poison:
     - Poison
     - Sickness
     - Scourges
+    - Swamps
   adjective:
+    - Emerald
     - Jade
 
 piety:
   of:
-    - Adoration
+    - Atonement
     - Belief
     - Candles
     - Consecration
+    - Consolation
     - Devotion
+    - Divine Justice
     - Divinity
+    - Faith
+    - Grace
     - Holiness
     - Hymns
     - Idols
     - Martyrs
     - Miracles
     - Piety
-    - Prayers
-    - Preaching
-    - Relics
+    - Prayer
     - Reverence
     - Sacrament
     - Sanctity
     - Sanctuary
-    - Sermons
     - Temples
+    - the Awakening God
     - the Divine
     - Vows
     - Worship
   adjective:
     - Holy
+    - Ivory
