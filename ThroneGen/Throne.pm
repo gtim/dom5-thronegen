@@ -5,7 +5,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 use Carp;
 use POSIX qw/ceil/;
-use List::Util qw/uniq/;
+use List::Util qw/uniq max/;
 use List::MoreUtils qw/mode/;
 
 use ThroneGen::PowerGeneratorList;
@@ -40,12 +40,16 @@ has 'powers' => (
 sub _generate_throne_name {
 	my $self = shift;
 	local $_;
-	my @themes = map { @{ $_->themes } } @{ $self->powers };
+	# themes weighed by power value
+	my @themes = map { ( @{ $_->themes } ) x max( $_->pts, 1 ) } @{ $self->powers };
 	if ( @themes == 0 ) {
 		carp "no theme found for throne";
 		return 'The Throne of No Theme Found';
 	}
-	my ( undef, $most_common_theme ) = mode @themes;
+	# find most common theme (after weights)
+	my ( undef, @most_common_themes ) = mode @themes;
+	my $most_common_theme = $most_common_themes[ int rand @most_common_themes ];
+	# generate throne name on the theme
 	my $throne_name = ThroneGen::ThematicWords->instance->throne_name_on_theme( $most_common_theme );
 	return $throne_name;
 }
