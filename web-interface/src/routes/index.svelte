@@ -4,8 +4,10 @@
 
 	let promise;
 
+	let num_thrones = 5;
+
 	async function genNewThrones() {
-		const response = await fetch('/gen.pl');
+		const response = await fetch( '/gen.pl?n=' + num_thrones );
 		const json = await response.json();
 		if ( response.ok ) {
 			console.log(json.thrones);
@@ -29,7 +31,12 @@
 <h1>Throne Generator</h1>
 
 <div id="buttondiv">
-	<button on:click={clickButton}>generate thrones</button>
+	<select bind:value={num_thrones}>
+		{#each [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] as n}
+			<option value={n}>{n} throne{#if n!=1}s{/if}</option>
+		{/each}
+	</select>
+	<button on:click={clickButton}>generate</button>
 </div>
 
 <div id="container">
@@ -70,6 +77,13 @@
 <style>
 	h1, #buttondiv {
 		text-align:center;
+	}
+	#buttondiv select {
+		padding:5px;
+		margin-right:16px;
+	}
+	#buttondiv button {
+		padding:4px 7px;
 	}
 	#container {
 		width:fit-content;
