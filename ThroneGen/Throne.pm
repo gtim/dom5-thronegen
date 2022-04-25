@@ -132,7 +132,7 @@ sub write_to_dm {
 	print  $fh "#path 8\n";
 	print  $fh "#level 0\n";
 	print  $fh "#loc 213999 -- unique, allowed everywhere\n";
-	print  $fh "#rarity 11 -- lvl1 throne\n";
+	print  $fh "#rarity 12 -- lvl 2 throne\n";
 
 	# always-on throne powers 
 	for my $power ( @{ $self->powers } ) {
