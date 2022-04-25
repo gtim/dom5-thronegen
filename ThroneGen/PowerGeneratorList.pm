@@ -523,14 +523,6 @@ has 'generators' => (
 			themes => 'death', # TODO find a better theme
 			dm_unclaimed => "#supply -150",
 		),
-		# reduced resources
-		ThroneGen::PowerGenerator::Simple->new(
-			pts => -1,
-			type => "resources",
-			title => "-100 resources",
-			themes => 'sloth',
-			dm_unclaimed => "#res -100",
-		),
 
 		#
 		# 0pt-powers
@@ -569,6 +561,25 @@ has 'generators' => (
 		# wall mage
 		ThroneGen::PowerGenerator::WallMage->new(),
 
+		# reduced resources
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => 0,
+			type => "resources",
+			title => "-100 resources",
+			themes => 'sloth',
+			dm_unclaimed => "#res -100",
+			weight => 0.3,
+		),
+
+		# improved resources
+		ThroneGen::PowerGenerator::Simple->new(
+			pts => 0,
+			type => "resources",
+			title => "+100 resources",
+			themes => 'productivity',
+			dm_unclaimed => "#res 100",
+			weight => 0.3,
+		),
 
 
 	] },
