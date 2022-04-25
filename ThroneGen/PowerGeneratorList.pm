@@ -94,12 +94,11 @@ has 'generators' => (
 		ThroneGen::PowerGenerator::RecruitableMage->new( weight => 2 ),
 
 		# gem income
-		# 1/2/3 pts => 2/3/4 gems,
-		# 4+ pts => num pts + 1 + 0-1 gems
+		# 1/2/3/4 pts => 1/2/3/4 gems,
 		ThroneGen::PowerGenerator->new(
 			generate => sub {
 				my $pts = shift;
-				my $num_gems = $pts <= 3 ? $pts + 1 : $pts + 1 + int rand 2;
+				my $num_gems = $pts;
 				my $gem_id = int rand 7;
 				my $gem_str = (qw/F A W E S D N/)[$gem_id];
 				my $theme =  {F => 'fire', A => 'air', W => 'water', E => 'earth', S => 'astral', D => 'death', N => 'nature' }->{$gem_str};
