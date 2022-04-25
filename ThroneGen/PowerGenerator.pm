@@ -44,6 +44,12 @@ has 'possible_themes' => (
 	#required => 1,
 	coerce   => 1,
 );
+has 'weight' => (
+	# relative non-normalised chance to be picked
+	is => 'ro',
+	isa => 'Num',
+	default => 1,
+);
 
 sub can_generate_pts {
 	# checks if the generator can generate a power for the supplied number of points

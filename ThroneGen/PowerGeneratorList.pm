@@ -15,14 +15,10 @@ use ThroneGen::PowerGenerator::RecruitableMage;
 use ThroneGen::PowerGenerator::WallMage;
 
 use List::Util qw/shuffle any/;
+use List::Util::WeightedChoice qw/choose_weighted/;
 use Ref::Util qw/is_arrayref/;
 use Carp;
 use POSIX qw/round/;
-
-sub random_generator {
-	my $self = shift;
-	return $self->generators->[ int rand 0+@{$self->generators} ];
-}
 
 sub random_power {
 	# generate a random power, subject to restrictions
@@ -33,13 +29,23 @@ sub random_power {
 	
 	my $self = shift;
 	my %criteria = @_;
+	local $_;
 
+	my @valid_generators = @{$self->generators};
+	if ( exists $criteria{pts} ) {
+		@valid_generators = grep { $_->can_generate_pts( $criteria{pts} ) } @valid_generators;
+	}
+	if ( exists $criteria{themes} ) {
+		@valid_generators = grep { $_->can_generate_themes( $criteria{themes} ) } @valid_generators;
+	}
 
-	for my $gen ( shuffle @{$self->generators} ) {
-		next if exists $criteria{pts} && ! $gen->can_generate_pts( $criteria{pts} );
-		next if exists $criteria{themes} && ! $gen->can_generate_themes( $criteria{themes} );
+	while ( @valid_generators > 0 ) {
 
-		# can fulfill pts+themes criteria: try to generate
+		# choose a weighted-random generator
+		my $gen_i = choose_weighted( [0..$#valid_generators], [map { $_->weight } @valid_generators] );
+		my $gen = splice @valid_generators, $gen_i, 1;
+
+		# this generator can fulfill pts+themes criteria: try to generate
 		# this is not guaranteed to succeed as:
 		#   - themes might be chosen randomly
 		#   - disallowed types are checked later
@@ -85,12 +91,12 @@ has 'generators' => (
 	isa => 'ArrayRef[ThroneGen::PowerGenerator]',
 	default => sub { [
 		# recruitable mage
-		( ThroneGen::PowerGenerator::RecruitableMage->new() ) x 2,
+		ThroneGen::PowerGenerator::RecruitableMage->new( weight => 2 ),
 
 		# gem income
 		# 1/2/3 pts => 2/3/4 gems,
 		# 4+ pts => num pts + 1 + 0-1 gems
-		( ThroneGen::PowerGenerator->new(
+		ThroneGen::PowerGenerator->new(
 			generate => sub {
 				my $pts = shift;
 				my $num_gems = $pts <= 3 ? $pts + 1 : $pts + 1 + int rand 2;
@@ -106,7 +112,8 @@ has 'generators' => (
 				);
 			},
 			possible_themes => [qw/fire air water earth astral death nature/],
-		) ) x 4, # TODO: neater way of adjusting rarity
+			weight => 4,
+		),
 
 		# slave income
 		# 2.5 slaves per pt, round result randomly
@@ -168,7 +175,7 @@ has 'generators' => (
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
-		(ThroneGen::PowerGenerator->new(
+		ThroneGen::PowerGenerator->new(
 			pts_allowed => [3,6,9],
 			generate => sub {
 				my $pts = shift;
@@ -191,7 +198,8 @@ has 'generators' => (
 				);
 			},
 			possible_themes => [qw/order productivity growth luck magic/],
-		)) x 2,
+			weight => 2,
+		),
 
 		# scrying
 		ThroneGen::PowerGenerator->new(
@@ -209,6 +217,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => 'scrying',
+			weight => 0.5,
 		),
 
 		# ritual discounts
@@ -261,6 +270,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => [qw/fire air water earth astral death nature blood/],
+			weight => 0.3,
 		),
 		# ritual range bonus, elemental/sorcery
 		ThroneGen::PowerGenerator->new(
@@ -278,6 +288,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => 'magic',
+			weight => 0.3,
 		),
 		# ritual range bonus, all paths
 		ThroneGen::PowerGenerator->new(
@@ -294,6 +305,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => 'magic',
+			weight => 0.3,
 		),
 
 
@@ -398,6 +410,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => [qw/heat cold air poison/],
+			weight => 2,
 		),
 
 		# bless atk/def/prec/morale/reinvig/hp/undying
@@ -426,6 +439,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => [qw/battle air awe growth death/],
+			weight => 2,
 		),
 		
 		# bless darkvision
