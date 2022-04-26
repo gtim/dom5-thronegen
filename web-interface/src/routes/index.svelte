@@ -2,6 +2,8 @@
 
 	import { browser } from '$app/env';
 
+	import Throne from '$lib/Throne.svelte';
+
 	let promise;
 
 	let num_thrones = 5;
@@ -46,14 +48,7 @@
 	{:then generated}
 		<div id="thrones">
 		{#each generated.thrones as throne}
-			<div>
-				<p class="throne_name">{throne.name}</p>
-				<ul>
-				{#each throne.powers as power}
-					<li>{power.title} ({power.pts} pts)</li>
-				{/each}
-				</ul>
-			</div>
+			<Throne name="{throne.name}" powers="{throne.powers}"/>
 		{/each}
 		</div>
 		<div id="dm">
@@ -92,15 +87,6 @@
 	#thrones {
 		margin-top:32px;
 		width:480px;
-	}
-	#thrones p {
-		margin:0;
-	}
-	#thrones ul {
-		margin-top:8px;
-	}
-	.throne_name {
-		font-weight:bold;
 	}
 	#dm {
 		margin-top:48px;
