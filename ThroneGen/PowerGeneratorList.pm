@@ -251,7 +251,7 @@ has 'generators' => (
 		# elemental/sorcery +2: 2pt 
 		# elemental/sorcery +3: 3pt 
 		# all +1: 2pt 
-		# all +2: 4pt 
+		# all +2: 3pt 
 		
 		# ritual range bonus, single path
 		ThroneGen::PowerGenerator->new(
@@ -291,7 +291,7 @@ has 'generators' => (
 		),
 		# ritual range bonus, all paths
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [2,4],
+			pts_allowed => [2,3],
 			generate => sub {
 				my $pts = shift;
 				my $range = $pts/2;
