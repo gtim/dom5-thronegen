@@ -28,7 +28,13 @@ has 'name' => (
 	is     => 'ro',
 	isa     => 'Str',
 	lazy    => 1,
-	builder => '_generate_throne_name',
+	builder => '_generate_name',
+);
+has 'disallowed_names' => (
+	# disallowed throne names, e.g. because there's already a throne of that name
+	is     => 'ro',
+	isa     => 'ArrayRef[Str]',
+	default => sub { [] },
 );
 has 'powers' => (
 	is => 'ro',
@@ -37,8 +43,9 @@ has 'powers' => (
 	builder => '_generate_powers',
 );
 
-sub _generate_throne_name {
+sub _generate_name {
 	my $self = shift;
+	my $attempt = shift // 1;
 	local $_;
 
 	# themes weighted by power value
@@ -47,14 +54,27 @@ sub _generate_throne_name {
 		carp "no theme found for throne";
 		return 'The Throne of No Theme Found';
 	}
-	
+
 	# find most common theme (after weights)
 	my ( undef, @most_common_themes ) = mode @themes;
 	my $most_common_theme = $most_common_themes[ int rand @most_common_themes ];
-	
+
 	# generate throne name on the theme
 	my $throne_name = ThroneGen::ThematicWords->instance->throne_name_on_theme( $most_common_theme );
-	return $throne_name;
+
+	# check if throne name is allowed
+	if ( ! grep { $_ eq $throne_name } @{$self->disallowed_names} ) {
+		# allowed
+		return $throne_name;
+	} elsif ( $attempt < 90 ) {
+		# disallowed: try again
+		return $self->_generate_name( $attempt + 1 );
+	} else {
+		# 100th attempt: give up
+		$throne_name .= ' ' . int rand 1e5;
+		carp "Unable to find a unique name after 90 tries, going with: $throne_name";
+		return $throne_name;
+	}
 }
 
 sub _generate_powers {

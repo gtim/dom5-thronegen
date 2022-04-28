@@ -26,7 +26,17 @@ has 'thrones' => (
 
 sub _generate_thrones {
 	my $self = shift;
-	my @thrones = map { ThroneGen::Throne->new( pts => 4 ) } ( 1..$self->num_thrones );
+	my $pts_per_throne = 4;
+	local $_;
+
+	my @thrones;
+	for ( 1..$self->num_thrones ) {
+		push @thrones, ThroneGen::Throne->new(
+			pts => $pts_per_throne,
+			disallowed_names => [ map { $_->name } @thrones ],
+		);
+	}
+
 	return \@thrones;
 }
 
