@@ -4,28 +4,19 @@ use warnings;
 use FindBin;
 use lib $FindBin::Bin;
 
-use ThroneGen::Throne;
-use ThroneGen::DM;
+use ThroneGen;
 
+# generate thrones
 
-# generate five 5pt thrones
+my $thronegen = ThroneGen->new( num_thrones => 3 );
 
-my @thrones = map { ThroneGen::Throne->new( pts => 4 ) } ( 1..3 );
+# print thrones to STDOUT
 
-# print thrones
+$thronegen->print_thrones;
 
-for my $throne ( @thrones ) {
-	say $throne->name;
-	say "  " . $_->title for ( @{$throne->powers} );
-	say "";
-}
-
-# write .dm
+# write DM
 
 open( my $fh, '>', '../tg.dm' ) or die $!;
-my $dm = ThroneGen::DM->new(
-	thrones => \@thrones,
-	fh => $fh,
-);
-$dm->write();
+$thronegen->write_dm( $fh );
 close $fh or die $!;
+
