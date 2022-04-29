@@ -1,5 +1,10 @@
 body {
 	background-color:rgb(50,50,50);
+	background-image:url("/big-throne.png");
+	background-position:left -100px bottom;
+	background-repeat:no-repeat;
+	background-size:600px;
+	background-attachment:fixed;
 }
 div#content {
 	/*background-color:rgb(201,184,158);*/
