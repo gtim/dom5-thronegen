@@ -330,17 +330,21 @@ turmoil:
 productivity:
   of:
     - Anvils
+    - Conduct
     - Dwarves
+    - Discipline
     - Hammers
     - Harvest
     - Industry
     - Labour
     - Mines
+    - Obedience
     - Ore
     - Plows
     - Production
     - Productivity
     - Reward
+    - Rigour
     - Roads
     - Smiths
     - the Mountain
@@ -569,6 +573,7 @@ battle:
   of:
     - Battle Prowess
     - Bravery
+    - Discipline
     - Excellence
     - Expertise
     - Masters
