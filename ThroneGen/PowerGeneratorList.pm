@@ -599,6 +599,7 @@ has 'generators' => (
 					[ 5, 'dec', 'magic',       'spreading its power across the world' ],
 				);
 				my ( $scale_num, $dir, $scale, $spread_phrase ) = @{ $scales[ int rand @scales ] };
+				my $themes = ( $scale eq 'heat' ? ['heat','fire'] : $scale );
 				return ThroneGen::Power->new(
 					pts => 0,
 					type => "increase global $scale",
@@ -616,7 +617,7 @@ has 'generators' => (
 						   ."#end\n",
 				);
 			},
-			possible_themes => [qw/turmoil order sloth productivity cold heat death growth misfortune luck drain magic/],
+			possible_themes => [qw/turmoil order sloth productivity cold heat fire death growth misfortune luck drain magic/],
 		),
 
 
