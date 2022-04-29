@@ -41,10 +41,9 @@
 	<button on:click={clickButton}>generate</button>
 </div>
 
-<div id="container">
 {#if promise}
 	{#await promise}
-		<p>generating...</p>
+		<p style="text-align:center;">generating...</p>
 	{:then generated}
 		<div id="thrones">
 		{#each generated.thrones as throne}
@@ -60,7 +59,6 @@
 		</p>
 	{/await}
 {/if}
-</div>
 
 <div id="github_footer">
 	<a href="https://github.com/gtim/dom5-thronegen" rel="noopener noreferrer">
@@ -70,8 +68,15 @@
 
 
 <style>
+	h1 {
+		margin-top:0;
+		margin-bottom:16px;
+	}
 	h1, #buttondiv {
 		text-align:center;
+	}
+	#buttondiv {
+		margin-bottom:48px;
 	}
 	#buttondiv select {
 		padding:5px;
@@ -80,20 +85,16 @@
 	#buttondiv button {
 		padding:4px 7px;
 	}
-	#container {
-		width:fit-content;
-		margin:0 auto;
-	}
 	#thrones {
-		margin-top:32px;
-		width:480px;
+		margin:0 auto;
+		width:fit-content;
 	}
 	#dm {
 		margin-top:48px;
 	}
 	textarea {
-		width:480px;
-		height:474px;
+		width:100%;
+		height:480px;
 	}
 	#github_footer {
 		position:fixed;

@@ -1,4 +1,10 @@
 body {
+	background-color:rgb(50,50,50);
+}
+div#content {
 	/*background-color:rgb(201,184,158);*/
 	background-color:rgb(221,204,178);
+	width:520px;
+	padding:20px;
+	margin:0 auto;
 }
