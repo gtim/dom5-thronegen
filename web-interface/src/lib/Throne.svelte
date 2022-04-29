@@ -16,13 +16,14 @@
 
 <style>
 	h2 {
-		font-size:16px;
+		font-size:18px;
 		font-weight:bold;
 		margin:0;
 	}
 	ul {
 		padding-left:20px;
 		margin-top:6px;
+		margin-bottom:20px;
 		list-style:none;
 	}
 	li {

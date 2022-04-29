@@ -76,14 +76,14 @@
 		text-align:center;
 	}
 	#buttondiv {
-		margin-bottom:48px;
+		margin-bottom:40px;
 	}
 	#buttondiv select {
-		padding:5px;
-		margin-right:16px;
+		padding:3px;
+		margin-right:12px;
 	}
 	#buttondiv button {
-		padding:4px 7px;
+		padding:3px 7px;
 	}
 	#thrones {
 		margin:0 auto;
@@ -93,8 +93,11 @@
 		margin-top:48px;
 	}
 	textarea {
-		width:100%;
+		width:95%;
 		height:480px;
+		margin:0 auto;
+		padding:4px;
+		display:block;
 	}
 	#github_footer {
 		position:fixed;
