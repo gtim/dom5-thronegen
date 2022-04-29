@@ -110,8 +110,9 @@ sub _generate_powers {
 	# generate following powers
 	for my $pt ( @pts ) {
 		my $power;
-		if ( rand() < 0.5 ) {
-			# 50% chance to for same theme as first power
+		my $chance_of_same_theme = ( $pt == 0 ? 0.9 : 0.5 ); # 90% for flavour 0pt powers, otherwise 50%
+		if ( rand() < $chance_of_same_theme ) {
+			# same theme as first power
 			$power = ThroneGen::PowerGeneratorList->instance->random_power(
 				pts => $pt,
 				disallowed_types => [ map { $_->type } @powers ],
