@@ -16,10 +16,8 @@ To do before test game:
 * permanent lab
 * improve scales in neighbouring provinces
 * freespawn units
-* temporary global effects
-  * increase world scales
-  * increase/decrease world unrest
-  * darkness, curse, horrormark, heal, age
+* temporarily increased/decreased world unrest
+* temporary global darkness/curse/horrormark/heal/aging
 * recruitable unit that's only situationally useful. e.g. bad infantry with resistances/amphibious/wings
 * bonus wall defender
 * negative: cause specific affliction to one(?) unit per turn (blind/NHW/eyeloss/armloss/..)

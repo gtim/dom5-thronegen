@@ -580,6 +580,45 @@ has 'generators' => (
 			weight => 0.3,
 		),
 
+		# change world scales on claim
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [0],
+			generate => sub {
+				my @scales = (
+					[ 0, 'inc', 'turmoil',     'spreading chaos across the world'     ],
+					[ 0, 'dec', 'order',       'spreading order across the world'     ],
+					[ 1, 'inc', 'sloth',       'spreading sloth across the world'     ],
+					[ 1, 'dec', 'productivity','spreading its power across the world' ],
+					[ 2, 'inc', 'cold',        'spreading cold across the world'      ],
+					[ 2, 'dec', 'heat',        'spreading warmth across the world'    ],
+					[ 3, 'inc', 'death',       'draining life from the world'         ],
+					[ 3, 'dec', 'growth',      'spreading life across the world'      ],
+					[ 4, 'inc', 'misfortune',  'spreading its power across the world' ],
+					[ 4, 'dec', 'luck',        'spreading its power across the world' ],
+					[ 5, 'inc', 'drain',       'draining the world of magic'          ],
+					[ 5, 'dec', 'magic',       'spreading its power across the world' ],
+				);
+				my ( $scale_num, $dir, $scale, $spread_phrase ) = @{ $scales[ int rand @scales ] };
+				return ThroneGen::Power->new(
+					pts => 0,
+					type => "increase global $scale",
+					title => "increases global $scale when claimed",
+					themes => $scale,
+					dm_event => "#newevent\n"
+						   ."#msg \"THRONE_NAME is $spread_phrase. [THRONE_NAME]\"\n"
+						   ."#rarity 13 -- global, always and immediate\n"
+						   ."#req_site 1 -- only happens to province specified in msg\n"
+						   ."#req_claimedthrone 1 -- throne must be claimed\n"
+						   ."#req_pop0ok -- even if throne province has 0 pop\n"
+						   ."#world".$dir."scale $scale_num -- globally increase $scale by 1\n"
+						   ."#req_rare 50 -- 50% chance to happen every turn\n"
+						   ."#req_unique 2 -- happens twice\n"
+						   ."#end\n",
+				);
+			},
+			possible_themes => [qw/turmoil order sloth productivity cold heat death growth misfortune luck drain magic/],
+		),
+
 
 	] },
 );
