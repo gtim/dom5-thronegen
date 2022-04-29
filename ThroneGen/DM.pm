@@ -60,7 +60,7 @@ sub write_header {
 	my $self = shift;
 	printf {$self->fh} "#modname \"ThroneGen #%s\"\n", $self->dm_id;
 	print  {$self->fh} "#description \"" . $self->description . "\"\n";
-	print  {$self->fh} "#version 0.1\n";
+	print  {$self->fh} "#version 0.2\n";
 	print  {$self->fh} "\n";
 }
 

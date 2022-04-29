@@ -1,17 +1,5 @@
 # thronegen
 
-###
-
-To do before test game:
-- [x] 0pt-power: bonus wall mage
-- [x] 0pt-power: change province scale
-- [x] power: auto-construct a lab/temple (through events)
-- [x] make the good recruitable mages slow-to-recruit
-- [x] very simple throne names
-- [x] minor balancing run
-- [x] make a discord channel
-- [ ] get buried in criticism adjust balance accordingly
-
 ### throne power ideas (both good and bad)
 * permanent lab
 * improve scales in neighbouring provinces
