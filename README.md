@@ -8,7 +8,10 @@
 * temporary global darkness/curse/horrormark/heal/aging
 * recruitable unit that's only situationally useful. e.g. bad infantry with resistances/amphibious/wings
 * bonus wall defender
+* random items freespawn
 * negative: cause specific affliction to one(?) unit per turn (blind/NHW/eyeloss/armloss/..)
+* custom throne defenders (through event)
+* negative: event indies try to retake the throne regularly
 
 ### random notes
 
