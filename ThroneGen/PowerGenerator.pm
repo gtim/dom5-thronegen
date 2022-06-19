@@ -51,6 +51,13 @@ has 'weight' => (
 	default => 1,
 );
 
+has 'boring' => (
+	# each throne must have at least one non-boring >0-pt power 
+	is        => 'ro',
+	isa       => 'Bool',
+	default   => 0,
+);
+
 sub can_generate_pts {
 	# checks if the generator can generate a power for the supplied number of points
 	my ( $self, $pts ) = @_;

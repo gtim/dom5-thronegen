@@ -134,6 +134,23 @@ sub _generate_powers {
 		}
 		push @powers, $power;
 	}
+
+	# if no +gem powers, 90% chance to generate one
+	if ( rand() < 0.9 && ! grep { $_->type =~ m/^[FAWESDNB] per month$/ } @powers ) {
+		my $power = ThroneGen::PowerGeneratorList->instance->random_power(
+			pts => 0,
+			themes => $powers[0]{themes},
+			power_generator => ThroneGen::PowerGenerator::GemIncome->new(),
+		);
+		if ( ! $power ) {
+			$power = ThroneGen::PowerGeneratorList->instance->random_power(
+				pts => 0,
+				power_generator => ThroneGen::PowerGenerator::GemIncome->new(),
+			);
+		}
+		push @powers, $power;
+	}
+
 	return \@powers;
 
 	croak "no unique power types found for point distribution [@pts] after many tries";

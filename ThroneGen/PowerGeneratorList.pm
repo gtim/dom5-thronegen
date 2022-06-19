@@ -13,12 +13,13 @@ use ThroneGen::PowerGenerator;
 use ThroneGen::PowerGenerator::Simple;
 use ThroneGen::PowerGenerator::RecruitableMage;
 use ThroneGen::PowerGenerator::WallMage;
+use ThroneGen::PowerGenerator::GemIncome;
 
 use List::Util qw/shuffle any/;
 use List::Util::WeightedChoice qw/choose_weighted/;
 use Ref::Util qw/is_arrayref/;
 use Carp;
-use POSIX qw/round/;
+use POSIX qw/round ceil/;
 
 sub random_power {
 	# generate a random power, subject to restrictions
@@ -26,6 +27,8 @@ sub random_power {
 	#   pts: exact number of points for power
 	#   themes: themes, at least one theme from list must be present in power theme list
 	#   disallowed_types arrayref of types not allowed
+	#   interesting: if true, don't return a boring power
+	#   power_generator: specific PowerGenerator to use
 	
 	my $self = shift;
 	my %criteria = @_;
@@ -37,6 +40,12 @@ sub random_power {
 	}
 	if ( exists $criteria{themes} ) {
 		@valid_generators = grep { $_->can_generate_themes( $criteria{themes} ) } @valid_generators;
+	}
+	if ( exists( $criteria{interesting} ) && $criteria{interesting} ) {
+		@valid_generators = grep { ! $_->boring } @valid_generators;
+	}
+	if ( exists $criteria{power_generator} ) {
+		@valid_generators = $criteria{power_generator};
 	}
 
 	while ( @valid_generators > 0 ) {
@@ -94,25 +103,7 @@ has 'generators' => (
 		ThroneGen::PowerGenerator::RecruitableMage->new( weight => 2 ),
 
 		# gem income
-		# 1/2/3/4 pts => 1/2/3/4 gems,
-		ThroneGen::PowerGenerator->new(
-			generate => sub {
-				my $pts = shift;
-				my $num_gems = $pts;
-				my $gem_id = int rand 7;
-				my $gem_str = (qw/F A W E S D N/)[$gem_id];
-				my $theme =  {F => 'fire', A => 'air', W => 'water', E => 'earth', S => 'astral', D => 'death', N => 'nature' }->{$gem_str};
-				return ThroneGen::Power->new(
-					pts => $pts,
-					type => "$gem_str per month",
-					title => sprintf( '+%d %s gem%s per month', $num_gems, $gem_str, ($num_gems==1?'':'s') ),
-					themes => $theme,
-					dm_claimed => "#gems $gem_id $num_gems",
-				);
-			},
-			possible_themes => [qw/fire air water earth astral death nature/],
-			weight => 4,
-		),
+		ThroneGen::PowerGenerator::GemIncome->new( weight => 7, boring => 1 ),
 
 		# slave income
 		# 2.5 slaves per pt, round result randomly
@@ -123,20 +114,23 @@ has 'generators' => (
 				my $slaves = round( 2.5 * $pts + rand()-0.5 );
 				return ThroneGen::Power->new(
 					pts => $pts,
-					type => "slaves per month",
+					type => "B per month",
 					title => "+$slaves slaves per month",
 					themes => 'blood',
 					dm_claimed => "#gems 7 $slaves",
 				);
 			},
 			possible_themes => 'blood',
+			boring => 1,
 		),
 
 		# gold income
+		# ~75 gold per pt, rounded to nearest 50
 		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2,3],
 			generate => sub {
 				my $pts = shift;
-				my $gold = 50 * $pts;
+				my $gold = 50 * round( 1.5 * $pts + rand()-0.5 );
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "gold per month",
@@ -146,14 +140,16 @@ has 'generators' => (
 				);
 			},
 			possible_themes => 'gold',
+			boring => 1,
 		),
 
 		# dom spread
+		# 1/2/3 pts -> 1/2/3 checks
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [2,4,6,8,10,12,14,16,18,20],
+			pts_allowed => [1,2,3],
 			generate => sub {
 				my $pts = shift;
-				my $candles = $pts/2;
+				my $candles = $pts;
 				my $plural_s = $candles == 1 ? '' : 's';
 				return ThroneGen::Power->new(
 					pts => $pts,
@@ -164,6 +160,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => 'piety',
+			boring => 1,
 		),
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => -1,
@@ -171,14 +168,15 @@ has 'generators' => (
 			title => "one less temple check per month",
 			themes => 'piety',
 			dm_increased_domspread => -1,
+			boring => 1,
 		),
 
 		# improve nation scales: order/prod/growth/luck/magic
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [3,6,9],
+			pts_allowed => [2,5,8],
 			generate => sub {
 				my $pts = shift;
-				my $scale_points = $pts/3;
+				my $scale_points = ceil($pts/3);
 				my @scales = (
 					{ name => 'order',        cmd => 'goddomchaos',      inverted => 1 },
 					{ name => 'productivity', cmd => 'goddomlazy',       inverted => 1 },
@@ -270,6 +268,7 @@ has 'generators' => (
 			},
 			possible_themes => [qw/fire air water earth astral death nature blood/],
 			weight => 0.3,
+			boring => 1,
 		),
 		# ritual range bonus, elemental/sorcery
 		ThroneGen::PowerGenerator->new(
@@ -315,6 +314,7 @@ has 'generators' => (
 			title => "adventure ruin (15% success)",
 			dm_unclaimed => "#adventureruin 15",
 			themes => 'adventure',
+			boring => 1,
 		),
 
 		# Gain XP for commander + units
@@ -332,6 +332,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => 'battle',
+			boring => 1,
 		),
 
 		# Call God bonus
@@ -352,10 +353,10 @@ has 'generators' => (
 
 		# dominions conflict bonus
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [2,4],
+			pts_allowed => [2,3],
 			generate => sub {
 				my $pts = shift;
-				my $conflictbonus = $pts/2;
+				my $conflictbonus = ceil($pts/2);
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "dom conflict bonus",
@@ -414,7 +415,7 @@ has 'generators' => (
 
 		# bless atk/def/prec/morale/reinvig/hp/undying
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [1,2,3],
+			pts_allowed => [1,2],
 			generate => sub {
 				my $pts = shift;
 				my %stats = ( # blesscommand -> [ human-readable word, theme ]
@@ -426,6 +427,8 @@ has 'generators' => (
 					hp       => ['hp',             'growth'         ],
 					dtv      => ['undying',        'death'          ],
 				);
+				my $bonus = $pts + 1;
+				delete $stats{mor} if $pts >= 2;
 				my $stat = _random_element( keys %stats );
 				my $word = $stats{$stat}[0];
 				my $theme = $stats{$stat}[1];

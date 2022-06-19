@@ -8,10 +8,11 @@ use ThroneGen::PowerGenerator::Simple;
 
 my $pg = ThroneGen::PowerGenerator::Simple->new(
 	pts => -1,
-	type => "resources",
-	title => "-100 resources",
-	dm_unclaimed => "#res -100",
+	type => "temple checks per month",
+	title => "one less temple check per month",
+	themes => 'piety',
+	dm_increased_domspread => -1,
+	boring => 1,
 );
 say $pg;
-say $pg->generate;
 say $pg->generate->(-1);
