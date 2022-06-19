@@ -42,11 +42,20 @@ has 'powers' => (
 	lazy => 1,
 	builder => '_generate_powers',
 );
+has 'themes' => (
+	is => 'ro',
+	isa => 'ArrayRef[Str]',
+	lazy => 1,
+	builder => '_find_themes',
+);
 
-sub _generate_name {
+sub _find_themes {
+	# find themes for this throne
+	# returns array of theme strings
+	
 	my $self = shift;
-	my $attempt = shift // 1;
-	local $_;
+
+	croak "can't find theme for powerless throne" if ! @{ $self->powers };
 
 	# themes weighted by power value
 	my @themes = map { ( @{ $_->themes } ) x max( $_->pts, 1 ) } @{ $self->powers };
@@ -55,9 +64,38 @@ sub _generate_name {
 		return 'The Throne of No Theme Found';
 	}
 
-	# find most common theme (after weights)
+	# find most common themes (after weighting)
 	my ( undef, @most_common_themes ) = mode @themes;
-	my $most_common_theme = $most_common_themes[ int rand @most_common_themes ];
+	return \@most_common_themes;
+}
+
+sub is_wild {
+	# check if throne has a #wild theme
+	my $self = shift;
+	for my $theme ( @{$self->themes} ) {
+		if ( $theme eq 'air' || $theme eq 'nature' || $theme eq 'turmoil' ) {
+			return 1;
+		}
+	}
+	return 0;
+}
+sub is_evil {
+	# check if throne has an #evil theme
+	my $self = shift;
+	for my $theme ( @{$self->themes} ) {
+		if ( $theme eq 'death' || $theme eq 'blood' || $theme eq 'horror' || $theme eq 'darkness' ) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+sub _generate_name {
+	my $self = shift;
+	my $attempt = shift // 1;
+	local $_;
+
+	my $most_common_theme = $self->themes->[ int rand @{$self->themes} ];
 
 	# generate throne name on the theme
 	my $throne_name = ThroneGen::ThematicWords->instance->throne_name_on_theme( $most_common_theme );
@@ -171,6 +209,13 @@ sub write_to_dm {
 	print  $fh "#level 0\n";
 	print  $fh "#loc 213999 -- unique, allowed everywhere\n";
 	print  $fh "#rarity 12 -- lvl 2 throne\n";
+
+	# evil/wild defenders
+	if ( $self->is_wild() ) {
+		print $fh "#wild\n";
+	} elsif ( $self->is_evil() ) {
+		print $fh "#evil\n";
+	}
 
 	# always-on throne powers 
 	for my $power ( @{ $self->powers } ) {
