@@ -293,7 +293,7 @@ has 'generators' => (
 			pts_allowed => [2,3],
 			generate => sub {
 				my $pts = shift;
-				my $range = $pts/2;
+				my $range = ceil($pts/2);
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "ritual range bonus",
