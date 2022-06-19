@@ -459,6 +459,7 @@ has 'generators' => (
 				);
 			},
 			possible_themes => 'darkness',
+			weight => 0.5,
 		),
 		
 		# bless awe
