@@ -1,14 +1,22 @@
 <script>
+	import { page } from '$app/stores'
+
 	export let name;
 	export let powers;
+
+	const show_pts = $page.url.searchParams.get('show_pts');
+
 </script>
 
 <div>
 	<h2>{name}</h2>
 	<ul>
 	{#each powers as power}
-		<li>{power.title}
-			<span class="pts">({power.pts} pts)</span>
+		<li>
+			{power.title}
+			{#if show_pts}
+				<span class="pts">({power.pts} pts)</span>
+			{/if}
 		</li>
 	{/each}
 	</ul>
