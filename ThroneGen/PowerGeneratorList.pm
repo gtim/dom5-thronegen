@@ -443,7 +443,23 @@ has 'generators' => (
 			possible_themes => [qw/battle air awe growth death/],
 			weight => 2,
 		),
-		
+
+		# bless +MR
+		ThroneGen::PowerGenerator->new(
+			pts_allowed => [1,2],
+			generate => sub {
+				my $pts = shift;
+				return ThroneGen::Power->new(
+					pts => $pts,
+					type => 'bless',
+					title => "Blessed get +$pts MR",
+					themes => ['astral','magic'],
+					dm_claimed => "#blessmr $pts",
+				);
+			},
+			possible_themes => ['astral','magic'],
+		),
+
 		# bless darkvision
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [2,4],
