@@ -319,7 +319,7 @@ has 'generators' => (
 
 		# Gain XP for commander + units
 		ThroneGen::PowerGenerator->new(
-			pts_allowed => [1,2,3],
+			pts_allowed => [1,2],
 			generate => sub {
 				my $pts = shift;
 				my $xp = 8 * $pts;
