@@ -125,12 +125,12 @@ has 'generators' => (
 		),
 
 		# gold income
-		# ~75 gold per pt, rounded to nearest 50
+		# 100 gold per pt
 		ThroneGen::PowerGenerator->new(
 			pts_allowed => [1,2,3],
 			generate => sub {
 				my $pts = shift;
-				my $gold = 50 * round( 1.5 * $pts + rand()-0.5 );
+				my $gold = 100 * $pts;
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "gold per month",
@@ -372,7 +372,7 @@ has 'generators' => (
 		ThroneGen::PowerGenerator::Simple->new(
 			pts => 1,
 			type => "permanent temple",
-			title => "free permanent temple when claimed",
+			title => "Permanent temple when claimed",
 			dm_event => "#newevent\n"
 				   ."#msg \"As the throne is claimed, a temple to ##godname## springs from the ground. [THRONE_NAME]\"\n"
 				   ."#nation -2 -- province owner\n"
