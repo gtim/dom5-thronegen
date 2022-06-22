@@ -207,7 +207,15 @@ sub write_to_dm {
 	print  $fh "#name \"".$self->name."\"\n";
 	print  $fh "#path 8\n";
 	print  $fh "#level 0\n";
-	print  $fh "#loc 213999 -- unique, allowed everywhere\n";
+
+	# location / terrain
+	# https://illwiki.com/dom5/user/loggy/sitegeneration
+	# unique, allowed everywhere:           16384 + 1+2+4+8+32+64+128+256+512+65536+131072 = 213999
+	# unique, allowed everywhere except UW: 16384 + 1+2+4+8   +64+128    +512              =  17103
+	print  $fh "#loc 213999 -- unique, allowed everywhere\n"; 
+	#print  $fh "#loc 17103 -- unique, allowed everywhere except UW\n"; 
+
+	# rarity
 	print  $fh "#rarity 12 -- lvl 2 throne\n";
 
 	# evil/wild defenders
