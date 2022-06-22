@@ -8,7 +8,7 @@ use ThroneGen;
 
 # generate thrones
 
-my $thronegen = ThroneGen->new( num_thrones => 3 );
+my $thronegen = ThroneGen->new( num_thrones => 5 );
 
 # print thrones to STDOUT
 
