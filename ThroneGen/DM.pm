@@ -69,7 +69,7 @@ sub description {
 	my $desc = "Replaces all thrones with randomly generated ones. The thrones included with this instance are:\n\n";
 	for my $throne ( @{$self->thrones} ) {
 		$desc .= $throne->name . "\n";
-		$desc .= "- " . $_->title . "\n" for ( @{$throne->powers} );
+		$desc .= "- " . $_->title . "\n" for ( $throne->outputfriendly_powers );
 	}
 	$desc .= "\n";
 	$desc .= "You can generate new ones at thronegen.illwiki.com.";
