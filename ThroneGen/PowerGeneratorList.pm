@@ -189,7 +189,7 @@ has 'generators' => (
 				return ThroneGen::Power->new(
 					pts => $pts,
 					type => "increase $scale{name} in nation",
-					title => "+$scale_points $scale{name} scale in nation",
+					title => "Dominion gets $scale{name} +$scale_points",
 					themes => $scale{name},
 					dm_claimed => $dm_cmd,
 				);
