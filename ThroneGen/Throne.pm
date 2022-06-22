@@ -5,7 +5,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 use Carp;
 use POSIX qw/ceil/;
-use List::Util qw/uniq max/;
+use List::Util qw/uniq max sum/;
 use List::MoreUtils qw/mode/;
 
 use ThroneGen::PowerGeneratorList;
@@ -256,6 +256,31 @@ sub _domspread {
 		}
 	}
 	return $domspread;
+}
+
+sub outputfriendly_powers {
+	# processes the throne powers for friendlier output by:
+	# - combinining +/-domspread powers into a single "spreads dominion (n)" power, and adding a dummy power if none exist
+	# - sorting powers by domspread first, then descending order of pts
+	
+	my $self = shift;
+
+	# exclude domspread powers
+	my @of_powers = grep { ! $_->dm_increased_domspread } @{ $self->powers };
+	
+	# sort by pts
+	@of_powers = sort { $b->{pts} <=> $a->{pts} } @of_powers;
+
+	# combine domspread powers 
+	my $domspread_pts = ( sum map { $_->pts } grep { $_->dm_increased_domspread } @{ $self->powers } ) // 0;
+	my $domspread = $self->_domspread();
+	unshift @of_powers, ThroneGen::Power->new(
+		pts => $domspread_pts,
+		type => "domspread total",
+		title => "Spreads dominion ($domspread)",
+	);
+
+	return @of_powers;
 }
 
 

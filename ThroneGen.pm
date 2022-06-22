@@ -48,7 +48,7 @@ sub print_thrones {
 	my $self = shift;
 	for my $throne ( @{$self->thrones} ) {
 		say $throne->name;
-		say "  " . $_->title for ( @{$throne->powers} );
+		say "  " . $_->title for ( $throne->outputfriendly_powers );
 		say "";
 	}
 }
@@ -65,11 +65,10 @@ sub as_json {
 			name => $throne->name,
 			pts => $throne->pts,
 			powers => [
-				sort { $b->{pts} <=> $a->{pts} }
 				map { {
 					pts => $_->pts,
 					title => $_->title,
-				} } @{$throne->powers}
+				} } $throne->outputfriendly_powers
 			]
 		};
 		push @json_thrones, $json_throne;
